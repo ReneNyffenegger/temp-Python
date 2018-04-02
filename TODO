@@ -16,3 +16,121 @@ sum = reduce(add, individual, 0)
 father = [1,2,3,4,5,6]
 mother = [10,20,30,40,50,60]
 child = father[:3] + mother[3:]
+
+{ Tuples
+
+  t = (1, 2, 3, 4, 5)
+  print (len(t))
+
+}
+
+Create list {
+
+# arrays are something different!
+
+  a1 = []
+  a1.append('foo')
+  a1.append('bar')
+  a1.append('baz')
+
+
+  a2 = ['x'] * 42 # 42 elements
+
+  print(len(a2))
+
+}
+
+Create dictionary {
+
+  d1 = {}
+  d1["age"] = 25
+
+  d2 = {"age":25}
+
+
+}
+
+{ Slurp file
+
+  with open('foo.txt') as fil: txt=fil.read()
+
+}
+
+{ Loops
+
+  for x in ...
+      if x == ..
+         break    # 
+         continue # return control to the beginning of the while loop
+
+  for ...
+  else
+    # Loop is exhausted
+
+}
+
+Inheritance {
+
+  class BaseException(object):
+       def throw(self):
+           raise self
+
+}
+
+if {
+
+  if x:
+    ...
+  elif y:
+    ...
+  else:
+
+}
+
+{ Increment operator
+
+  v ++ ---> does not work
+  v += 1
+
+}
+
+{ os.path
+
+  if os.path.isfile(db_name):
+     os.remove(db_name)
+
+}
+
+{ assert / in
+
+  assert attribute in ('series', 'publisher', 'issue', 'tags')
+
+}
+
+{ Dates
+
+  today = date.today()
+
+}
+
+{ try / except
+
+  try:
+    …
+
+    sys.exit(1) # will be caught...
+  except BaseException as e:
+    print ( str(e) )
+
+
+}
+
+{ if ... == "__main__ "
+
+  https://stackoverflow.com/questions/1590608/is-it-possible-to-forward-declare-a-function-in-python
+
+  if __name__=="__main__":
+     main()
+
+}
+
