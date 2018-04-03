@@ -113,6 +113,23 @@ if {
 
 }
 
+{ printf
+
+    print("a=%d, b=%s" % (4, 'six'))
+    print('a={:d}, b={:s}'.format(4, 'six'))   # Python 3 recommendation
+
+}
+
+r, u, f- strings {
+
+    f-strings: These strings may contain replacement fields, which are expressions delimited by curly braces {}. While other string literals always have a constant value, formatted strings are really expressions evaluated at run time.
+
+    print(f'a={f(x,n):d}, b={g(x,n):d}')
+
+
+
+}
+
 { try / except
 
   try:
@@ -134,3 +151,21 @@ if {
 
 }
 
+{ Reading a file line for line
+
+  with open(sys.argv[1]) as f:
+      for line in f:
+
+}
+{ Assigning value from .split() to variables
+
+
+  var_1, var_2, var_3, var_4, var_5 = str.split()
+
+}
+{ Encode / decode
+
+  txt.encode('utf-8')
+  txt.decode('utf-8')
+
+}
