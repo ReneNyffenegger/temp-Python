@@ -150,11 +150,18 @@ r, u, f- strings {
      main()
 
 }
+{ if ... else on one line
 
+  print('yes' if b else 'no')
+
+}
 { Reading a file line for line
 
   with open(sys.argv[1]) as f:
       for line in f:
+
+  Reading one line only:
+     f.readline()
 
 }
 { Assigning value from .split() to variables
