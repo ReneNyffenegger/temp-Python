@@ -150,7 +150,7 @@ r, u, f- strings {
      main()
 
 }
-{ if ... else on one line
+{ if ... else on one line (  Inline if-else EXPRESSION )
 
   print('yes' if b else 'no')
 
@@ -204,6 +204,15 @@ r, u, f- strings {
     while line:
           ...
           line = f.readline()
+
+  }
+  { while true
+
+     while True:
+     line = f.readline()
+     if not line:
+         break
+     ...  # do something with line
 
   }
 
