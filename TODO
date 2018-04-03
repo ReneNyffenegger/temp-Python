@@ -181,3 +181,30 @@ r, u, f- strings {
   
 
 }
+{ Assignment is a statement. Not an expression
+
+  In Python, assignment is a statement, not an expression, and can therefore
+  not be used inside an arbitrary expression. This means that common C idioms
+  like:
+  
+  while (line = readline(file)) {
+      ...do something with line...
+  }
+  
+  or
+  
+  if (match = search(target)) {
+      ...do something with match...
+  }
+
+
+  { Read ahead pattern
+
+    line = f.readline()
+    while line:
+          ...
+          line = f.readline()
+
+  }
+
+}
