@@ -76,6 +76,19 @@ Inheritance {
            raise self
 
 }
+{ die ...
+  
+  raise Exception('xyz')
+
+  try:
+    generate_exception()
+  except SomeException as e:
+    if not can_handle(e):
+      raise
+    handle_exception(e)
+
+
+}
 
 if {
 
