@@ -55,6 +55,14 @@ Create dictionary {
   with open('foo.txt') as fil: txt=fil.read()
 
 }
+{ Write to a file
+
+    f=open('/tmp/xx', 'w')
+    f.write('foo\n')
+    f.write('bar\n')
+    f.write('baz\n')
+
+}
 
 { Loops
 
