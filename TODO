@@ -63,6 +63,13 @@ Create dictionary {
     f.write('baz\n')
 
 }
+{ Iterating over a directory
+
+    import os
+    for f in os.listdir('/path/to/directory'):
+        print(f)
+
+}
 
 { Loops
 
