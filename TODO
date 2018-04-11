@@ -1,4 +1,9 @@
 
+dir(inst)
+
+
+*****
+
 
 from random import randint
 
