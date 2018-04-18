@@ -1,0 +1,8 @@
+
+
+m = re.search(pattern, text)
+m.group(n)
+
+re.search vs re.match:
+
+   re.match() matches only from the beginning of the string. 
