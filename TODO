@@ -176,6 +176,11 @@ r, u, f- strings {
 
 
 }
+{ String concatenation
+
+  str_1 + str_2
+
+}
 
 { try / except
 
