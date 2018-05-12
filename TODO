@@ -132,6 +132,12 @@ if {
     ...
   else:
 
+  { if ... else on one line (  Inline if-else EXPRESSION )
+  
+    print('yes' if b else 'no')
+  
+  }
+
 }
 
 { Increment operator
@@ -200,11 +206,6 @@ r, u, f- strings {
 
   if __name__=="__main__":
      main()
-
-}
-{ if ... else on one line (  Inline if-else EXPRESSION )
-
-  print('yes' if b else 'no')
 
 }
 { Reading a file line for line
