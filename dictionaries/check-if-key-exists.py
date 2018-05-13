@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 d = {'x': 'eggs',
      'y': 'why',
      'z':  42}
