@@ -1,6 +1,11 @@
+#!/usr/bin/python3
+
 
 prims_list = [2, 3, 5, 7, 11, 13, 17]
+
 prims_list_i = iter(prims_list)
+print(type(prims_list_i)) # <class list_iterator>
+
 print(next(prims_list_i))
 print(next(prims_list_i))
 print(next(prims_list_i))
