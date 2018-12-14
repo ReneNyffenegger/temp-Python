@@ -4,12 +4,12 @@ class aClass:
 
     instanceCounter = 0
 
-    def __init__(self, data):
-        self.data = data
+    def __init__(self, name):
+        self.name = name
         aClass.instanceCounter += 1
 
     def printData(self):
-        print('data = {:s}, instanceCounter = {:d}'.format(self.data, aClass.instanceCounter))
+        print('name = {:s}, instanceCounter = {:d}'.format(self.name, aClass.instanceCounter))
 
 #
 #  Note: no need to use a 'new' operator to instantiate an

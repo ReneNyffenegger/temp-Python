@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 class A:
 
    def __eq__(self, o):
