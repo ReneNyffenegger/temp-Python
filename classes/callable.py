@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 class CallableClass:
     #
     # A callable is anything that can be called. 

@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 class S(object):
     __slots__ = ['x', 'y', 'z']   # instances will have attribute __slots__ instead of __dict__
     def __init__(self, x, y, z):

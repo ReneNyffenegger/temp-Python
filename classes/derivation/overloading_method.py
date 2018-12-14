@@ -1,11 +1,19 @@
 #!/usr/bin/python3
 
+#
+# All class methods are virtual.
+#
+
 class Base:
       def m(self):
           print('Base::m')
 
 class Deriv(Base):
-      pass
+      def m(self):
+          print('Deriv::m')
 
+b = Base ()
 d = Deriv()
+
+b.m()
 d.m()
