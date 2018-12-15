@@ -11,6 +11,7 @@
 #            __doc__          The function’s documentation string, or None if unavailable; not inherited by subclasses
 #            __func__         is the function object; 
 #            __globals__      A reference to the dictionary that holds the function’s global variables — the global namespace of the module in which the function was defined.
+#            __import__
 #            __iter__
 #            __kwdefaults__   A dict containing defaults for keyword-only parameters.
 # class.     __mro__           a tuple of classes that are considered when looking for base classes during method resolution.
