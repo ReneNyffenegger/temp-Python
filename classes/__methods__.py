@@ -21,5 +21,6 @@
 #            __qualname__     The function’s qualified name
 #            __self__         is the class instance object,
 #            __slots__
+#            __str__  
 # class.     __subclasses__
 
