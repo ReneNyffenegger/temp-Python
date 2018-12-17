@@ -2,6 +2,7 @@
 
 #            __annotations__  A dict containing annotations of parameters. The keys of the dict are the parameter names, and 'return' for the return annotation, if provided.
 # class.     __bases__        The tuple of base classes of a class object.
+#            __bool__
 #            __call__         Used for callables.
 # instance.  __class__        the class to which an instance belongs
 #            __closure__      None or a tuple of cells that contain bindings for the function’s free variables. See below for information on the cell_contents attribute.
@@ -9,6 +10,7 @@
 #            __defaults__     A tuple containing default argument values for those arguments that have defaults, or None if no arguments have a default value
 #            __dict__         The namespace supporting arbitrary function attribut
 #            __doc__          The function’s documentation string, or None if unavailable; not inherited by subclasses
+#            __eq__           et. al.
 #            __func__         is the function object; 
 #            __globals__      A reference to the dictionary that holds the function’s global variables — the global namespace of the module in which the function was defined.
 #            __import__
