@@ -13,4 +13,4 @@ def tq84_decorator(func):
 def add(a, b):
     return a + b
 
-add(1, 3)
+print('add(1, 3)  == ' + str(add(1, 3)))
