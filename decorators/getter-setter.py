@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 #
 #   https://stackoverflow.com/a/18583708/180275
+#
+#   Compare with ../functions/property/setter-getter.py
 
 class C(object):
     def __init__(self):
