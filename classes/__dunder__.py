@@ -1,5 +1,15 @@
 #!/usr/bin/python3
 
+
+# dunder = double underscore methods
+#
+# AKA: Magic methods.
+#
+# __init__ might be called »dunder init«.
+
+
+
+
 #            __annotations__  A dict containing annotations of parameters. The keys of the dict are the parameter names, and 'return' for the return annotation, if provided.
 # class.     __bases__        The tuple of base classes of a class object.
 #            __bool__
@@ -27,4 +37,4 @@
 #            __slots__
 #            __str__  
 # class.     __subclasses__
-
+#            __unicode__
