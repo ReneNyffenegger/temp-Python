@@ -24,12 +24,12 @@
 #            __func__         is the function object; 
 #            __globals__      A reference to the dictionary that holds the function’s global variables — the global namespace of the module in which the function was defined.
 #            __import__
-#            __iter__
+#            __iter__         Anything that has an __iter__ method is an iterable.
 #            __kwdefaults__   A dict containing defaults for keyword-only parameters.
 #            __main__
 #            __metaclass__    this was introduced to give the programmer some control over the semantics of the class statement. In particular it eases the transition from old-style classes (which are not covered in this tutorial) and new-style classes (simply called classes in this tutorial).
 #            __module__       The name of the module the function was defined in, or None if unavailable.
-# class.     __mro__           a tuple of classes that are considered when looking for base classes during method resolution.
+# class.     __mro__          a tuple of classes that are considered when looking for base classes during method resolution.
 # definition.__name__         The function's, class's, method's, descriptor's or generator's name 
 #            __next__
 #            __qualname__     The function’s qualified name
