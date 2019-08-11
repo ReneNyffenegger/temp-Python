@@ -31,7 +31,7 @@
 #            __module__       The name of the module the function was defined in, or None if unavailable.
 # class.     __mro__          a tuple of classes that are considered when looking for base classes during method resolution.
 # definition.__name__         The function's, class's, method's, descriptor's or generator's name 
-#            __next__
+#            __next__         Anthing that as an __iter__ and a __next__ method is an iterator.
 #            __qualname__     The function’s qualified name
 #            __self__         is the class instance object,
 #            __slots__
