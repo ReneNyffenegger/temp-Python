@@ -46,8 +46,7 @@ yet_again = PRIMES()
 iter(yet_again)
 
 try:
-   while True:
-         x = next(yet_again)
+   while x := next(yet_again): # PEP-572
          print(x)
 except StopIteration:
    print('finished')
