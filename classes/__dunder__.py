@@ -12,16 +12,18 @@
 
 #            __annotations__      A dict containing annotations of parameters. The keys of the dict are the parameter names, and 'return' for the return annotation, if provided.
 # class.     __bases__            The tuple of base classes of a class object.
-#            __bool__
+# class.     __bases__            The tuple of base classes of a class object.
+#            __builtins__
 #            __call__             Used for callables.
 # instance.  __class__            the class to which an instance belongs
 #            __closure__          None or a tuple of cells that contain bindings for the function’s free variables. See below for information on the cell_contents attribute.
 #            __code__             The code object representing the compiled function body.
 #            __contains__()       See collections.abc.Sequence
+#            __debug__            A built-in constant that is true if Pythons was started with the `-o` option
 #            __defaults__         A tuple containing default argument values for those arguments that have defaults, or None if no arguments have a default value
 #            __delete__           Used (with __set__ and __get__) to define a descriptor object
 #            __dict__             The namespace supporting arbitrary function attribut
-#            __doc__              The function’s documentation string, or None if unavailable; not inherited by subclasses
+#            __doc__              The function’s documentation string, or None if unavailable; not inherited by subclasses (Seems to be printed with help(obj) )
 #            __enter__            goes along with __exit__ to define a context manager (used in with statements)
 #            __eq__               Needed (with __hash__) for keys in a dictionary
 #            __exit__             goes along with __enter__ to define a context manager (used in with statements)
@@ -49,3 +51,26 @@
 #            __str__  
 # class.     __subclasses__
 #            __unicode__
+
+
+
+# TODO:
+#   dir(help) returns the following attributes that are not listed above:
+ __delattr__
+ __dir__
+ __format__
+ __ge__
+ __gt__
+ __init__
+ __init_subclass__
+ __le__
+ __lt__
+ __ne__
+ __new__
+ __reduce__
+ __reduce_ex__
+ __repr__
+ __setattr__
+ __sizeof__
+ __subclasshook__
+ __weakref__
