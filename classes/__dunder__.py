@@ -20,7 +20,9 @@
 #            __defaults__     A tuple containing default argument values for those arguments that have defaults, or None if no arguments have a default value
 #            __dict__         The namespace supporting arbitrary function attribut
 #            __doc__          The function’s documentation string, or None if unavailable; not inherited by subclasses
+#            __enter__        goes along with __exit__ to define a context manager (used in with statements)
 #            __eq__           et. al.
+#            __exit__         goes along with __enter__ to define a context manager (used in with statements)
 #            __func__         is the function object; 
 #            __globals__      A reference to the dictionary that holds the function’s global variables — the global namespace of the module in which the function was defined.
 #            __import__
