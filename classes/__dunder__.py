@@ -18,13 +18,17 @@
 #            __closure__      None or a tuple of cells that contain bindings for the function’s free variables. See below for information on the cell_contents attribute.
 #            __code__         The code object representing the compiled function body.
 #            __defaults__     A tuple containing default argument values for those arguments that have defaults, or None if no arguments have a default value
+#            __delete__       Used (with __set__ and __get__) to define a descriptor object
 #            __dict__         The namespace supporting arbitrary function attribut
 #            __doc__          The function’s documentation string, or None if unavailable; not inherited by subclasses
 #            __enter__        goes along with __exit__ to define a context manager (used in with statements)
-#            __eq__           et. al.
+#            __eq__           Needed (with __hash__) for keys in a dictionary
 #            __exit__         goes along with __enter__ to define a context manager (used in with statements)
 #            __func__         is the function object; 
+#            __get__          Used (with __set__ and __delete__) to define a descriptor object
+#            __getitem__      Used for sequence semantics?
 #            __globals__      A reference to the dictionary that holds the function’s global variables — the global namespace of the module in which the function was defined.
+#            __hash__         Needed (with __eq__) for keys in a dictionary
 #            __import__
 #            __iter__         Anything that has an __iter__ method is an iterable.
 #            __kwdefaults__   A dict containing defaults for keyword-only parameters.
@@ -36,6 +40,7 @@
 #            __next__         Anthing that as an __iter__ and a __next__ method is an iterator.
 #            __qualname__     The function’s qualified name
 #            __self__         is the class instance object,
+#            __set__          Used (with __get__ and __delete__) to define a descriptor object
 #            __slots__
 #            __str__  
 # class.     __subclasses__
