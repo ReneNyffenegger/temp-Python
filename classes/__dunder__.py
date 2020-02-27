@@ -14,6 +14,7 @@
 # class.     __bases__            The tuple of base classes of a class object.
 # class.     __bases__            The tuple of base classes of a class object.
 #            __builtins__
+#            __cached__           dir(module)
 #            __call__             Used for callables.
 # instance.  __class__            the class to which an instance belongs
 #            __closure__          None or a tuple of cells that contain bindings for the function’s free variables. See below for information on the cell_contents attribute.
@@ -36,17 +37,20 @@
 #            __import__
 #            __iter__             Anything that has an __iter__ method is an iterable.
 #            __kwdefaults__       A dict containing defaults for keyword-only parameters.
+#            __loader__           A dict containing defaults for keyword-only parameters.
 #            __main__
 #            __metaclass__        this was introduced to give the programmer some control over the semantics of the class statement. In particular it eases the transition from old-style classes (which are not covered in this tutorial) and new-style classes (simply called classes in this tutorial).
 #            __module__           The name of the module the function was defined in, or None if unavailable.
 # class.     __mro__              a tuple of classes that are considered when looking for base classes during method resolution.
 # definition.__name__             The function's, class's, method's, descriptor's or generator's name 
 #            __next__             Anthing that as an __iter__ and a __next__ method is an iterator.
+#            __package__          ...
 #            __path__             A module with a __path__ attribute is a package
 #            __qualname__         The function’s qualified name
 #            __reversed__()       See collections.abc.Sequence
 #            __self__             is the class instance object,
 #            __set__              Used (with __get__ and __delete__) to define a descriptor object
+#            __spec__             ...
 #            __slots__            declaration inside a class that saves memory by pre-declaring space for instance attributes and eliminating instance dictionaries (tricky to be used)
 #            __str__  
 # class.     __subclasses__
