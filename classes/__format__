@@ -1,0 +1,5 @@
+https://stackoverflow.com/a/47782792/180275:
+   I definitely prefer the format method more, as it is very flexible and can be
+   easily extended to your custom classes by defining __format__ or the str or
+   repr representations. For the sake of keeping it simple, i am using print in
+   the following examples, which can be replaced by sys.stdout.write.

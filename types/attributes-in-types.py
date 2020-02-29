@@ -1,4 +1,4 @@
-
+import sys
 
 # types = [
 #   { 'name':  'list'      , 'instance': [] },
@@ -20,6 +20,7 @@ types = [
   { 'instance': {}.items()       },
   { 'instance': map   (None, []) },
   { 'instance': filter(None, []) },
+  { 'instance': lambda x: x      },
   { 'instance': open('dummy','w')},
 ]
 
@@ -35,14 +36,21 @@ for T in types:
     for A in dir(T['instance']):
 
         if not A in types_with_attribute:
-           types_with_attribute[A] = {}
+           types_with_attribute[A] = {'cnt': 0, 'seen_in': {}}
 
-        types_with_attribute[A][T['name']] = 'seen'
+        types_with_attribute[A]['cnt'    ] += 1
+ #      types_with_attribute[A][T['name']]['cnt'] += 1
+        types_with_attribute[A]['seen_in'][T['name']] = 1
+#       types_with_attribute[A][T['name']] = 'seen'
 
 
 html = open('attributes-in-types.html', 'w')
 
-html.write("<!DOCTYPE html>\n<html><head><title>Attributes in types</title></head><body><table border=1>")
+html.write('<!DOCTYPE html>\n<html><head><title>Attributes in types</title></head><body>')
+
+html.write('<h1>Matrix of types and their attributes (Python version {}.{})</h1>'.format( sys.version_info.major, sys.version_info.minor))
+
+html.write('<table border=1>')
 
 # print(type(html))
 
@@ -63,7 +71,7 @@ for T in types:
 #       print("\t", end='')
         html.write('<td>')
 
-        if T['name'] in types_with_attribute[A]:
+        if T['name'] in types_with_attribute[A]['seen_in']:
            html.write('x')
         else:
            html.write('')
