@@ -20,5 +20,6 @@ for i in m:
 
 
 m_ = map(lambda n: n*3, l)
+print(dir(m_))
 for i in m_:
     print(i)
