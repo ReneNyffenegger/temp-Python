@@ -9,8 +9,9 @@
 
 
 
-
+# module     __all__              
 #            __annotations__      A dict containing annotations of parameters. The keys of the dict are the parameter names, and 'return' for the return annotation, if provided.
+# module     __author__           
 # class.     __bases__            The tuple of base classes of a class object.
 # class.     __bases__            The tuple of base classes of a class object.
 #            __builtins__
@@ -30,6 +31,7 @@
 #            __exit__             goes along with __enter__ to define a context manager (used in with statements)
 #            __func__             is the function object; 
 #            __get__              Used (with __set__ and __delete__) to define a descriptor object
+# class      __getattr__          Used for sequence semantics?
 #            __getattribute__()   Used for sequence semantics?
 #            __getitem__          Used for sequence semantics?
 #            __globals__          A reference to the dictionary that holds the function’s global variables — the global namespace of the module in which the function was defined.
@@ -55,6 +57,7 @@
 #            __str__  
 # class.     __subclasses__
 #            __unicode__
+# module     __version__
 
 
 
