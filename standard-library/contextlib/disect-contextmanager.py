@@ -1,5 +1,10 @@
-# from contextlib import contextmanager
-# import abc
+# Trying to understand contextlib.contextmanager
+#
+#    First step: make sure we're independent of the standard-libary.
+#    So: copy paste needed code here.
+
+
+
 
 from _abc import (get_cache_token, _abc_init, _abc_register,
                       _abc_instancecheck, _abc_subclasscheck, _get_dump,
