@@ -10,17 +10,23 @@ class B:
       print('B.m was called')
 
 
-class C:
+class M(type):
+
+  def mro(self):
+      return self.__class__, A, object
+
+class C(metaclass=M):
 
   def M(self):
       self.m()
+
 
 
 c = C()
 
 print(C.mro())
 
-C.mro = lambda: (C, A, object)
+# C.mro = lambda: (C, A, object)
 
 print(C.mro())
 
