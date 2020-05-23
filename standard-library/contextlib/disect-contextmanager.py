@@ -3,12 +3,21 @@
 #    First step: make sure we're independent of the standard-libary.
 #    So: copy paste needed code here.
 
+import sys
+
+
+tq84_indent = 0
+
+def tq84_print(txt):
+    print( ('  ' * tq84_indent) + txt)
 
 
 
 from _abc import (get_cache_token, _abc_init, _abc_register,
                       _abc_instancecheck, _abc_subclasscheck, _get_dump,
                       _reset_registry, _reset_caches)
+
+tq84_print('before class ABCMeta')
 
 class ABCMeta(type):
      """Metaclass for defining Abstract Base Classes (ABCs).
@@ -24,8 +33,12 @@ class ABCMeta(type):
      even via super()).
      """
      def __new__(mcls, name, bases, namespace, **kwargs):
+         global tq84_indent
+         tq84_indent+=1
+         tq84_print('ABCMeta.__new__')
          cls = super().__new__(mcls, name, bases, namespace, **kwargs)
          _abc_init(cls)
+         tq84_indent-=1
          return cls
 
      def register(cls, subclass):
@@ -43,17 +56,17 @@ class ABCMeta(type):
          """Override for issubclass(subclass, cls)."""
          return _abc_subclasscheck(cls, subclass)
 
-     def _dump_registry(cls, file=None):
-         """Debug helper to print the ABC registry."""
-         print(f"Class: {cls.__module__}.{cls.__qualname__}", file=file)
-         print(f"Inv. counter: {get_cache_token()}", file=file)
-         (_abc_registry, _abc_cache, _abc_negative_cache,
-          _abc_negative_cache_version) = _get_dump(cls)
-         print(f"_abc_registry: {_abc_registry!r}", file=file)
-         print(f"_abc_cache: {_abc_cache!r}", file=file)
-         print(f"_abc_negative_cache: {_abc_negative_cache!r}", file=file)
-         print(f"_abc_negative_cache_version: {_abc_negative_cache_version!r}",
-               file=file)
+#q     def _dump_registry(cls, file=None):
+#q         """Debug helper to print the ABC registry."""
+#q         print(f"Class: {cls.__module__}.{cls.__qualname__}", file=file)
+#q         print(f"Inv. counter: {get_cache_token()}", file=file)
+#q         (_abc_registry, _abc_cache, _abc_negative_cache,
+#q          _abc_negative_cache_version) = _get_dump(cls)
+#q         print(f"_abc_registry: {_abc_registry!r}", file=file)
+#q         print(f"_abc_cache: {_abc_cache!r}", file=file)
+#q         print(f"_abc_negative_cache: {_abc_negative_cache!r}", file=file)
+#q         print(f"_abc_negative_cache_version: {_abc_negative_cache_version!r}",
+#q               file=file)
 
      def _abc_registry_clear(cls):
          """Clear the registry (for debugging or testing)."""
@@ -64,6 +77,7 @@ class ABCMeta(type):
          _reset_caches(cls)
 
 
+tq84_print('before class ABC')
 
 class ABC(metaclass=ABCMeta):
     """Helper class that provides a standard way to create an ABC using
@@ -71,8 +85,15 @@ class ABC(metaclass=ABCMeta):
     """
     __slots__ = ()
 
+tq84_print('before def recursive_repr')
+
 def recursive_repr(fillvalue='...'):
     'Decorator to make a repr function return fillvalue for a recursive call'
+
+    global tq84_indent
+    tq84_indent+=1
+    tq84_print('recursive_repr')
+
 
     def decorating_function(user_function):
         repr_running = set()
@@ -96,6 +117,7 @@ def recursive_repr(fillvalue='...'):
         wrapper.__annotations__ = getattr(user_function, '__annotations__', {})
         return wrapper
 
+    tq84_indent-=1
     return decorating_function
 
 class ContextDecorator(object):
@@ -114,6 +136,8 @@ class ContextDecorator(object):
         return self
 
     def __call__(self, func):
+        print('  !!!! contextDecorator.__call__')
+
         @wraps(func)
         def inner(*args, **kwds):
             with self._recreate_cm():
@@ -123,70 +147,83 @@ class ContextDecorator(object):
 
 
 
+tq84_print('before class partial')
 class partial:
-    """New function with partial application of the given arguments
-    and keywords.
-    """
 
     __slots__ = "func", "args", "keywords", "__dict__", "__weakref__"
 
     def __new__(cls, func, /, *args, **keywords):
-        if not callable(func):
-            raise TypeError("the first argument must be callable")
+        global tq84_indent
+        tq84_indent+=1
+        tq84_print('partial.__new__')
 
-        if hasattr(func, "func"):
-            args = func.args + args
-            keywords = {**func.keywords, **keywords}
-            func = func.func
+#q      if not callable(func):
+#q          raise TypeError("the first argument must be callable")
+
+#q      if hasattr(func, "func"):
+#q          print('    partial.__new__, func has attribute func')
+#q          args = func.args + args
+#q          keywords = {**func.keywords, **keywords}
+#q          func = func.func
 
         self = super(partial, cls).__new__(cls)
+#       print(f'  partial.__new__, type(self)  = {type(self)}')
+#       print(f'  partial.__new__, dir(self)  = {dir(self)}')
 
         self.func = func
         self.args = args
         self.keywords = keywords
+        tq84_indent-=1
         return self
 
     def __call__(self, /, *args, **keywords):
+        global tq84_indent
+        tq84_indent+=1
+        tq84_print('partial.__call__()')
         keywords = {**self.keywords, **keywords}
+        tq84_indent-=1
         return self.func(*self.args, *args, **keywords)
 
-    @recursive_repr()
-    def __repr__(self):
-        qualname = type(self).__qualname__
-        args = [repr(self.func)]
-        args.extend(repr(x) for x in self.args)
-        args.extend(f"{k}={v!r}" for (k, v) in self.keywords.items())
-        if type(self).__module__ == "functools":
-            return f"functools.{qualname}({', '.join(args)})"
-        return f"{qualname}({', '.join(args)})"
+#q  @recursive_repr()
+#q  def __repr__(self):
+#q      tq84_print('!!!!!__repr__')
+#q      qualname = type(self).__qualname__
+#q      args = [repr(self.func)]
+#q      args.extend(repr(x) for x in self.args)
+#q      args.extend(f"{k}={v!r}" for (k, v) in self.keywords.items())
+#q      if type(self).__module__ == "functools":
+#q          return f"functools.{qualname}({', '.join(args)})"
+#q      return f"{qualname}({', '.join(args)})"
 
-    def __reduce__(self):
-        return type(self), (self.func,), (self.func, self.args,
-               self.keywords or None, self.__dict__ or None)
+#q  def __reduce__(self):
+#q      tq84_print('!!!!!!!!!!!!!!!!!!!!!!!!!1')
+#q      return type(self), (self.func,), (self.func, self.args,
+#q             self.keywords or None, self.__dict__ or None)
 
-    def __setstate__(self, state):
-        if not isinstance(state, tuple):
-            raise TypeError("argument to __setstate__ must be a tuple")
-        if len(state) != 4:
-            raise TypeError(f"expected 4 items in state, got {len(state)}")
-        func, args, kwds, namespace = state
-        if (not callable(func) or not isinstance(args, tuple) or
-           (kwds is not None and not isinstance(kwds, dict)) or
-           (namespace is not None and not isinstance(namespace, dict))):
-            raise TypeError("invalid partial state")
-
-        args = tuple(args) # just in case it's a subclass
-        if kwds is None:
-            kwds = {}
-        elif type(kwds) is not dict: # XXX does it need to be *exactly* dict?
-            kwds = dict(kwds)
-        if namespace is None:
-            namespace = {}
-
-        self.__dict__ = namespace
-        self.func = func
-        self.args = args
-        self.keywords = kwds
+#q  def __setstate__(self, state):
+#q      tq84_print('!!!!!!!!!!!!!!!!!!!!!!!!!1')
+#q      if not isinstance(state, tuple):
+#q          raise TypeError("argument to __setstate__ must be a tuple")
+#q      if len(state) != 4:
+#q          raise TypeError(f"expected 4 items in state, got {len(state)}")
+#q      func, args, kwds, namespace = state
+#q      if (not callable(func) or not isinstance(args, tuple) or
+#q         (kwds is not None and not isinstance(kwds, dict)) or
+#q         (namespace is not None and not isinstance(namespace, dict))):
+#q          raise TypeError("invalid partial state")
+#q
+#q      args = tuple(args) # just in case it's a subclass
+#q      if kwds is None:
+#q          kwds = {}
+#q      elif type(kwds) is not dict: # XXX does it need to be *exactly* dict?
+#q          kwds = dict(kwds)
+#q      if namespace is None:
+#q          namespace = {}
+#q
+#q      self.__dict__ = namespace
+#q      self.func = func
+#q      self.args = args
+#q      self.keywords = kwds
 
 
 WRAPPER_ASSIGNMENTS = ('__module__', '__name__', '__qualname__', '__doc__', '__annotations__')
@@ -250,11 +287,19 @@ class AbstractContextManager(ABC):
 
     def __enter__(self):
         """Return `self` upon entering the runtime context."""
+        global tq84_indent
+        tq84_indent+=1
+        tq84_print('AbstractContextManager.__enter__')
+        tq84_indent-=1
         return self
 
     @abstractmethod
     def __exit__(self, exc_type, exc_value, traceback):
         """Raise any exception triggered within the runtime context."""
+        global tq84_indent
+        tq84_indent+=1
+        tq84_print('AbstractContextManager.__exit__')
+        tq84_indent-=1
         return None
 
     @classmethod
@@ -286,12 +331,14 @@ class _GeneratorContextManager(_GeneratorContextManagerBase,
     """Helper for @contextmanager decorator."""
 
     def _recreate_cm(self):
+        print('!!!!!!!!!!!!!!')
         # _GCM instances are one-shot context managers, so the
         # CM must be recreated each time a decorated function is
         # called
         return self.__class__(self.func, self.args, self.kwds)
 
     def __enter__(self):
+        print('--> _GeneratorContextManager, __enter__')
         # do not keep args and kwds alive unnecessarily
         # they are only needed for recreation, which is not possible anymore
         del self.args, self.kwds, self.func
@@ -300,8 +347,10 @@ class _GeneratorContextManager(_GeneratorContextManagerBase,
         except StopIteration:
             raise RuntimeError("generator didn't yield") from None
 
-    def __exit__(self, type, value, traceback):
-        if type is None:
+    def __exit__(self, exType, exValue, traceback):
+        print('  _GeneratorContextManager, __exit__')
+        if exType is None:
+            print('    __exit__, exType is None')
             try:
                 next(self.gen)
             except StopIteration:
@@ -309,25 +358,28 @@ class _GeneratorContextManager(_GeneratorContextManagerBase,
             else:
                 raise RuntimeError("generator didn't stop")
         else:
-            if value is None:
+            print('    __exit__, exType is not None')
+            if exValue is None:
                 # Need to force instantiation so we can reliably
                 # tell if we get the same exception back
-                value = type()
+                exValue = exType()
+            else:
+                print('    exValue:', exValue)
             try:
-                self.gen.throw(type, value, traceback)
+                self.gen.throw(exType, exValue, traceback)
             except StopIteration as exc:
                 # Suppress StopIteration *unless* it's the same exception that
                 # was passed to throw().  This prevents a StopIteration
                 # raised inside the "with" statement from being suppressed.
-                return exc is not value
+                return exc is not exValue
             except RuntimeError as exc:
                 # Don't re-raise the passed in exception. (issue27122)
-                if exc is value:
+                if exc is exValue:
                     return False
                 # Likewise, avoid suppressing if a StopIteration exception
                 # was passed to throw() and later wrapped into a RuntimeError
                 # (see PEP 479).
-                if type is StopIteration and exc.__cause__ is value:
+                if exType is StopIteration and exc.__cause__ is exValue:
                     return False
                 raise
             except:
@@ -342,7 +394,7 @@ class _GeneratorContextManager(_GeneratorContextManagerBase,
                 # async implementation) to maintain compatibility with
                 # Python 2, where old-style class exceptions are not caught
                 # by 'except BaseException'.
-                if sys.exc_info()[1] is value:
+                if sys.exc_info()[1] is exValue:
                     return False
                 raise
             raise RuntimeError("generator didn't stop after throw()")
@@ -362,59 +414,87 @@ def wraps(wrapped,
        This is a convenience function to simplify applying partial() to
        update_wrapper().
     """
-    return partial(update_wrapper, wrapped=wrapped,
-                   assigned=assigned, updated=updated)
+    print(f'  wraps, wrapped = {wrapped.__name__}')
+    return partial(update_wrapper, wrapped=wrapped, assigned=assigned, updated=updated)
 
 
 def contextmanager(func):
+    print(f'contextmanager, func = {func.__name__}')
     @wraps(func)
     def helper(*args, **kwds):
+        print('--> helper, return _GeneratorContextManager')
         return _GeneratorContextManager(func, args, kwds)
     return helper
+
+
+print('\n\n')
 
 class resource:
       
       def __init__(self, name):
-          print(f'resource.__init__, name = {name}')
+          global tq84_indent
+          tq84_indent+=1
+          tq84_print(f'  resource.__init__, name = {name}')
           self.name = name
+          tq84_indent-=1
 
       def doSomething(self):
-          print(f'Resource named {self.name} is used to do something')
+          tq84_print(f'  Resource named {self.name} is used to do something')
 
       def doSomethingBad(self):
-          print(f'Resource named {self.name} is doing something bad.')
+          tq84_print(f'  Resource named {self.name} is doing something bad.')
           raise Exception('uh oh…')
-          print(f'Not reached.')
+          tq84_print(f'  Not reached.')
 
       def release(self):
-          print(f'Resource {self.name} is released.')
+          tq84_print(f'  Resource {self.name} is released.')
 
           
 
 @contextmanager
 def getResource(name):
 
-    print(f'Going to aquire resource, giving it the name {name}')
+    tq84_print(f'Going to aquire resource, giving it the name {name}')
     res = resource(name)
  
     try:
-       print('Returing (yielding) the resource')
+       tq84_print('  Returning (yielding) the resource')
        yield res
 
     finally:
-       print('Calling res.release()')
+       tq84_print('Calling res.release()')
        res.release()
 
+print('-----------------------------------------')
 
 try:
    with getResource('demo') as abc:
+        tq84_indent+=1
 #       print('****', dir(abc))
-        print(f'I own the resource named {abc.name}')
+        tq84_print(f'I own the resource named {abc.name}')
    
    
         abc.doSomething()
-        abc.doSomethingBad()
-        print('This line is not reached')
+        tq84_print('This line IS reached')
+        tq84_indent-=1
 
 except BaseException as ex:
-       print(f'Caught excpetion: {str(ex)}')
+       tq84_print(f'Caught excpetion: {str(ex)}')
+
+
+print('-----------------------------------------')
+
+try:
+   with getResource('demo') as abc:
+        tq84_indent += 1
+#       tq84_print('****', dir(abc))
+        tq84_print(f'I own the resource named {abc.name}')
+   
+   
+        abc.doSomething()
+        tq84_indent -= 1
+        abc.doSomethingBad()
+        tq84_print('This line is not reached')
+
+except BaseException as ex:
+       tq84_print(f'Caught excpetion: {str(ex)}')
