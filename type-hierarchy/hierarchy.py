@@ -5,21 +5,28 @@ def ensureTypeInDict(t):
 
     if not id(t) in builtin_types:
 
-       builtin_types[id(t)] = { 
+       builtin_types[id(t)] = {
            'name'    :  t.__name__,
            'aliases' : [],          # special key to store names of aliases (for example: OSError is EnvironmentError is IOError is WindowsError)
            'children': []           # type ids of children
        }
 
-for builtin_name in dir(__builtins__):
+for builtin_name in dir(__builtins__) + ['builtin_function_or_method', 'module']:
 
-    builtin_obj = getattr(__builtins__, builtin_name)
+    if   builtin_name == 'builtin_function_or_method':
+         builtin_obj = type(dir)
+
+    elif builtin_name == 'module':
+         builtin_obj = __builtins__.__class__
+    else:
+         builtin_obj = getattr(__builtins__, builtin_name)
+
     builtin_type = builtin_obj
 
     if not issubclass(type(builtin_type), type):
        continue
 
-    if builtin_type is object: 
+    if builtin_type is object:
        continue
 
     assert len(builtin_type.__bases__) == 1
@@ -38,23 +45,22 @@ for builtin_name in dir(__builtins__):
        builtin_types[id(builtin_type)]['aliases'].append(builtin_name)
 
 
+def printTypeChildren(typeId, indent = -1):
 
+    if indent >= 0:
+       print('  ' * indent, end='')
+       print(builtin_types[typeId]['name'], end='')
 
-def printTypeChildren(typeId, indent = 0):
+       if builtin_types[typeId]['aliases']:
+          print(' ('                                       +
+               ', '.join(builtin_types[typeId]['aliases']) +
+               ')',
+               end='')
 
-    print('  ' * indent, end='')
-    print(builtin_types[typeId]['name'], end='')
+       print('')
 
-    if builtin_types[typeId]['aliases']:
-       print(' ('                                       +
-            ', '.join(builtin_types[typeId]['aliases']) +
-            ')',
-            end='')
-
-    print('')
-
-    for child_id in builtin_types[typeId]['children']:
+    for child_id in sorted(builtin_types[typeId]['children'], key=lambda λ: builtin_types[λ]['name'].upper()):
         printTypeChildren(child_id, indent+1)
-        
+
 
 printTypeChildren(id(object))
