@@ -7,7 +7,8 @@ def cls(obj):
 #   print('{:40s} {:s}'.format('.'.join([obj_t.__module__, obj_t.__qualname__]), str(type(obj).mro())))
     print('{:40s} {:s}'.format(
        '.'.join([obj_t.__module__, obj_t.__qualname__]),
-       ' <- '.join( map(lambda t: str(t.__qualname__), type(obj).mro())
+#      ' <- '.join( map(lambda t: str(t.__qualname__), type(obj).mro())
+       ' <- '.join( map(lambda t: '.'.join([t.__module__, t.__qualname__]), type(obj).mro())
     )))
 
 
