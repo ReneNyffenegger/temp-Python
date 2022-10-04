@@ -1,0 +1,7 @@
+start: item+
+
+item: DIGIT  -> dig
+    | CHAR   -> chr
+
+CHAR : ("a" .. "z")
+DIGIT: ("0" .. "9")
