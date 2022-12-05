@@ -1,7 +1,7 @@
 import re
 
 nofFields = 3
-reText = ';'.join(['([^;]+)'] * nofFields)
+reText = ';'.join(['([^;]*)'] * nofFields)
 print(reText)
 
 csvRe = re.compile( reText )
