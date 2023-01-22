@@ -2,4 +2,6 @@
 
 # . py-venv/bin/activate
 
-pip3 install torch
+# pip3 install torch
+  pip3 install numpy
+  
