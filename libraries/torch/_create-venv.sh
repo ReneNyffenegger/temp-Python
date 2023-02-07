@@ -1,7 +1,7 @@
-# python3 -m venv py-venv
+  python3 -m venv py-venv
 
-# . py-venv/bin/activate
+  . py-venv/bin/activate
 
-# pip3 install torch
+  pip3 install torch
   pip3 install numpy
   
