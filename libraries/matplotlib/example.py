@@ -49,15 +49,10 @@ def plot_linestyles(ax, linestyles, title):
                     color="blue", fontsize=8, ha="right", family="monospace")
 
 
-print('a')
 fig, (ax0, ax1) = plt.subplots(2, 1, figsize=(10, 8), height_ratios=[1, 3])
-print('b')
 
 plot_linestyles(ax0, linestyle_str[::-1], title='Named linestyles')
-print('c')
 plot_linestyles(ax1, linestyle_tuple[::-1], title='Parametrized linestyles')
-print('d')
 
 plt.tight_layout()
-print('x')
 plt.show()
