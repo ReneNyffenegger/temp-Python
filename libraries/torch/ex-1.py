@@ -1,3 +1,6 @@
+#
+#   https://torchtutorialstaging.z5.web.core.windows.net/beginner/pytorch_with_examples.html
+#
 import torch
 import math
 import matplotlib.pyplot as plt
