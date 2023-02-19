@@ -4,7 +4,7 @@ def print_frame(frames):
     frame_addr, frame = next(iter(frames.items()))
 
     print(f'frame address: {frame_addr}')
-    print(str(frame))
+    print(dir(frame))
 
 
 def h(i):
