@@ -1,0 +1,27 @@
+#
+#    https://docs.bokeh.org/en/latest/docs/first_steps/first_steps_1.html
+#
+#    use different renderer functions to create various other kinds of graphs. You will also customize what your glyphs look like.
+#
+from bokeh.plotting import figure, show
+
+# prepare some data
+x = [1, 2, 3, 4, 5]
+y1 = [6, 7, 2, 4, 5]
+y2 = [2, 3, 4, 5, 6]
+y3 = [4, 5, 5, 7, 2]
+
+# create a new plot with a title and axis labels
+p = figure(title="Multiple line example", x_axis_label="x", y_axis_label="y")
+
+# add multiple renderers
+p.line(x, y1, legend_label="Temp.", color="blue", line_width=2)
+# vbar() to render vertical bars:
+# p.line(x, y2, legend_label="Rate", color="red", line_width=2)
+p.vbar(x=x, top=y2, legend_label="Rate", width=0.5, bottom=0, color="red")
+# p.line(x, y3, legend_label="Objects", color="green", line_width=2)
+p.circle(x, y3, legend_label="Objects", color="yellow", size=12)
+
+
+# show the results
+show(p)
