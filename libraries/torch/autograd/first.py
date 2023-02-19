@@ -14,16 +14,20 @@ b        = torch.rand(1, requires_grad = True)
 c        = torch.rand(1, requires_grad = True)
 d        = torch.rand(1, requires_grad = True)
 
-for i in range(10000):
+for i in range(2):
+
 
     y = a * x**3 + \
         b * x**2 + \
         c * x**1 + \
         d * x**0
+
     
     loss = (y-expected).pow(2).sum()
     loss_ = loss.item()
-    print('loss = ' + str(loss_))
+
+    print(f' {a.item():7.3f} {b.item():7.3f} {c.item():7.3f} {d.item():7.3f}  ->  {y.tolist()[0]:7.3f} {y.tolist()[1]:7.3f} {y.tolist()[2]:7.3f} {y.tolist()[3]:7.3f}    {loss:7.3f}')
+#   print('loss = ' + str(loss_))
     loss.backward()
     with torch.no_grad():
     #    print(f'y = {y.item()} a = {a.item()}, b = {b.item()}')
