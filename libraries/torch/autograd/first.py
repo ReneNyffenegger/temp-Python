@@ -14,7 +14,7 @@ b        = torch.rand(1, requires_grad = True)
 c        = torch.rand(1, requires_grad = True)
 d        = torch.rand(1, requires_grad = True)
 
-for i in range(2):
+for i in range(20):
 
 
     y = a * x**3 + \

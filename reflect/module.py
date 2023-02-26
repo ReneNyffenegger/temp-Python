@@ -1,7 +1,10 @@
 # exec(open('/home/tq84/github/temp/Python/reflect/module.py').read(), {**globals(), "obj": mechanicalsoup})
+# exec(open('/home/tq84/github/temp/Python/reflect/module.py').read(), {**globals(), "obj": torch})
 
 # import torch
 # obj = mechanicalsoup
+
+import types
 
 for mem in [ _ for _ in sorted(dir(obj), key = lambda m: m.replace('_', '')) if not _.startswith('__') ]:
 
@@ -9,9 +12,17 @@ for mem in [ _ for _ in sorted(dir(obj), key = lambda m: m.replace('_', '')) if 
     typ = type(member)
 #   print(isinstance(typ, object))
 
-    if isinstance(member, type(lambda: 0)):
-       member = f'{mem}()'
-       type_  =  ''
+    if   isinstance(member, type(lambda: 0)):
+         member = f'{mem}()'
+         type_  =  'f'
+
+    elif isinstance(member, type(print)):
+         member = f'{mem}()'
+         type_  =  'b f/m'
+
+    elif isinstance(member, types.ModuleType):
+         member = f'{mem}'
+         type_  =  'mod'
 
     else:
        member = mem
