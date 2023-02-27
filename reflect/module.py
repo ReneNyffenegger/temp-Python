@@ -6,7 +6,7 @@
 
 import types
 
-for mem in [ _ for _ in sorted(dir(obj), key = lambda m: m.replace('_', '')) if not _.startswith('__') ]:
+for mem in [ _ for _ in sorted(dir(obj), key = lambda m: m.replace('_', '').upper()) if not _.startswith('__') ]:
 
     member = getattr(obj, mem)
     typ = type(member)
