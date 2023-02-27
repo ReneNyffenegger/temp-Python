@@ -1,5 +1,6 @@
 # exec(open('/home/tq84/github/temp/Python/reflect/module.py').read(), {**globals(), "obj": mechanicalsoup})
 # exec(open('/home/tq84/github/temp/Python/reflect/module.py').read(), {**globals(), "obj": torch})
+# exec(open('/home/tq84/github/temp/Python/reflect/module.py').read(), {**globals(), "obj": torch.Tensor})
 
 # import torch
 # obj = mechanicalsoup
