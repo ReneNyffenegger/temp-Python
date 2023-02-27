@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import torch
-import math
+# import math
 
 x_  = 3.1
 a_  = 4.7
@@ -16,19 +16,22 @@ y = a * x ** k
 d = 0.001
 g = y.grad_fn( torch.tensor([ d ], dtype=torch.double))
 
-print(y.grad_fn.next_function)
+print(g)
 
-print( g[0].item() )
-print( g[1].item() )
 
-print(g[0].grad_fn( torch.tensor([d]))  )
-print(g[1].grad_fn( torch.tensor([d]))  )
+print( g[0].item() ) # 0.02979... =  d * x_ ** k_
+print( g[1].item() ) # 0.0047     =  d * a_
+
 
 
 print( d * x_ ** k_  )
 print( d * a_        )
 
 
+quit()
+# print(g[0].grad_fn( torch.tensor([d]))  )
+# print(g[1].grad_fn( torch.tensor([d]))  )
+# print(y.grad_fn.next_function)
 
 y.backward()
 
