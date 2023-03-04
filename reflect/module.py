@@ -31,3 +31,4 @@ for mem in [ _ for _ in sorted(dir(obj), key = lambda m: m.replace('_', '').uppe
        type_  = str(typ)
 
     print(f'`{member}` ☰  {type_}' )
+#   print(f'`{member}` ☰  {type_} {str(typ)}' )
