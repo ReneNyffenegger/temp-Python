@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# This script is in pandas on the homepage
+
 import pandas
 import sqlalchemy
 import os
