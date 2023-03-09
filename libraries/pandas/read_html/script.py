@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import pandas as pd
 # url = r'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
 url = r'C:\Users\Rene\github\temp\Bibel\Textkritik\manus.html'
