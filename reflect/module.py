@@ -1,7 +1,8 @@
 # exec(open('/home/tq84/github/temp/Python/reflect/module.py').read(), {**globals(), "obj": mechanicalsoup})
-# exec(open('/home/tq84/github/temp/Python/reflect/module.py').read(), {**globals(), "obj": torch})
-# exec(open('/home/tq84/github/temp/Python/reflect/module.py').read(), {**globals(), "obj": torch.Tensor})
-# exec(open('/home/tq84/github/temp/Python/reflect/module.py').read(), {**globals(), "obj": g[1]})
+# exec(open('/home/tq84/github/temp/Python/reflect/module.py').read(), {**globals(), "obj": torch         })
+# exec(open('/home/tq84/github/temp/Python/reflect/module.py').read(), {**globals(), "obj": torch.Tensor  })
+# exec(open('/home/tq84/github/temp/Python/reflect/module.py').read(), {**globals(), "obj": g[1]          })
+# exec(open('/home/tq84/github/temp/Python/reflect/module.py').read(), {**globals(), "obj": pandas        })
 
 # import torch
 # obj = mechanicalsoup
@@ -10,7 +11,9 @@ import types
 
 for mem in [ _ for _ in sorted(dir(obj), key = lambda m: m.replace('_', '').upper()) if not _.startswith('__') ]:
 
+ try:
     member = getattr(obj, mem)
+
     typ = type(member)
 #   print(isinstance(typ, object))
 
@@ -26,9 +29,17 @@ for mem in [ _ for _ in sorted(dir(obj), key = lambda m: m.replace('_', '').uppe
          member = f'{mem}'
          type_  =  'mod'
 
+    elif str(typ) == "<class 'method'>":
+         member = f'{mem}()'
+         type_  =  'clm'
+
     else:
        member = mem
        type_  = str(typ)
 
-    print(f'`{member}` ☰  {type_}' )
+    print(f'`{member}` ☰ {type_}' )
+
+ except:
+    print(f'`{mem}` ☰ ?' )
+  
 #   print(f'`{member}` ☰  {type_} {str(typ)}' )
