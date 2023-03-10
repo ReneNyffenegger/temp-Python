@@ -3,11 +3,13 @@
 # exec(open('/home/tq84/github/temp/Python/reflect/module.py').read(), {**globals(), "obj": torch.Tensor  })
 # exec(open('/home/tq84/github/temp/Python/reflect/module.py').read(), {**globals(), "obj": g[1]          })
 # exec(open('/home/tq84/github/temp/Python/reflect/module.py').read(), {**globals(), "obj": pandas        })
+# exec(open('/home/tq84/github/temp/Python/reflect/module.py').read(), {**globals(), "obj": 
 
 # import torch
 # obj = mechanicalsoup
 
 import types
+import re
 
 for mem in [ _ for _ in sorted(dir(obj), key = lambda m: m.replace('_', '').upper()) if not _.startswith('__') ]:
 
@@ -19,23 +21,34 @@ for mem in [ _ for _ in sorted(dir(obj), key = lambda m: m.replace('_', '').uppe
 
     if   isinstance(member, type(lambda: 0)):
          member = f'{mem}()'
-         type_  =  'f'
+         type_  =  'Function'
 
     elif isinstance(member, type(print)):
          member = f'{mem}()'
-         type_  =  'b f/m'
+         type_  =  'Built-in function'
 
     elif isinstance(member, types.ModuleType):
          member = f'{mem}'
-         type_  =  'mod'
+         type_  =  'Module'
 
     elif str(typ) == "<class 'method'>":
          member = f'{mem}()'
-         type_  =  'clm'
+         type_  =  'Class method'
 
     else:
        member = mem
        type_  = str(typ)
+       type_  = re.search(r"<class '(\w+)'>", type_).group(1)
+       if    type_ == 'type':
+             n =       f'{obj.__name__}.{mem}'
+             x =  eval(n)
+             type_ = str(x)
+             type_ = re.search(r"<class '(.+)'>", type_).group(1)
+             type_ = f'`{type_}` class'
+
+#            type_ = f'A `{str(type_)
+       else:
+             type_  = f'`{type_}` object'
 
     print(f'`{member}` ☰ {type_}' )
 
