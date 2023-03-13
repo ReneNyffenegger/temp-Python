@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 
-way = ET.fromstring('''<?xml version="1.0" encoding="UTF-8"?>
+xml = ET.fromstring('''<?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="CGImap 0.8.8 (3313918 spike-07.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
  <node id="581359396" visible="true" version="5" changeset="92639725" timestamp="2020-10-17T19:15:24Z" user="Geonick" uid="6087" lat="47.5338731" lon="8.5871862"/>
  <node id="581359397" visible="true" version="5" changeset="92639725" timestamp="2020-10-17T19:15:24Z" user="Geonick" uid="6087" lat="47.5339712" lon="8.5871983"/>
@@ -35,4 +35,18 @@ way = ET.fromstring('''<?xml version="1.0" encoding="UTF-8"?>
 </osm>
 ''')
 
-print(type(way))
+# print(type(xml))
+
+way=xml.find('way')
+# print(type(way))
+
+for nd in way.findall('nd'):
+    node_id = nd.get('ref')
+    node = xml.find(f"node[@id='{node_id}']")
+    lat = float(node.get("lat"))
+    lon = float(node.get("lon"))
+    print(f'{node_id}: {lat} {lon}')
+
+
+for tag in way.findall('tag'):
+    print(f'{tag.get("k")}: {tag.get("v")}')
