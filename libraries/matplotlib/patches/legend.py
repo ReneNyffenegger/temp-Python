@@ -8,7 +8,7 @@ blue_patch = mpatches.Patch(color='blue' , label='Blue marble' )
 g          = mpatches.Patch(color='green', label='Green beans' )
 
 ax.legend(handles=[red_patch, blue_patch, g])
+print(type(ax))
 
 plt.show()
-plt.waitforbuttonpress()
-
+# plt.waitforbuttonpress()
