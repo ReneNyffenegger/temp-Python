@@ -22,6 +22,8 @@ ax.set_ylabel('Y Label')
 ax.set_zlabel('Z Label')
 ax.set_title('Trisurf Example')
 
+# plt.axis('off')
+
 # Show the plot
 plt.show()
 
