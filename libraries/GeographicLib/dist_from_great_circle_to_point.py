@@ -81,9 +81,15 @@ def test():
 
     fig = plt.figure()
     ax  = plt.gca()
-    bm  = Basemap(  projection  = 'ortho',
+
+
+ #
+ #  Basemap is deprecated in favor of the Cartopy project.
+ #
+    bm  = Basemap(  projection  = 'ortho',   
                     lat_0       = 35.0,
                     lon_0       = 85.0)
+
     bm.drawcoastlines(linewidth=0.25)
 
     points          = [a, b, p, m, h]
