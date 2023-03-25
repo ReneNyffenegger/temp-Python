@@ -6,3 +6,4 @@
   pip3 install numpy
   pip3 install pandas
   pip3 install SQLAlchemy
+  pip3 install geopy
