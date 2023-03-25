@@ -8,3 +8,4 @@
   pip3 install SQLAlchemy
   pip3 install geopy
   pip3 install geographiclib
+  pip3 install cartopy
