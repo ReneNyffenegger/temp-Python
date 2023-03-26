@@ -1,3 +1,6 @@
+#
+#   https://stackoverflow.com/questions/53195551/cartopy-plotting-points-incorrectly-with-orthographic-projection
+#
 import numpy as np
 import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
@@ -17,6 +20,7 @@ ax = plt.axes(projection=ortho)
 ax.scatter(lons, lats, marker='o', c='r', transform=geo)
 
 # plot north pole for reference                                                                                               
+# plot north pole for reference (with a projection transform)                                                                                           
 ax.plot([0], [90], 'b^', transform=geo)
 
 # add coastlines for reference                                                                                                
