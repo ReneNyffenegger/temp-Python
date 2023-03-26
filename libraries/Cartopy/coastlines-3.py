@@ -31,7 +31,8 @@ ax = plt.axes(projection=ortho)
 
 for city, (lon, lat) in cities.items():
 #   pass
-    ax.scatter(lon, lat, transform=ccrs.Orthographic(), label=city, zorder=10)
+#   ax.scatter(lon, lat, transform=ccrs.Orthographic(), label=city, zorder=10, marker = 'o', c='r')
+    ax.scatter(lon, lat, transform=geo                , label=city, zorder=10, marker = 'o', c='r')
     ax.text(lon + 2, lat + 2, city, transform=ccrs.PlateCarree(), fontsize=8)
 
 # plot north pole for reference                                                                                               
