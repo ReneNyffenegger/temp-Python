@@ -1,5 +1,6 @@
-# sudo pip install -U spacy==3.* 
+  sudo pip install -U spacy==3.* 
 
-  sudo pip install spicy
+# sudo pip install spicy
 
-# python3 -m spicy info
+  python3 -m spicy info
+  # -> No module named spicy.__main__; 'spicy' is a package and cannot be directly executed
