@@ -1,0 +1,5 @@
+# sudo pip install -U spacy==3.* 
+
+  sudo pip install spicy
+
+# python3 -m spicy info
