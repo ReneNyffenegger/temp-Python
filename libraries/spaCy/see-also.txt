@@ -1,0 +1,4 @@
+NLTK stands for Natural Language Toolkit, which is a widely used library for
+natural language processing in Python. In the context of stemming, NLTK
+provides several stemmers that can be used to reduce words to their base or
+root form, known as the stem.

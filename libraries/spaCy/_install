@@ -1,6 +1,24 @@
   sudo pip install -U spacy==3.* 
 
-# sudo pip install spicy
+  python3 -m spacy info
 
-  python3 -m spicy info
-  # -> No module named spicy.__main__; 'spicy' is a package and cannot be directly executed
+# en_core_web_sm: the smallest English model spaCy offers and is a good
+# starting point for NLP tasks.
+# 
+# en_core_web_sm is trained on OntoNotes 5 which is an annotated corpus
+# comprising news, blogs, transcripts, etc. Put simply, this means a bunch of
+# documents were labelled with information such as how each sentence should be
+# parsed, whether a particular word is a noun or adjective or other
+# part-of-speech, whether a word is a special entity like a person or a
+# real-world organization, and other language-related labels. A statistical
+# model was then generated from these labelled documents.
+# 
+#    https://catalog.ldc.upenn.edu/LDC2013T19
+# 
+
+  python3 -m spacy download en_core_web_sm
+  #  -> You can now load the package via spacy.load('en_core_web_sm')
+ 
+#
+# German, optimized for accuracy (as opposed to efficiency).
+  python3 -m spacy download de_dep_news_trf

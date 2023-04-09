@@ -1,0 +1,7 @@
+After importing spaCy, the next thing we need to do is load a suitable
+statistical model for our project. spaCy offers a variety of models for
+different languages. These models help with tokenization, part-of-speech
+tagging, named entity recognition, and more.
+
+https://spacy.io/models
+https://spacy.io/usage/models
