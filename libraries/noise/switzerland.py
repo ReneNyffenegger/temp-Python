@@ -59,6 +59,7 @@ grid = [ [ False if cell==' ' else True  for cell in line ] for line in lines]
 
 width  = len(grid[0])
 height = len(grid   )
+print(f'Size: {width}x{height}')
 
 img = Image.new('L', (width, height) ) # L = grayscale (rather than RGB)
 
@@ -67,7 +68,8 @@ for x in range(width):
 #       print(127 + int(127* noise.snoise2(x,y)))
 
         if grid[y][x]:
-           img.putpixel( (x, y), 127 + int(127*noise.snoise2(x,y)))
+           noise_val = int(255 * noise.snoise2(x/300, y/300, octaves=4, persistence=0.2, lacunarity=0.8, repeatx=width, repeaty=height))
+           img.putpixel( (x, y), noise_val)
         else:
            img.putpixel( (x, y), 0)
 
