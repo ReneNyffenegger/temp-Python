@@ -65,7 +65,7 @@ width  = len(grid[0])
 values = np.zeros( (height, width) )
 
 
-# print(f'Size: {width}x{height}')
+print(f'Size: {width}x{height}')
 
 # img = Image.new('L', (width, height) ) # L = grayscale (rather than RGB)
 
