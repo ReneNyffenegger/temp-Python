@@ -1,17 +1,17 @@
 import torch
 
-n_input  = 20
-n_output = 15
 
-lin = torch.nn.Linear(n_input, n_output)
+lin = torch.nn.Linear(3, 2) # three inputs, two outputs
 
-print(type(lin.bias  ))
-print(type(lin.weight))
 
-print('------------------------------')
 
 print(lin.bias  .shape)
 print(lin.weight.shape)
+
+print('------------------------------')
+
+print(type(lin.bias  ))
+print(type(lin.weight))
 
 print('------------------------------')
 
