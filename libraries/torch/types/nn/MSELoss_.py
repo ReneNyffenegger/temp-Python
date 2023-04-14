@@ -1,12 +1,29 @@
+#
+#  gh: development/languages/Python/libraries/torch/nn/MSELoss
+#
+
+prd = [1.2, 2.5, 3.8, 4.1] # Predicted values
+tgt = [1.0, 2.0, 4.0, 4.5] # Ground-truth (i. e. target) values
+
+# Calculate the squares of the pairwise differences between predicted and target values:
+squared_diffs = [  (p-t)**2  for  p, t in zip(prd, tgt)]
+
+# Sum the the squares and divide result by the number of squares:
+mse = sum(squared_diffs) / len(squared_diffs)
+
+print(f"Mean Squared Error (no library):    {mse:.4f}")
+
+#
+#    Same thing, but using PyTorch
+#
+
 import torch
 
-# Create an instance of MSELoss
 criterion = torch.nn.MSELoss()
 
-predicted = torch.tensor([1.2]) # Predicted values
-target    = torch.tensor([1.0]) # Ground-truth (i. e. target) values
+loss = criterion(
+           torch.tensor(prd),
+           torch.tensor(tgt)
+        )
 
-# Calculate the loss
-loss = criterion(predicted, target)
-
-print(f"MSE Loss: {loss:.4f}")
+print(f"Mean squared Error (using PyTorch): {loss:.4f}")
