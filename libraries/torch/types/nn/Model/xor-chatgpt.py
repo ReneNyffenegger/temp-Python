@@ -26,8 +26,9 @@ Y = torch.tensor([
 class XORModel(nn.Module):
 
     def __init__(self):
-#       super(XORModel, self).__init__()
-        super().__init__()
+        super(XORModel, self).__init__()
+#       super().__init__()                       #
+
         self.layer1 = nn.Linear(2, 2)
         self.layer2 = nn.Linear(2, 1)
 

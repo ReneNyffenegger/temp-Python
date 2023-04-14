@@ -1,24 +1,30 @@
+#
+# gh: languages/Python/libraries/torch/_members/multiplication/index
+#
 import sys
 import torch
 
-
-
-
 m1 = torch.tensor([
 
-  [ 0.9, 1.3 ],
-  [ 4.2, 5.2 ],
-  [ 2.1, 3.0 ]
+  [ 0.9  ,  1.3 ],
+  [ 4.2  ,  5.2 ],
+  [ 2.1  ,  3.0 ]
  
 ])
 
 
 m2 = torch.tensor([
 
-  [ 0.1, 2.8, 3.1 ],
-  [ 4.8, 3.0, 0.2 ]
+  [ 0.1  ,  2.8  ,  3.1  ,  1.8  ,  2.6 ],
+  [ 4.8  ,  3.0  ,  0.2  ,  2.5  ,  3.8 ],
+  [ 4.8  ,  3.0  ,  0.2  ,  2.5  ,  3.8 ]
 
 ])
+
+r = m1.mm(m2)       ; print(r)
+r = torch.mm(m1, m2); print(r) # same thing
+
+print(r)
 
 sys.exit()
 
