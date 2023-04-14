@@ -1,17 +1,54 @@
+import sys
 import torch
+
+
+
+
+m1 = torch.tensor([
+
+  [ 0.9, 1.3 ],
+  [ 4.2, 5.2 ],
+  [ 2.1, 3.0 ]
+ 
+])
+
+sys.exit()
+
+
+
+
+
+# ---------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 lin = torch.nn.Linear(3, 2) # three inputs, two outputs
 
-print(lin.bias  .shape)    # torch.Size([2])     = number of outputs
-print(lin.weight.shape)    # torch.Size([2, 3])  = number of outputs x number of inputs
+# print(lin.bias  .shape)    # torch.Size([2])     = number of outputs
+# print(lin.weight.shape)    # torch.Size([2, 3])  = number of outputs x number of inputs
 
 
 x_0 = 1.0
 x_1 = 2.2
 x_2 = 0.9
+
 x_tensor = torch.tensor([ x_0, x_1, x_2 ])
 
 print( x_tensor @ lin.weight.t() + lin.bias )
+print( x_tensor.matmul(lin.weight.t()) + lin.bias )
+print( torch.matmul(x_tensor, lin.weight.t()) + lin.bias )
+
 print(lin( x_tensor ))
 
 
