@@ -12,6 +12,14 @@ m1 = torch.tensor([
  
 ])
 
+
+m2 = torch.tensor([
+
+  [ 0.1, 2.8, 3.1 ],
+  [ 4.8, 3.0, 0.2 ]
+
+])
+
 sys.exit()
 
 
