@@ -1,0 +1,33 @@
+https://nn.readthedocs.io/en/rtd/criterion/index.html
+-----------------------------------------------------
+
+   Criterions are helpful to train a neural network. Given an input and a
+   target, they compute a gradient according to a given loss function.
+
+   AbsCriterion and MSECriterion are perfect for regressionbs
+
+ChatGPT
+-------
+
+   In the context of PyTorch, a "criterion" typically refers to a loss function used
+   to evaluate the performance of a model during training. The term "criterion"
+   is often used interchangeably with "loss function" or "objective function."
+   The purpose of a criterion is to quantify the difference between the model's
+   predictions and the ground-truth labels or target values.
+   
+   During the training process, the model's parameters are updated to minimize
+   the value of the criterion. In PyTorch, a criterion is usually implemented
+   as a subclass of torch.nn.Module, which allows it to be easily integrated
+   into the training loop.
+   
+   Some common criteria (loss functions) available in PyTorch's torch.nn module include:
+   
+   nn.MSELoss:          Mean Squared Error Loss, commonly used for regression tasks.
+   nn.CrossEntropyLoss: Cross-Entropy Loss, often used for multi-class classification tasks.
+   nn.BCELoss:          Binary Cross-Entropy Loss, used for binary classification tasks.
+   nn.L1Loss:           Mean Absolute Error Loss (L1 Loss), another option for regression tasks.
+   nn.NLLLoss:          Negative Log-Likelihood Loss, typically used with a log-softmax output for multi-class classification tasks.
+
+   To use a criterion in PyTorch, you can instantiate it and then apply it to
+   the model's output and the target values in the training loop. For example:
+   
