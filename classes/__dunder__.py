@@ -13,7 +13,6 @@
 #            __annotations__      A dict containing annotations of parameters. The keys of the dict are the parameter names, and 'return' for the return annotation, if provided.
 # module     __author__           
 # class.     __bases__            The tuple of base classes of a class object.
-# class.     __bases__            The tuple of base classes of a class object.
 #            __builtins__
 #            __cached__           dir(module)
 #            __call__             Used for callables.

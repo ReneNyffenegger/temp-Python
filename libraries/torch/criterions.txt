@@ -4,7 +4,7 @@ https://nn.readthedocs.io/en/rtd/criterion/index.html
    Criterions are helpful to train a neural network. Given an input and a
    target, they compute a gradient according to a given loss function.
 
-   AbsCriterion and MSECriterion are perfect for regressionbs
+   AbsCriterion and MSECriterion are perfect for regressions.
 
 ChatGPT
 -------
