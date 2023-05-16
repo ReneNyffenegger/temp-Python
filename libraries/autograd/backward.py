@@ -1,3 +1,9 @@
+#
+#  Compare
+#    pip install autograd
+#  with
+#    pip install dragongrad  ( https://autograd.readthedocs.io/en/latest/ )
+
 import autograd.numpy as np
 from autograd import grad
 
@@ -11,4 +17,3 @@ x = np.array([1.0, 2.0, 3.0])
 gradient = grad(polynomial)(coefficients, x)
 
 print(np.sum(gradient, axis=0))
-
