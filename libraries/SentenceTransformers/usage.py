@@ -12,6 +12,8 @@ embeddings = model.encode(sentences)
 
 #Print the embeddings
 for sentence, embedding in zip(sentences, embeddings):
+    print(type(embedding)) # numpy.ndarray
+    print(embedding.shape)
     print("Sentence: ", sentence)
     print("Embedding:", embedding)
     print("")
