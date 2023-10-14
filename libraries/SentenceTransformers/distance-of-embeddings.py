@@ -1,3 +1,7 @@
+#
+#  similar text is close and can efficiently be found using cosine similarity.
+#
+
 from sentence_transformers import SentenceTransformer
 import numpy as np
 
@@ -27,14 +31,13 @@ def dist(emb_a, emb_b):
     norm_b = np.linalg.norm(emb_b)
     
     similarity = dot_product / (norm_a * norm_b)
-    distance = 1 - similarity  # Cosine dista
+    dist_cos = 1 - similarity  # Cosine dista
 
-    print(distance)
+    print(dist_cos)
 
-    dist_euclid = np.linalg.norm(emb_a - emb_b)
-    
-    print(dist_euclid)
-    print('')
+  # dist_euclid = np.linalg.norm(emb_a - emb_b)
+  # print(dist_euclid)
+  # print('')
 
 
 dist(emb_1, emb_2)
