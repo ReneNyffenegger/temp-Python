@@ -1,0 +1,3 @@
+. venv
+
+pip install langchain
