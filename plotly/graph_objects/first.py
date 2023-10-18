@@ -1,5 +1,6 @@
 import plotly.graph_objects as go
 import numpy as np
+import time
 
 # Generate 100 random x, y, z coordinates
 np.random.seed(42)  # for reproducibility
@@ -24,3 +25,4 @@ fig.update_layout(scene=dict(
 )
 
 fig.show()
+time.sleep(5)
