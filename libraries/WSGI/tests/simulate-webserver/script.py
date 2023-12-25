@@ -36,7 +36,12 @@ def call_app(app, environ):
     return status_headers[0], status_headers[1], b''.join(body_parts).decode()
 
 # You can populate this with more WSGI environment variables
-environ = {'PATH_INFO': '/foo/bar/baz'}
+environ = {
+                                 #
+                                 #  WSGI splits the requested paths into two components:
+   'SCRIPT_NAME': 'xyz.py',      #     SCRIPT_NAME is everything that was «used up getting here»
+   'PATH_INFO'  : '/foo/bar/baz' #     PATH_INFO   is everything left over.
+}
 
 status, headers, body = call_app(simple_app, environ)
 
