@@ -1,4 +1,6 @@
-When you want to create dynamic pages with Python on an Azure VM, a popular choice of web server is the Python built-in server (http.server). However, for production environments, it is recommended to use a more robust web server like Gunicorn or uWSGI, which are designed to handle multiple concurrent requests efficiently. Here's how you can set up a basic web server with Gunicorn:
+When you want to create dynamic pages with Python on an Azure VM, a popular choice of web server is the Python built-in server (http.server).
+However, for production environments, it is recommended to use a more robust web server like Gunicorn or uWSGI, which are designed to handle multiple concurrent requests efficiently.
+Here's how you can set up a basic web server with Gunicorn:
 
 Create a virtual environment and activate it:
 
