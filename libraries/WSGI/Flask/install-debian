@@ -1,0 +1,12 @@
+python3 -m venv virtual-env
+. virtual-env/bin/activate
+pip install Flask
+
+
+#
+#   Flask depends/builds on Werkzeug:
+#
+python3 -m flask --version
+# Python 3.9.2
+# Flask 3.0.0
+# Werkzeug 3.0.1
