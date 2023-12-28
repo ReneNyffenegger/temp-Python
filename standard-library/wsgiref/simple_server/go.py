@@ -1,4 +1,3 @@
-
 def app(environ, start_response):
 
     start_response(
