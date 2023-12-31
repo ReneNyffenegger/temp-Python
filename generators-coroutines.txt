@@ -1,0 +1,13 @@
+It is easy to confuse coroutines with regular generators, since they share the same syntax
+
+A Python generator is a form of coroutine, but has the limitation that it can only yield to its immediate caller.
+
+Whether or not a function is a coroutine is determined by a presence of yield
+or yield from statements in its body, which can lead to unobvious errors when
+such statements appear in or disappear from function body during refactoring.
+
+PEP 492: This proposal makes coroutines a native Python language feature, and clearly separates them from generators.
+
+sa:
+  collections.abc.Coroutine
+  types.coroutines
