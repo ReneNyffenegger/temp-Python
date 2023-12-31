@@ -1,0 +1,23 @@
+digraph {
+
+  node [shape=box]
+
+  p288 [ label = "288\nGenerators Attributes and Exceptions\nwithdrawn" ]
+  p310 [ label = "310\nReliable Acquisition/Release Pairs\nrejected"]
+  p319 [ label = "319\nPython Synchronize/Asynchronize Block"]
+  p325 [ label = "325\nResource-Release Support for Generators\nrejected"]
+  p340 [ label = "340\nAnonymous Block Statements\nwithdrawn" ]
+  p342 [ label = "342\nCoroutines via Enhanced Generators" ]
+  p343 [ label = "343\nwith statement" ]
+  p346 [ label = "346\nUser Defined 'with' statement" ]
+  p380 [ label = "380\Syntax for Delegating to a Subgenerator\nIntroduction of `yield from`\nfinal" ]
+  p492 [ label = "492\nCoroutines with async and await syntax" ]
+
+  p310 -> p343 [label = "rejected in favor of" ]
+  p319 -> p343 [label = "rejected in favor of" ]
+  p325 -> p342 [label = "rejected in favor of" ]
+  p340 -> p343 [label = "withdrawn in favor of" ]
+  p346 -> p343 [label = "withdrawn in favor of" ]
+  p288 -> p343 [label = "subsumed in" ]
+
+}

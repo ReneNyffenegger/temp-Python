@@ -1,9 +1,21 @@
 This proposal aims to answer that need by making writing explicitly
 asynchronous, concurrent Python code easier and more Pythonic.
 
-It is proposed to make coroutines a proper standalone concept in Python along with supporting syntax.
+Coroutines
+  It is proposed to make coroutines a proper standalone concept in Python along
+  with supporting syntax.
 
-This PEP assumes that the asynchronous tasks are scheduled and coordinated by an Event Loop similar to that of stdlib module asyncio.events.AbstractEventLoop. 
+Event Loop
+  This PEP assumes that the asynchronous tasks are scheduled and coordinated by
+  an Event Loop similar to that of stdlib module
+  asyncio.events.AbstractEventLoop. 
+
+  While the PEP is not tied to any specific Event Loop implementation, it is
+  relevant only to the kind of coroutine that uses yield as a signal to the
+  scheduler, indicating that the coroutine will be waiting until an event (such
+  as IO) is completed.
+
+
 
 Great effort has been made to make sure that coroutines and generators are
 treated as distinct concepts:
