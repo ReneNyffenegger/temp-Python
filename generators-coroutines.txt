@@ -8,6 +8,9 @@ such statements appear in or disappear from function body during refactoring.
 
 PEP 492: This proposal makes coroutines a native Python language feature, and clearly separates them from generators.
 
+dis.RETURN_GENERATOR Create a generator, coroutine, or async generator from the current frame.
+
+
 sa:
   collections.abc.Coroutine
   types.coroutines
