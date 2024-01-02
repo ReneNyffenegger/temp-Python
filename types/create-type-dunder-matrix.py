@@ -13,10 +13,12 @@ def f(): pass
 #
 #    data = { typ.__name__: dir(typ) for typ in types }
 
+data['dict'     ]=dir(type({}))
 data['list'     ]=dir(type([]))
 data['func'     ]=dir(type(f          ))
 data['lambda'   ]=dir(type(lambda x: x))
 data['coroutine']=dir(coroutine)
+data['map-proxy']=dir(type.__dict__    )
 
 #q # Extracting unique values
 #q unique_values = sorted({val for values in data.values() for val in values})
