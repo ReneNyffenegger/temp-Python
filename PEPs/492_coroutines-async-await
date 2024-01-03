@@ -74,6 +74,10 @@ Two new magic methods are added:
    __aexit__.
    Both must return an awaitable.
 
+await expressions
+  When a Task executes an await expression, the running Task gets suspended,
+  and the event loop executes the next Task.
+
 Environment variable:
   PYTHONASYNCIODEBUG
 
@@ -81,6 +85,7 @@ Beginner's misstake:
    @asyncio.coroutine
    def useful():
        asyncio.sleep(1) # this will do nothing without 'yield from'
+
 
 See als
   PEP  342 Implementation of couroutines with generators.
