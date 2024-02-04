@@ -1,5 +1,5 @@
-  python3 -m venv py-venv
+  python3 -m venv py-virt-env
 
-  . py-venv/bin/activate
+  . py-virt-env/bin/activate
 
   pip3 install xkeysnail
