@@ -2,4 +2,4 @@
 
   . py-virt-env/bin/activate
 
-  pip3 install python-evdev
+  pip3 install evdev
