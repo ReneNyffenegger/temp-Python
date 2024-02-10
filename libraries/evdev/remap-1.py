@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#/usr/bin/python3
 
 #  https://gist.github.com/t184256/f4994037a2a204774ef3b9a2b38736dc
 
@@ -21,23 +21,28 @@
 
 # Import necessary libraries.
 import atexit
+
 # You need to install evdev with a package manager or pip3.
-import evdev  # (sudo pip3 install evdev)
+# (sudo pip3 install evdev)
+import evdev
 
 
 # Define an example dictionary describing the remaps.
-REMAP_TABLE = {
-  # Let's swap A and B...
-    evdev.ecodes.KEY_A: evdev.ecodes.KEY_B,
-    evdev.ecodes.KEY_B: evdev.ecodes.KEY_A,
-    # ... and make the right Shift into a second Space.
-    evdev.ecodes.KEY_RIGHTSHIFT: evdev.ecodes.KEY_SPACE,
-    # We'll also remap CapsLock to Control when held ...
-    evdev.ecodes.KEY_CAPSLOCK: evdev.ecodes.KEY_LEFTCTRL,
-    # ... but to Esc when pressed solo, xcape style! See below.
-}
+# REMAP_TABLE = {
+#   # Let's swap A and B...
+#     evdev.ecodes.KEY_A: evdev.ecodes.KEY_B,
+#     evdev.ecodes.KEY_B: evdev.ecodes.KEY_A,
+#     # ... and make the right Shift into a second Space.
+#     evdev.ecodes.KEY_RIGHTSHIFT: evdev.ecodes.KEY_SPACE,
+#     # We'll also remap CapsLock to Control when held ...
+#     evdev.ecodes.KEY_CAPSLOCK: evdev.ecodes.KEY_LEFTCTRL,
+#     # ... but to Esc when pressed solo, xcape style! See below.
+# }
 # The names can be found with evtest or in evdev docs.
 
+
+# print(evdev.ecodes.KEY_ESC)
+# quit()
 
 # The keyboard name we will intercept the events for. Obtainable with evtest.
 MATCH = 'LITEON Technology USB Multimedia Keyboard'
@@ -58,43 +63,54 @@ kbd.grab()  # Grab, i.e. prevent the keyboard from emitting original events.
 
 soloing_caps = False  # A flag needed for CapsLock example later.
 
+
 # Create a new keyboard mimicking the original one.
 with evdev.UInput.from_device(kbd, name='kbdremap') as ui:
 
   # Read events from original keyboard.
     for ev in kbd.read_loop():
     #   print(type(ev))
-        print(kbd.active_keys())
+    #   print(kbd.active_keys())
 
         if ev.type == evdev.ecodes.EV_KEY:  # Process key events.
 
-            if ev.code == evdev.ecodes.KEY_PAUSE and ev.value == 1:
-              # Exit on pressing PAUSE.
-              # Useful if that is your only keyboard. =)
-              # Also if you bind that script to PAUSE, it'll be a toggle.
-                break
+           if ev.code == evdev.ecodes.KEY_PAUSE and ev.value == 1:
+            # Exit on pressing PAUSE.
+            # Useful if that is your only keyboard. =)
+            # Also if you bind that script to PAUSE, it'll be a toggle.
+              break
 
-            elif ev.code in REMAP_TABLE:
+           if   ev.code == evdev.ecodes.KEY_ESC:
+                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_CAPSLOCK, ev.value)
 
-              # Lookup the key we want to press/release instead...
-                remapped_code = REMAP_TABLE[ev.code]
+           elif ev.code == evdev.ecodes.KEY_CAPSLOCK:
+                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_ESC, ev.value)
 
-              # And do it.
-                ui.write(evdev.ecodes.EV_KEY, remapped_code, ev.value)
-
-              # Also, remap a 'solo CapsLock' into an Escape as promised.
-                if ev.code == evdev.ecodes.KEY_CAPSLOCK and ev.value == 0:
-                    if soloing_caps:
-                      # Single-press Escape.
-                        ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_ESC, 1)
-                        ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_ESC, 0)
-            else:
-                # Passthrough other key events unmodified.
+           else:
                 ui.write(evdev.ecodes.EV_KEY, ev.code, ev.value)
 
-            # If we just pressed (or held) CapsLock, remember it.
-            # Other keys will reset this flag.
-            soloing_caps = (ev.code == evdev.ecodes.KEY_CAPSLOCK and ev.value)
+
+#           elif ev.code in REMAP_TABLE:
+
+#             # Lookup the key we want to press/release instead...
+#               remapped_code = REMAP_TABLE[ev.code]
+
+#             # And do it.
+#               ui.write(evdev.ecodes.EV_KEY, remapped_code, ev.value)
+
+#             # Also, remap a 'solo CapsLock' into an Escape as promised.
+#               if ev.code == evdev.ecodes.KEY_CAPSLOCK and ev.value == 0:
+#                   if soloing_caps:
+#                     # Single-press Escape.
+#                       ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_ESC, 1)
+#                       ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_ESC, 0)
+#           else:
+#               # Passthrough other key events unmodified.
+#               ui.write(evdev.ecodes.EV_KEY, ev.code, ev.value)
+
+#           # If we just pressed (or held) CapsLock, remember it.
+#           # Other keys will reset this flag.
+#           soloing_caps = (ev.code == evdev.ecodes.KEY_CAPSLOCK and ev.value)
         else:
-            # Passthrough other events unmodified (e.g. SYNs).
+          # Passthrough other events unmodified (e.g. SYNs).
             ui.write(ev.type, ev.code, ev.value)
