@@ -56,11 +56,8 @@ def write_hex(keys):
     ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 0)
 
     for key in keys:
-
-       ui.write(evdev.ecodes.EV_KEY, key, 1) # https://www.utf8-zeichentabelle.de/unicode-utf8-table.pl?names=-&unicodeinhtml=hex
-       ui.write(evdev.ecodes.EV_KEY, key, 0)
-  #    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_4        , 1)
-  #    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_4        , 0)
+        ui.write(evdev.ecodes.EV_KEY, key, 1) # https://www.utf8-zeichentabelle.de/unicode-utf8-table.pl?names=-&unicodeinhtml=hex
+        ui.write(evdev.ecodes.EV_KEY, key, 0)
 
     ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 1)
     ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 0)
@@ -89,22 +86,15 @@ with evdev.UInput.from_device(kbd, name='kbdremap') as ui:
 
            elif  left_alt_suppressed and ev.code == evdev.ecodes.KEY_SEMICOLON and ev.value == 1:
                  left_alt_suppressed = False
+                 write_hex([evdev.ecodes.KEY_F, evdev.ecodes.KEY_6]) # ö
 
+           elif  left_alt_suppressed and ev.code == evdev.ecodes.KEY_APOSTROPHE and ev.value == 1:
+                 left_alt_suppressed = False
                  write_hex([evdev.ecodes.KEY_E, evdev.ecodes.KEY_4]) # ä
-
-#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL , 1)
-#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 1)
-#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_U        , 1)
-#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_U        , 0)
-#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL , 0)
-#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 0)
-#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_E        , 1) # https://www.utf8-zeichentabelle.de/unicode-utf8-table.pl?names=-&unicodeinhtml=hex
-#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_E        , 0)
-#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_4        , 1)
-#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_4        , 0)
-#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 1)
-#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 0)
           
+           elif  left_alt_suppressed and ev.code == evdev.ecodes.KEY_LEFTBRACE and ev.value == 1:
+                 left_alt_suppressed = False
+                 write_hex([evdev.ecodes.KEY_F, evdev.ecodes.KEY_C]) # ü
 
            elif ev.code == evdev.ecodes.KEY_ESC:
                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_CAPSLOCK, ev.value)
@@ -123,27 +113,7 @@ with evdev.UInput.from_device(kbd, name='kbdremap') as ui:
                 ui.write(evdev.ecodes.EV_KEY, ev.code, ev.value)
                 left_alt_suppressed = False
                    
-
 #          elif evdev.ecodes.KEY_LEFTALT in kbd.active_keys() and evdev.ecodes.KEY_SEMICOLON in kbd.active_keys():
-  #        elif ev.code == evdev.ecodes.KEY_BACKSPACE and ev.value == 0:
-  #                print('yes')
-# #             if ev.value == 1:
-# #                print('  1')
-# #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTALT  , 0)
-# #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SEMICOLON, 0)
-
-  #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL , 1)
-  #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 1)
-  #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_U        , 1)
-  #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_U        , 0)
-  #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL , 0)
-  #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 0)
-  #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_E        , 1) # https://www.utf8-zeichentabelle.de/unicode-utf8-table.pl?names=-&unicodeinhtml=hex
-  #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_E        , 0)
-  #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_4        , 1)
-  #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_4        , 0)
-  #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 1)
-  #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 0)
 
            else:
                 ui.write(evdev.ecodes.EV_KEY, ev.code, ev.value)
