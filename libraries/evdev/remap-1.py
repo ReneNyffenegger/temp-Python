@@ -83,7 +83,7 @@ with evdev.UInput.from_device(kbd, name='kbdremap') as ui:
   #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_U        , 0)
   #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL , 0)
   #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 0)
-  #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_E        , 1)
+  #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_E        , 1) # https://www.utf8-zeichentabelle.de/unicode-utf8-table.pl?names=-&unicodeinhtml=hex
   #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_E        , 0)
   #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_4        , 1)
   #                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_4        , 0)
