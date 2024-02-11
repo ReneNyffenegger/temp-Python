@@ -46,6 +46,25 @@ left_alt_suppressed = False
 
 # print(ansiEscapes.clearTerminal)
 
+def write_hex(keys):
+
+    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL , 1)
+    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 1)
+    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_U        , 1)
+    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_U        , 0)
+    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL , 0)
+    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 0)
+
+    for key in keys:
+
+       ui.write(evdev.ecodes.EV_KEY, key, 1) # https://www.utf8-zeichentabelle.de/unicode-utf8-table.pl?names=-&unicodeinhtml=hex
+       ui.write(evdev.ecodes.EV_KEY, key, 0)
+  #    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_4        , 1)
+  #    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_4        , 0)
+
+    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 1)
+    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 0)
+
 # Create a new keyboard mimicking the original one.
 with evdev.UInput.from_device(kbd, name='kbdremap') as ui:
 
@@ -71,18 +90,20 @@ with evdev.UInput.from_device(kbd, name='kbdremap') as ui:
            elif  left_alt_suppressed and ev.code == evdev.ecodes.KEY_SEMICOLON and ev.value == 1:
                  left_alt_suppressed = False
 
-                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL , 1)
-                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 1)
-                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_U        , 1)
-                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_U        , 0)
-                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL , 0)
-                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 0)
-                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_E        , 1) # https://www.utf8-zeichentabelle.de/unicode-utf8-table.pl?names=-&unicodeinhtml=hex
-                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_E        , 0)
-                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_4        , 1)
-                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_4        , 0)
-                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 1)
-                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 0)
+                 write_hex([evdev.ecodes.KEY_E, evdev.ecodes.KEY_4]) # ä
+
+#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL , 1)
+#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 1)
+#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_U        , 1)
+#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_U        , 0)
+#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL , 0)
+#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 0)
+#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_E        , 1) # https://www.utf8-zeichentabelle.de/unicode-utf8-table.pl?names=-&unicodeinhtml=hex
+#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_E        , 0)
+#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_4        , 1)
+#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_4        , 0)
+#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 1)
+#                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 0)
           
 
            elif ev.code == evdev.ecodes.KEY_ESC:
