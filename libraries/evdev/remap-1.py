@@ -21,6 +21,7 @@
 
 import atexit
 import evdev
+# from ansi_escapes import ansiEscapes
 
 # print(evdev.ecodes.KEY_ESC)
 # quit()
@@ -41,6 +42,10 @@ kbd = [d for d in devices if keyboard_name in d.name][0]
 atexit.register(kbd.ungrab)  # Don't forget to ungrab the keyboard on exit!
 kbd.grab()  # Grab, i.e. prevent the keyboard from emitting original events.
 
+left_alt_suppressed = False
+
+# print(ansiEscapes.clearTerminal)
+
 # Create a new keyboard mimicking the original one.
 with evdev.UInput.from_device(kbd, name='kbdremap') as ui:
 
@@ -50,6 +55,8 @@ with evdev.UInput.from_device(kbd, name='kbdremap') as ui:
     #   print(kbd.active_keys())
 
         if ev.type == evdev.ecodes.EV_KEY:  # Process key events.
+        
+#          print(kbd.active_keys())
 
            if   ev.code == evdev.ecodes.KEY_PAUSE and ev.value == 1:
               # Exit on pressing PAUSE.
@@ -57,7 +64,28 @@ with evdev.UInput.from_device(kbd, name='kbdremap') as ui:
               # Also if you bind that script to PAUSE, it'll be a toggle.
                 break
 
-           if   ev.code == evdev.ecodes.KEY_ESC:
+
+           if    ev.code == evdev.ecodes.KEY_LEFTALT and ev.value == 1:
+                 left_alt_suppressed = True
+
+           elif  left_alt_suppressed and ev.code == evdev.ecodes.KEY_SEMICOLON and ev.value == 1:
+                 left_alt_suppressed = False
+
+                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL , 1)
+                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 1)
+                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_U        , 1)
+                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_U        , 0)
+                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL , 0)
+                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 0)
+                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_E        , 1) # https://www.utf8-zeichentabelle.de/unicode-utf8-table.pl?names=-&unicodeinhtml=hex
+                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_E        , 0)
+                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_4        , 1)
+                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_4        , 0)
+                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 1)
+                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 0)
+          
+
+           elif ev.code == evdev.ecodes.KEY_ESC:
                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_CAPSLOCK, ev.value)
 
            elif ev.code == evdev.ecodes.KEY_CAPSLOCK:
@@ -68,6 +96,12 @@ with evdev.UInput.from_device(kbd, name='kbdremap') as ui:
 
            elif ev.code == evdev.ecodes.KEY_LEFTMETA:
                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL, ev.value)
+
+           elif left_alt_suppressed:
+                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTALT, 1)
+                ui.write(evdev.ecodes.EV_KEY, ev.code, ev.value)
+                left_alt_suppressed = False
+                   
 
 #          elif evdev.ecodes.KEY_LEFTALT in kbd.active_keys() and evdev.ecodes.KEY_SEMICOLON in kbd.active_keys():
   #        elif ev.code == evdev.ecodes.KEY_BACKSPACE and ev.value == 0:

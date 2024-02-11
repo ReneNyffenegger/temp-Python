@@ -3,3 +3,4 @@
   . py-virt-env/bin/activate
 
   pip3 install evdev
+# pip3 install ansi-escapes
