@@ -6,3 +6,5 @@ from evdev import ecodes
 
 for ecode in dir(ecodes):
     print(ecode + ': ' + str(type(getattr(ecodes, ecode))))
+
+print(ecodes.BTN_LEFT)
