@@ -6,7 +6,7 @@ import evdev
 # Find device object for device with a given name
 #
 devname = 'LITEON Technology USB Multimedia Keyboard'
-        # 'AT Translated Set 2 keyboard'
+# devname = 'AT Translated Set 2 keyboard'
 
 devobjs = [ devobj for devobj  in [ evdev.InputDevice(devpath) 
                    for devpath in evdev.list_devices() ]
