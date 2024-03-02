@@ -20,5 +20,5 @@ if devobjs == []:
 devobj=devobjs[0]
 
 for ev in devobj.read_loop():
-    if ev.type == evdev.ecodes.EV_KEY and ev.value == 1:
-       print(evdev.ecodes.KEY[ev.code])
+    if ev.type == evdev.ecodes.EV_KEY: # and ev.value == 1:
+       print(f"{evdev.ecodes.KEY[ev.code]} {ev.value}")

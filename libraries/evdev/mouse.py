@@ -1,7 +1,8 @@
 import asyncio
 import atexit
 import evdev
-
+import sys
+import time
 
 
 # print(evdev.InputDevice('/dev/input/event0'))
@@ -23,19 +24,22 @@ dv_ms = [ devobj for devobj  in [ evdev.InputDevice(devpath) for devpath in evde
 # print(type(dv_kb))
 # print(type(dv_ms))
 
-print(f'Keyboard at {dv_kb.path}')
-print(f'Mouse    at {dv_ms.path}')
+print( "[2J") # Clear screen
+print(f'[1;1HKeyboard at {dv_kb.path}')
+print(f'[2;1HMouse    at {dv_ms.path}')
 
 
 
 # --- rempa-1.py -----------------------------------------------------------
 
-atexit.register(dv_kb.ungrab)  # Don't forget to ungrab the keyboard on exit!
 dv_kb.grab()                   # Grab, i.e. prevent the keyboard from emitting original events.
+atexit.register(dv_kb.ungrab)  # Don't forget to ungrab the keyboard on exit!
+dv_ms.grab()                   # Grab, i.e. prevent the keyboard from emitting original events.
+atexit.register(dv_kb.ungrab)  # Don't forget to ungrab the keyboard on exit!
 left_alt_suppressed = False
 
 # Create a new keyboard mimicking the original one.
-ui = evdev.UInput.from_device(dv_kb, name='kbdremap') 
+ui = evdev.UInput.from_device(dv_kb, dv_ms, name='kbdremap', version=3) 
 
 def write_hex(keys): # {{{
 
@@ -66,7 +70,7 @@ async def handle_events(dev): # {{{
 #          print(dev.path, evdev.categorize(ev), sep=': ')
 #          if ev.code in [evdev.ecodes.BTN_LEFT, evdev.ecodes.BTN_MIDDLE, evdev.ecodes.BTN_RIGHT]:
 #             print('btn')
-        if ev.type == evdev.ecodes.EV_KEY:  # Process key events.
+        if ev.type == evdev.ecodes.EV_KEY:  # {{{ Process key events.
         
 #          print(kbd.active_keys())
 
@@ -77,20 +81,36 @@ async def handle_events(dev): # {{{
                 break
 
 
-           if    ev.code == evdev.ecodes.KEY_LEFTALT and ev.value == 1:
-                 left_alt_suppressed = True
+           if   ev.code == evdev.ecodes.KEY_LEFTALT and ev.value == 1:
+                print(f'[4;1HL-ALT')
+                left_alt_suppressed = True
 
-           elif  left_alt_suppressed and ev.code == evdev.ecodes.KEY_SEMICOLON and ev.value == 1:
-                 left_alt_suppressed = False
-                 write_hex([evdev.ecodes.KEY_F, evdev.ecodes.KEY_6]) # ö
+           elif left_alt_suppressed and ev.code == evdev.ecodes.KEY_SEMICOLON and ev.value == 1:
+                print(f'[4;1H     ')
+                left_alt_suppressed = False
+                write_hex([evdev.ecodes.KEY_F, evdev.ecodes.KEY_6]) # ö
 
-           elif  left_alt_suppressed and ev.code == evdev.ecodes.KEY_APOSTROPHE and ev.value == 1:
-                 left_alt_suppressed = False
-                 write_hex([evdev.ecodes.KEY_E, evdev.ecodes.KEY_4]) # ä
+           elif left_alt_suppressed and ev.code == evdev.ecodes.KEY_APOSTROPHE and ev.value == 1:
+                print(f'[4;1H     ')
+                left_alt_suppressed = False
+                write_hex([evdev.ecodes.KEY_E, evdev.ecodes.KEY_4]) # ä
           
-           elif  left_alt_suppressed and ev.code == evdev.ecodes.KEY_LEFTBRACE and ev.value == 1:
-                 left_alt_suppressed = False
-                 write_hex([evdev.ecodes.KEY_F, evdev.ecodes.KEY_C]) # ü
+           elif left_alt_suppressed and ev.code == evdev.ecodes.KEY_LEFTBRACE and ev.value == 1:
+                print(f'[4;1H     ')
+                left_alt_suppressed = False
+                write_hex([evdev.ecodes.KEY_F, evdev.ecodes.KEY_C]) # ü
+
+           elif left_alt_suppressed and ev.code == evdev.ecodes.BTN_LEFT and ev.value == 1:
+                ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTALT, 1)
+#               ui.write(evdev.ecodes.EV_SYN, 0, 0)
+                ui.syn()
+                left_alt_suppressed = False
+#               yield
+                print(f'[4;1H     ')
+#               ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTALT, 2)
+#               ui.write(evdev.ecodes.EV_SYN, 0, 0)
+                ui.write(ev.type, ev.code, ev.value)
+#               ui.write(evdev.ecodes.EV_SYN, 0, 0)
 
            elif ev.code == evdev.ecodes.KEY_ESC:
                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_CAPSLOCK, ev.value)
@@ -107,13 +127,21 @@ async def handle_events(dev): # {{{
            elif left_alt_suppressed:
                 ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTALT, 1)
                 ui.write(evdev.ecodes.EV_KEY, ev.code, ev.value)
+                print(f'[4;1H     ')
                 left_alt_suppressed = False
                    
 #          elif evdev.ecodes.KEY_LEFTALT in kbd.active_keys() and evdev.ecodes.KEY_SEMICOLON in kbd.active_keys():
 
            else:
-                ui.write(evdev.ecodes.EV_KEY, ev.code, ev.value)
-
+            #   ui.write(evdev.ecodes.EV_KEY, ev.code, ev.value)
+                ui.write(ev.type, ev.code, ev.value)
+        # }}}
+#       elif ev.type == evdev.ecodes.EV_BTN:
+#          if left_alt_suppressed:
+#             ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTALT, 1)
+#             left_alt_suppressed = False
+#             ui.write(evdev.ecodes.EV_KEY, ev.code, ev.value)
+        
         else:
           # Passthrough other events unmodified (e.g. SYNs).
             ui.write(ev.type, ev.code, ev.value)
