@@ -37,6 +37,26 @@ left_alt_suppressed = False
 # Create a new keyboard mimicking the original one.
 ui = evdev.UInput.from_device(dv_kb, name='kbdremap') 
 
+def write_hex(keys): # {{{
+
+    global ui
+
+    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL , 1)
+    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 1)
+    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_U        , 1)
+    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_U        , 0)
+    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL , 0)
+    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 0)
+
+    for key in keys:
+        ui.write(evdev.ecodes.EV_KEY, key, 1) # https://www.utf8-zeichentabelle.de/unicode-utf8-table.pl?names=-&unicodeinhtml=hex
+        ui.write(evdev.ecodes.EV_KEY, key, 0)
+
+    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 1)
+    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 0)
+    
+# }}}
+
 async def handle_events(dev): # {{{
     global left_alt_suppressed
     global ui
@@ -99,6 +119,8 @@ async def handle_events(dev): # {{{
             ui.write(ev.type, ev.code, ev.value)
 # }}}
 
+
+
 for dev in dv_ms, dv_kb:
     asyncio.ensure_future(handle_events(dev))
 
@@ -106,23 +128,6 @@ loop = asyncio.get_event_loop()
 loop.run_forever()
 
 # if devobjs == []:
-def write_hex(keys): # {{{
-
-    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL , 1)
-    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 1)
-    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_U        , 1)
-    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_U        , 0)
-    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL , 0)
-    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTSHIFT, 0)
-
-    for key in keys:
-        ui.write(evdev.ecodes.EV_KEY, key, 1) # https://www.utf8-zeichentabelle.de/unicode-utf8-table.pl?names=-&unicodeinhtml=hex
-        ui.write(evdev.ecodes.EV_KEY, key, 0)
-
-    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 1)
-    ui.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_SPACE    , 0)
-    
-# }}}
 #    print('no device found')
 #    quit()
 # 

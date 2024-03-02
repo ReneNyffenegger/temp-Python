@@ -17,8 +17,8 @@ import evdev
 nm_kb = 'LITEON Technology USB Multimedia Keyboard'
 nm_ms = 'USB OPTICAL MOUSE ' # note the final space
 
-dv_kb = [ devobj for devobj  in [ evdev.InputDevice(devpath) for devpath in evdev.list_devices() ] if devobj.name == nm_kb ][0]
-dv_ms = [ devobj for devobj  in [ evdev.InputDevice(devpath) for devpath in evdev.list_devices() ] if devobj.name == nm_ms ][0]
+dv_kb = [devobj for devobj  in [ evdev.InputDevice(devpath) for devpath in evdev.list_devices() ] if devobj.name == nm_kb ][0]
+dv_ms = [devobj for devobj  in [ evdev.InputDevice(devpath) for devpath in evdev.list_devices() ] if devobj.name == nm_ms ][0]
 
 # print(type(dv_kb))
 # print(type(dv_ms))
@@ -38,8 +38,6 @@ left_alt_suppressed = False
 ui = evdev.UInput.from_device(dv_kb, name='kbdremap') 
 
 async def handle_events(dev): # {{{
-#with evdev.UInput.from_device(dv_kb, name='kbdremap') as ui: #
-#   # Create a new keyboard mimicking the original one.
     global left_alt_suppressed
     global ui
 
