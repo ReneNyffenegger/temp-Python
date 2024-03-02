@@ -1,5 +1,5 @@
 import asyncio
-# import atexit
+import atexit
 import evdev
 
 
@@ -26,13 +26,21 @@ dv_ms = [ devobj for devobj  in [ evdev.InputDevice(devpath) for devpath in evde
 print(f'Keyboard at {dv_kb.path}')
 print(f'Mouse    at {dv_ms.path}')
 
-async def handle_events(device):
-    async for ev in device.async_read_loop():
+
+
+# --- rempa-1.py -----------------------------------------------------------
+
+atexit.register(dv_kb.ungrab)  # Don't forget to ungrab the keyboard on exit!
+dv_kb.grab()                   # Grab, i.e. prevent the keyboard from emitting original events.
+# left_alt_suppressed = False
+
+async def handle_events(dev): # {{{
+    async for ev in dev.async_read_loop():
         if ev.type == evdev.ecodes.EV_KEY:
-           print(device.path, evdev.categorize(ev), sep=': ')
+           print(dev.path, evdev.categorize(ev), sep=': ')
            if ev.code in [evdev.ecodes.BTN_LEFT, evdev.ecodes.BTN_MIDDLE, evdev.ecodes.BTN_RIGHT]:
               print('btn')
-
+# }}}
 
 for dev in dv_ms, dv_kb:
     asyncio.ensure_future(handle_events(dev))

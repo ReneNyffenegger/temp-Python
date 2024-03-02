@@ -30,8 +30,8 @@ print(f'Mouse    at {dv_ms.path}')
 
 # --- rempa-1.py -----------------------------------------------------------
 
-# atexit.register(dv_kb.ungrab)  # Don't forget to ungrab the keyboard on exit!
-# dv_kb.grab()                   # Grab, i.e. prevent the keyboard from emitting original events.
+atexit.register(dv_kb.ungrab)  # Don't forget to ungrab the keyboard on exit!
+dv_kb.grab()                   # Grab, i.e. prevent the keyboard from emitting original events.
 left_alt_suppressed = False
 
 # Create a new keyboard mimicking the original one.
