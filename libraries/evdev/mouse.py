@@ -1,6 +1,8 @@
 import asyncio
-
+# import atexit
 import evdev
+
+
 
 # print(evdev.InputDevice('/dev/input/event0'))
 
@@ -24,12 +26,16 @@ dv_ms = [ devobj for devobj  in [ evdev.InputDevice(devpath) for devpath in evde
 print(f'Keyboard at {dv_kb.path}')
 print(f'Mouse    at {dv_ms.path}')
 
-async def print_events(device):
-    async for event in device.async_read_loop():
-        print(device.path, evdev.categorize(event), sep=': ')
+async def handle_events(device):
+    async for ev in device.async_read_loop():
+        if ev.type == evdev.ecodes.EV_KEY:
+           print(device.path, evdev.categorize(ev), sep=': ')
+           if ev.code in [evdev.ecodes.BTN_LEFT, evdev.ecodes.BTN_MIDDLE, evdev.ecodes.BTN_RIGHT]:
+              print('btn')
+
 
 for dev in dv_ms, dv_kb:
-    asyncio.ensure_future(print_events(dev))
+    asyncio.ensure_future(handle_events(dev))
 
 loop = asyncio.get_event_loop()
 loop.run_forever()
