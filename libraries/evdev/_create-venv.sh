@@ -21,10 +21,13 @@
 #     2024-03-05  - next trial
 #
 #   https://www.coderancher.us/2023/04/28/how-to-allow-users-access-to-virtual-devices/
+#   https://tkcheng.wordpress.com/2013/11/11/changing-uinput-device-permission/
 # 
 #   sudo touch /etc/udev/rules.d/99-input.rules
-    sudo sh -c 'echo KERNEL=="uinput", MODE="0660", GROUP="input" > /etc/udev/rules.d/99-input.rules'
+    sudo addgroup uinput
+    sudo sh -c 'echo KERNEL==\"uinput\", MODE:=\"0660\", GROUP=\"input\" > /etc/udev/rules.d/99-input.rules'
     sudo udevadm control --reload-rules
-    sudo usermod -a -G input rene
+    sudo usermod -a -G  input rene
+    sudo usermod -a -G uinput rene
 #   sudo chmode 0660 /dev/uinput
 #   sudo chgrp input /dev/uinput
