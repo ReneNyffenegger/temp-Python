@@ -15,3 +15,16 @@
 #   sudo sh -c 'echo SUBSYSTEM=="misc", KERNEL=="uinput", MODE="0660", GROUP="uinput"  > /etc/udev/rules.d/tq4-uinput.rules'
 #   sudo sh -c 'echo uinput > /etc/modules-load.d/uinput.conf'
 #   sudo sh -c 'udevadm control --reload-rules && udevadm trigger'
+
+
+#
+#     2024-03-05  - next trial
+#
+#   https://www.coderancher.us/2023/04/28/how-to-allow-users-access-to-virtual-devices/
+# 
+#   sudo touch /etc/udev/rules.d/99-input.rules
+    sudo sh -c 'echo KERNEL=="uinput", MODE="0660", GROUP="input" > /etc/udev/rules.d/99-input.rules'
+    sudo udevadm control --reload-rules
+    sudo usermod -a -G input rene
+#   sudo chmode 0660 /dev/uinput
+#   sudo chgrp input /dev/uinput
