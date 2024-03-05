@@ -25,7 +25,7 @@
 # 
 #   sudo touch /etc/udev/rules.d/99-input.rules
     sudo addgroup uinput
-    sudo sh -c 'echo KERNEL==\"uinput\", MODE:=\"0660\", GROUP=\"input\" > /etc/udev/rules.d/99-input.rules'
+    sudo sh -c 'echo KERNEL==\"uinput\", MODE:=\"0660\", GROUP=\"uinput\" > /etc/udev/rules.d/99-input.rules'
     sudo udevadm control --reload-rules
     sudo usermod -a -G  input rene
     sudo usermod -a -G uinput rene
