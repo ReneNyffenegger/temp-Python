@@ -25,10 +25,10 @@
 # 
 #   sudo touch /etc/udev/rules.d/99-input.rules
     sudo addgroup uinput
-  # sudo sh -c 'echo SUBSYSTEM==\"misc\",KERNEL==\"uinput\",   MODE=\"0660\", GROUP=\"uinput\" > /etc/udev/rules.d/99-input.rules' # https://github.com/chrippa/ds4drv/issues/93
+    sudo sh -c 'echo SUBSYSTEM==\"misc\", KERNEL==\"uinput\",   MODE=\"0660\", GROUP=\"uinput\" > /etc/udev/rules.d/99-input.rules' # https://github.com/chrippa/ds4drv/issues/93 , https://github.com/tuomasjjrasanen/python-uinput/blob/master/udev-rules/40-uinput.rules
   # sudo sh -c                     ' echo KERNEL==\"uinput\", MODE:=\"0660\", GROUP=\"uinput\" > /etc/udev/rules.d/99-input.rules'
-    sudo sh -c 'echo KERNEL==\"uinput\", MODE=\"0660\", GROUP=\"uinput\" > /etc/udev/rules.d/99-input.rules'
-  # sudo sh -c 'echo uinput > /etc/modules-load.d/uinput.con' # https://github.com/chrippa/ds4drv/issues/93
+  # sudo sh -c 'echo KERNEL==\"uinput\", MODE=\"0660\", GROUP=\"uinput\" > /etc/udev/rules.d/99-input.rules'
+#   sudo sh -c 'echo uinput > /etc/modules-load.d/uinput.conf' # https://github.com/chrippa/ds4drv/issues/93
   # sudo udevadm control --reload-rules
     sudo usermod -a -G  input rene
     sudo usermod -a -G uinput rene
