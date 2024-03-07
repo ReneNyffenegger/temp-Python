@@ -1,0 +1,5 @@
+. venv
+git clone https://github.com/tuomasjjrasanen/asciibox
+cd asciibox
+python3 -m pip install --upgrade Pillow
+python3 setup.py sdist
