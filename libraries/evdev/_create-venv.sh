@@ -28,9 +28,41 @@
     sudo sh -c 'echo SUBSYSTEM==\"misc\", KERNEL==\"uinput\",   MODE=\"0660\", GROUP=\"uinput\" > /etc/udev/rules.d/99-input.rules' # https://github.com/chrippa/ds4drv/issues/93 , https://github.com/tuomasjjrasanen/python-uinput/blob/master/udev-rules/40-uinput.rules
   # sudo sh -c                     ' echo KERNEL==\"uinput\", MODE:=\"0660\", GROUP=\"uinput\" > /etc/udev/rules.d/99-input.rules'
   # sudo sh -c 'echo KERNEL==\"uinput\", MODE=\"0660\", GROUP=\"uinput\" > /etc/udev/rules.d/99-input.rules'
-#   sudo sh -c 'echo uinput > /etc/modules-load.d/uinput.conf' # https://github.com/chrippa/ds4drv/issues/93
+    sudo sh -c 'echo uinput > /etc/modules-load.d/uinput.conf' # https://github.com/chrippa/ds4drv/issues/93
   # sudo udevadm control --reload-rules
     sudo usermod -a -G  input rene
     sudo usermod -a -G uinput rene
 #   sudo chmode 0660 /dev/uinput
 #   sudo chgrp input /dev/uinput
+
+
+#
+# https://forum.xfce.org/viewtopic.php?id=5550
+# https://askubuntu.com/questions/971105/what-is-the-difference-between-config-autostart-and-config-autostart-scrip
+# /etc/xdg/autostart
+# 
+mkdir -p ~/.config/autostart
+cat <<TF > ~/.config/autostart/evdev.desktop
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=Script
+Type=Application
+Exec= /home/rene/github/temp/Python/libraries/evdev/start
+Terminal=false
+StartupNotify=false
+Hidden=false
+TF
+
+# [Desktop Entry]
+# Version=1.0
+# Encoding=UTF-8
+# Name=Script
+# Type=Application
+# Exec= /home/rene/github/temp/Python/libraries/evdev/start
+# Icon=
+# Terminal=false
+# StartupNotify=false
+# Hidden=false
+# GenericName=
+# GenericName[en_US]=
