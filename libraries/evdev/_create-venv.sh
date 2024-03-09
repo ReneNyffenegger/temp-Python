@@ -39,7 +39,6 @@
 #
 # https://forum.xfce.org/viewtopic.php?id=5550
 # https://askubuntu.com/questions/971105/what-is-the-difference-between-config-autostart-and-config-autostart-scrip
-# /etc/xdg/autostart
 # 
 mkdir -p ~/.config/autostart
 cat <<TF > ~/.config/autostart/evdev.desktop
