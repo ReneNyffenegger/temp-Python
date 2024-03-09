@@ -44,16 +44,18 @@
 mkdir -p ~/.config/autostart
 cat <<TF > ~/.config/autostart/evdev.desktop
 [Desktop Entry]
-Version=1.0
-Name=Script
 Type=Application
+Name=Python evdev keyboard mapper
+Version=1.5
 Exec= /home/rene/github/temp/Python/libraries/evdev/start
-Terminal=false
+Terminal=true
 StartupNotify=false
-Hidden=false
 TF
 
+# Version=1.5
+# Terminal=false
 # Encoding=UTF-8
+# Hidden=false
 
 # [Desktop Entry]
 # Version=1.0
