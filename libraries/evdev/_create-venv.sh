@@ -45,7 +45,6 @@ mkdir -p ~/.config/autostart
 cat <<TF > ~/.config/autostart/evdev.desktop
 [Desktop Entry]
 Version=1.0
-Encoding=UTF-8
 Name=Script
 Type=Application
 Exec= /home/rene/github/temp/Python/libraries/evdev/start
@@ -53,6 +52,8 @@ Terminal=false
 StartupNotify=false
 Hidden=false
 TF
+
+# Encoding=UTF-8
 
 # [Desktop Entry]
 # Version=1.0
