@@ -6,7 +6,7 @@ from langchain.prompts import PromptTemplate
 # Define the template
 template = """
 Act as a {subject} expert.
-Provide a description for  {matter}
+Provide a description for {matter}
 """
 
 # Create the prompt template
