@@ -24,5 +24,6 @@ prompt = ChatPromptTemplate.from_messages([
 chain = prompt | llm 
 
 
-answer = chain.invoke({'who': 'poet', 'style': 'in rhymes', 'thing': 'gravity'})
-print(answer)
+message = chain.invoke({'who': 'poet', 'style': 'in rhymes', 'thing': 'gravity'})
+print(message)
+# print(type(message)) # str
