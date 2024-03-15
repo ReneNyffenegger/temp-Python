@@ -8,7 +8,11 @@ There are two main value propositions of LangChain
   - Use-Case Specific Chains: assembly of components tailored for specific use
     cases
 
+{ Jonathan Lewis' suggestion
 
+  https://twitter.com/JLOracle/status/1768238216648229300
+
+}
 { Components
 
   Document Loaders
