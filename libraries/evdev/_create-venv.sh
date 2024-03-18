@@ -46,7 +46,7 @@ cat <<TF > ~/.config/autostart/evdev.desktop
 Type=Application
 Name=Python evdev keyboard mapper
 Version=1.5
-Exec= /home/rene/github/temp/Python/libraries/evdev/start
+Exec= /home/rene/github/dev/python/temp/libraries/evdev/start
 Terminal=true
 StartupNotify=false
 TF
