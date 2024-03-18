@@ -1,0 +1,14 @@
+#
+#  Make sure tkinter is installed!
+#     /home/rene/after-installing-Linux/install/python-libraries/tkinter
+#
+. venv
+
+git clone https://github.com/Akascape/Ascify-Art
+
+cd Ascify-Art
+
+pip install -r requirements.txt
+
+cd "ascify art"
+python3 Ascify-Art.py
