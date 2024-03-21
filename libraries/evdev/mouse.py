@@ -2,30 +2,54 @@ import asyncio
 import atexit
 import evdev
 import sys
-import time
+# import time
 
+
+def grab_device(dev_name): # {{{
+
+    dev = [ devobj for devobj in [ evdev.InputDevice(devpath) for devpath in evdev.list_devices() ] if devobj.name == dev_name ][0]
+
+  #
+  # We want to handle the device's original events ourselves and
+  # thus do not want the device to emit these events:
+  #
+    dev.grab()
+
+  #
+  # When this script stope, the device is allowed (yea, even should)
+  # emit the events again:
+  #
+    atexit.register(dev.ungrab)
+    return dev
+
+# }}}
 
 #
 # Find device object for device with a given name
 #
-nm_kb = 'LITEON Technology USB Multimedia Keyboard'
-nm_ms = 'USB OPTICAL MOUSE ' # note the final space
+# nm_kb = 'LITEON Technology USB Multimedia Keyboard'
+# nm_ms = 'USB OPTICAL MOUSE ' # note the final space
 
-dv_kb = [ devobj for devobj  in [ evdev.InputDevice(devpath) for devpath in evdev.list_devices() ] if devobj.name == nm_kb ][0]
-dv_ms = [ devobj for devobj  in [ evdev.InputDevice(devpath) for devpath in evdev.list_devices() ] if devobj.name == nm_ms ][0]
+# dv_kb = [ devobj for devobj  in [ evdev.InputDevice(devpath) for devpath in evdev.list_devices() ] if devobj.name == nm_kb ][0]
+# dv_ms = [ devobj for devobj  in [ evdev.InputDevice(devpath) for devpath in evdev.list_devices() ] if devobj.name == nm_ms ][0]
+
+dv_kb = grab_device('LITEON Technology USB Multimedia Keyboard')
+dv_ms = grab_device('USB OPTICAL MOUSE '                       ) # Note the final space
+
 
 print( "[2J") # Clear screen
 print(f'[1;1HKeyboard at {dv_kb.path}')
 print(f'[2;1HMouse    at {dv_ms.path}')
 
-dv_kb.grab()                   # Grab, i.e. prevent the keyboard from emitting original events.
-atexit.register(dv_kb.ungrab)  # Don't forget to ungrab the keyboard on exit!
-dv_ms.grab()                   # Grab, i.e. prevent the keyboard from emitting original events.
-atexit.register(dv_kb.ungrab)  # Don't forget to ungrab the keyboard on exit!
-left_alt_suppressed = False
+# dv_kb.grab()                   # Grab, i.e. prevent the keyboard from emitting original events.
+# atexit.register(dv_kb.ungrab)  # Don't forget to ungrab the keyboard on exit!
+# dv_ms.grab()                   # Grab, i.e. prevent the keyboard from emitting original events.
+# atexit.register(dv_kb.ungrab)  # Don't forget to ungrab the keyboard on exit!
+# left_alt_suppressed = False
 
-# Create a new keyboard mimicking the original one.
-ui = evdev.UInput.from_device(dv_kb, dv_ms, name='kbdremap', version=3) 
+# Create a virtual keyboard  the original one.
+#ui = evdev.UInput.from_device(dv_kb, dv_ms, name='kbdremap', version=3) 
+ui = evdev.UInput.from_device(dv_kb, dv_ms, name='remapping-keyboard', version=3) 
 
 def write_hex(keys): # {{{
 
