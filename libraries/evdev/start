@@ -4,4 +4,3 @@ dir="$(dirname "$(readlink -f "$0")")"
 
 . $dir/py-virt-env/bin/activate
   $dir/py-virt-env/bin/python3 $dir/mouse.py
-

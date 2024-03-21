@@ -1,3 +1,5 @@
+ https://www.utf8-zeichentabelle.de/unicode-utf8-table.pl?names=-&unicodeinhtml=hex
+
 https://linux.die.net/man/1/syndaemon
 
 https://github.com/tuomasjjrasanen?tab=repositories
