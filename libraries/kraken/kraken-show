@@ -1,0 +1,13 @@
+$ kraken show 10.5281/zenodo.2577813
+
+name: 10.5281/zenodo.2577813
+
+A generalized model for English printed text
+
+This model has been trained on a large corpus of modern printed English text\naugmented with ~10000 lines of historical p
+scripts: Latn
+alphabet: !"#$%&'()+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]`abcdefghijklmnopqrstuvwxyz{} SPACE
+accuracy: 99.95%
+license: apache2.0
+author(s): Kiessling, Benjamin
+date: 2019-02-26

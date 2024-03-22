@@ -1,0 +1,57 @@
+Usage: kraken [OPTIONS] COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
+
+  Base command for recognition functionality.
+
+  Inputs are defined as one or more pairs `-i input_file output_file` followed
+  by one or more chainable processing commands. Likewise, verbosity is set on
+  all subcommands with the `-v` switch.
+
+Options:
+  --version                       Show the version and exit.
+  -i, --input <FILE FILE>...      Input-output file pairs. Each input file
+                                  (first argument) is mapped to one output
+                                  file (second argument), e.g. `-i input.png
+                                  output.txt`
+  -I, --batch-input TEXT          Glob expression to add multiple files at
+                                  once.
+  -o, --suffix TEXT               Suffix for output files from batch and PDF
+                                  inputs.
+  -v, --verbose                   [default: 0]
+  -f, --format-type [image|alto|page|pdf|xml]
+                                  Sets the default input type. In image mode
+                                  inputs are image files, alto/page expects
+                                  XML files in the respective format, pdf
+                                  expects PDF files with numbered suffixes
+                                  added to output file names as needed.
+  -p, --pdf-format TEXT           Format for output of PDF files. valid fields
+                                  are `src` (source file), `idx` (page
+                                  number), and `uuid` (v4 uuid). `-o` suffixes
+                                  are appended to this format string.
+                                  [default: {src}_{idx:06d}]
+  -h, --hocr                      Switch between hOCR, ALTO, abbyyXML, PageXML
+                                  or "native" output. Native are plain image
+                                  files for image, JSON for segmentation, and
+                                  text for transcription output.
+  -a, --alto
+  -y, --abbyy
+  -x, --pagexml
+  -n, --native                    [default: native]
+  -t, --template FILE             Explicitly set jinja template for output
+                                  serialization. Overrides -h/-a/-y/-x/-n.
+  -d, --device TEXT               Select device to use (cpu, cuda:0, cuda:1,
+                                  ...)  [default: cpu]
+  -r, --raise-on-error / --no-raise-on-error
+                                  Raises the exception that caused processing
+                                  to fail in the case of an error  [default:
+                                  no-raise-on-error]
+  -2, --autocast                  On compatible devices, uses autocast for
+                                  `segment` which lower the memory usage.
+  --help                          Show this message and exit.
+
+Commands:
+  binarize  Binarizes page images.
+  get       Retrieves a model from the repository.
+  list      Lists models in the repository.
+  ocr       Recognizes text in line images.
+  segment   Segments page images into text lines.
+  show      Retrieves model metadata from the repository.

@@ -1,2 +1,13 @@
 . venv
 pip install kraken[pdf]
+
+#
+#  Does this step install something:
+#
+kraken list
+
+#
+# Download the default English text recognition model.
+# Place it into the user's kraken directory.
+#
+kraken get 10.5281/zenodo.2577813
