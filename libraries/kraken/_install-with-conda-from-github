@@ -1,0 +1,23 @@
+git clone https://github.com/mittagessen/kraken.git repo-kraken
+cd repo-kraken/
+conda env create -f environment_cuda.yml
+
+#
+#  List conda environments
+#     conda env list
+#     conda info --envs        # equivalent
+#
+
+$ conta env list
+# conda environments:
+#
+base                  *  /home/rene/miniconda3
+kraken_2                 /home/rene/miniconda3/envs/kraken_2
+
+
+
+#  Activate this conda environment:
+#    conda activate kraken_2
+
+
+

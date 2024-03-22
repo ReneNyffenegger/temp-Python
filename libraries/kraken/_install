@@ -1,6 +1,3 @@
-. venv
-pip install kraken[pdf]
-
 #
 #  Does this step install something:
 #
