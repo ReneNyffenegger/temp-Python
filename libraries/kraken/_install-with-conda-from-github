@@ -15,9 +15,9 @@ base                  *  /home/rene/miniconda3
 kraken_2                 /home/rene/miniconda3/envs/kraken_2
 
 
+# Optionally, if using jupyter (for example for https://github.com/SSusantAchary/kraken_ocr_engine)
+conda install jupyter
 
 #  Activate this conda environment:
 #    conda activate kraken_2
-
-
 

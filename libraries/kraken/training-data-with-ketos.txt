@@ -1,0 +1,2 @@
+ketos train output_dir/*.png
+   --> see more at https://kraken.re/main/training.html

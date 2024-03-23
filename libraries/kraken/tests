@@ -1,0 +1,15 @@
+mkdir -p out
+kraken -i ~/github/temp/scans-for-OCR-tests/mine/tweet-177087971404902428.jpg out/tweet-177087971404902428.txt segment -bl ocr
+kraken -i ~/github/temp/scans-for-OCR-tests/mine/tweet-177087971404902428.jpg out/tweet-177087971404902428.txt segment -bl ocr
+
+# -----------------------------------------------------
+
+#    https://medium.com/analytics-vidhya/unleashing-the-kraken-for-ocr-fba6bff73c8c
+
+kraken -i ~/github/temp/scans-for-OCR-tests/mine/tweet-177087971404902428.jpg out/tweet-177087971404902428.test-2.txt binarize segment ocr
+
+
+# -----------------------------------------------------
+
+git clone https://github.com/SSusantAchary/kraken_ocr_engine repo/SSusantAchary/kraken_ocr_engine
+conda install jupyter
