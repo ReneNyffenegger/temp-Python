@@ -8,6 +8,12 @@ kraken -i ~/github/temp/scans-for-OCR-tests/mine/tweet-177087971404902428.jpg ou
 
 kraken -i ~/github/temp/scans-for-OCR-tests/mine/tweet-177087971404902428.jpg out/tweet-177087971404902428.test-2.txt binarize segment ocr
 
+# -----------------------------------------------------
+
+wget 'http://www.fmwconcepts.com/imagemagick/downloadcounter.php?scriptname=textcleaner&dirname=textcleaner' -O textcleaner
+chmod 755 textcleaner
+./textcleaner -g -e normalize -f 30 -o 12 -s 2 ~/github/temp/scans-for-OCR-tests/other/  out.png
+
 
 # -----------------------------------------------------
 

@@ -1,0 +1,29 @@
+Usage: ketos [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --version                       Show the version and exit.
+  -v, --verbose
+  -s, --seed INTEGER              Seed for numpy's and torch's RNG. Set to a
+                                  fixed value to ensure reproducible random
+                                  splits of data
+  -r, --deterministic / --no-deterministic
+                                  Enables deterministic training. If no seed
+                                  is given and enabled the seed will be set to
+                                  42.
+  --help                          Show this message and exit.
+
+Commands:
+  compile     Precompiles a binary dataset from a collection of XML files.
+  extract     (Deprecated) Extracts image-text pairs from a transcription
+              environment...
+  linegen     (Deprecated) Generates artificial text line training data.
+  pretrain    Trains a model from image-text pairs.
+  publish     Publishes a model on the zenodo model repository.
+  roadd       Combines a reading order model with a segmentation model.
+  rotrain     Trains a baseline labeling model for layout analysis
+  segtest     Evaluate on a test set.
+  segtrain    Trains a baseline labeling model for layout analysis
+  test        Evaluate on a test set.
+  train       Trains a model from image-text pairs.
+  transcribe  (Deprecated) Creates transcription environments for ground
+              truth...
