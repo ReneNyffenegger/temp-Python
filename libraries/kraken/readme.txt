@@ -95,6 +95,9 @@ OCR general notes {
    NER - Named Entity Recognition {
 
    }
+   { ROI - Region of interest
+
+   }
 
 }
 
