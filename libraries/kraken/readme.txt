@@ -77,6 +77,24 @@ OCR general notes {
 
 
    }
+   Scene Text Detection {
+
+     Scene Text Detection is a computer vision task that involves automatically
+     identifying and localizing text within natural images or videos. 
+
+     The goal of scene text detection is to develop algorithms that can
+     robustly detect and and label text with bounding boxes in uncontrolled and
+     complex environments, such as street signs, billboards, or license plates.
+
+   }
+   EAST - Efficient and Accurate Scene Text Detector {
+
+      On the ICDAR 2015 dataset, the proposed algorithm achieves an F-score of 0.7820 at 13.2fps at 720p resolution. 
+
+   }
+   NER - Named Entity Recognition {
+
+   }
 
 }
 
