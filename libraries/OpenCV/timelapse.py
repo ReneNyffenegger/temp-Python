@@ -3,7 +3,7 @@
 
 #
 #   After capturing images, create movie like so:
-#      ffmpeg -framerate 30 -pattern_type glob -i '*.jpg' -c:v libx264 -pix_fmt yuv420p out.mp4
+#      ffmpeg -framerate 15 -pattern_type glob -i '*.jpg' -c:v libx264 -pix_fmt yuv420p out-3.mp4
 #
 
 import cv2
@@ -30,22 +30,19 @@ while True:
            break
 
 t = time.time()
-for cnt in range(100):
+for cnt in range(10000):
 
       ret, frame = cam.read()
 
       if not ret:
          break
-
-      cv2.imshow('frame-out', frame)
-
+cv2.imshow('frame-out', frame)
       img_name = f'timelapse-{cnt:04d}.jpg'
       cv2.imwrite(img_name, frame)
       print(f'{img_name} written')
 
-      time.sleep(10)
+      time.sleep(1)
 
 
 cam.release()
 cv2.destroyAllWindows()
-
