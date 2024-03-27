@@ -36,7 +36,7 @@ for cnt in range(10000):
 
       if not ret:
          break
-cv2.imshow('frame-out', frame)
+#     cv2.imshow('frame-out', frame)
       img_name = f'timelapse-{cnt:04d}.jpg'
       cv2.imwrite(img_name, frame)
       print(f'{img_name} written')
