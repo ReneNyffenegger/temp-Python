@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+# vi: foldmethod=marker foldmarker={{{,}}}
 #
 # https://python.langchain.com/docs/get_started/quickstart
 #
@@ -139,7 +139,7 @@ len(response['context']) # 3
 # response['context'][1].page_content
 # response['context'][2].page_content
 
-# ---- Conversation retrieval chain --------------------------
+# ---- Conversation retrieval chain {{{ ------------------------------------------------
 #
 #   The chain we've created so far can only answer single questions 
 #
@@ -193,3 +193,40 @@ retrieval_chain.invoke({
     "chat_history": chat_history,
     "input": "Tell me how"
 })
+
+# }}}
+# Agent {{{
+
+  #  The final thing we will create is an agent - where the LLM decides what steps to take.
+
+from langchain.tools.retriever import create_retriever_tool
+
+retriever_tool = create_retriever_tool(
+    retriever,
+    "langsmith_search",
+    "Search for information about LangSmith. For any questions about LangSmith, you must use this tool!",
+)
+
+# export TAVILY_API_KEY=…
+from langchain_community.tools.tavily_search import TavilySearchResults
+
+search = TavilySearchResults()
+
+# create a list of the tools we want to work with:
+tools = [retriever_tool, search]
+
+from langchain_openai import ChatOpenAI
+from langchain import hub
+from langchain.agents import create_openai_functions_agent
+from langchain.agents import AgentExecutor
+
+# Get the prompt to use - you can modify this!
+prompt = hub.pull("hwchase17/openai-functions-agent")
+# type(prompt) -> langchain_core.prompts.chat.ChatPromptTemplate
+
+# You need to set OPENAI_API_KEY environment variable or pass it as argument `openai_api_key`.
+llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+agent = create_openai_functions_agent(llm, tools, prompt)
+agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+
+# }}}

@@ -4,3 +4,6 @@ pip install langchain
 
 pip install beautifulsoup4 # Used by WebBaseLoader
 pip install faiss-cpu      # Used by FAISS.from_documents
+
+pip install langchainhub
+pip install langchain-openai

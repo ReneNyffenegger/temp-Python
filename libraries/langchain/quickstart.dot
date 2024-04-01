@@ -1,0 +1,38 @@
+// pkill okular ; dot quickstart.dot -Tpdf -oquickstart-dependency.pdf && xdg-open quickstart-dependency.pdf
+
+digraph {
+
+  node [shape=box]
+
+
+  retriever       [ label=<<font face="courier">vector.as_retriever()</font>>]
+  retriever_chain [ label=<<font face="courier">retriever_chain = create_history_aware_retriever(llm, retriever, prompt)</font>>]
+  search          [ label=<<font face="courier">search = TavilySearchResults()</font>>]
+  retriever_tool  [ label=<<font face="courier">retriever_tool = create_retriever_tool(retriever, "…", "…")</font>>]
+  tools           [ label=<<font face="courier">tools = [retriever_tool, search]</font>> ]
+  prompt_         [ label=<<font face="courier">prompt = ChatPromptTemplate.from_messages([…])</font>> ]
+  prompt          [ label=<<font face="courier">prompt = hub.pull("hwchase17/openai-functions-agent")</font>> ]
+  llm             [ label=<<font face="courier">llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)</font>> ]
+  agent           [ label=<<font face="courier">agent = create_openai_functions_agent(llm, tools, prompt)</font>> ]
+  agent_executor  [ label=<<font face="courier">agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)</font>> ]
+
+  retriever -> retrieval_chain
+  document_chain -> retrieval_chain
+  search -> tools
+  retriever_tool -> tools
+  tools -> agent
+  tools -> agent_executor
+  prompt -> agent
+  agent -> agent_executor
+
+
+  b [ label=<<b>bold</b>> ]
+  i [ label=<<i><font color='red'>italic</font></i>>]
+
+  b -> i
+
+
+}
+
+
+
