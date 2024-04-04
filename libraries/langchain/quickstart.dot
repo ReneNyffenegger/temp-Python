@@ -11,7 +11,7 @@ digraph {
   retriever_tool  [ label=<<font face="courier">retriever_tool = create_retriever_tool(retriever, "…", "…")</font>>]
   tools           [ label=<<font face="courier">tools = [retriever_tool, search]</font>> ]
   prompt_         [ label=<<font face="courier">prompt = ChatPromptTemplate.from_messages([…])</font>> ]
-  prompt          [ label=<<font face="courier">prompt = hub.pull("hwchase17/openai-functions-agent")</font>> ]
+  prompt          [ label=<<font face="courier">prompt = langchain.hub.pull("hwchase17/openai-functions-agent")</font>> ]
   llm             [ label=<<font face="courier">llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)</font>> ]
   agent           [ label=<<font face="courier">agent = create_openai_functions_agent(llm, tools, prompt)</font>> ]
   agent_executor  [ label=<<font face="courier">agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)</font>> ]
@@ -31,8 +31,4 @@ digraph {
 
   b -> i
 
-
 }
-
-
-

@@ -1,0 +1,83 @@
+// pkill okular ; dot hierarchy.dot -Tpdf -ohierarchy.pdf && xdg-open hierarchy.pdf
+
+// Graphiv: HTML attributes
+//   https://www.graphviz.org/doc/info/shapes.html#html
+
+
+digraph {
+
+  node [shape=box]
+
+  template [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">xxx</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>yyy</b></font></td></tr>
+<tr><td align="left" height="12">…<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>> ]
+
+  langchain_core_runnables_base_RunnableSerializable [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.runnables.base</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>RunnableSerializable</b></font></td></tr>
+<tr><td align="left" height="12">…<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>> ]
+
+  langchain_core_retrievers_BaseRetriever [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.retrievers</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>BaseRetriever</b></font></td></tr>
+<tr><td align="left" height="12">Abstract base class for a Document retrieval system.<br align="Left"/></td></tr>
+<tr><td align="left">A <i>retrieval system</i> is defined as something that can take.<br align="Left"/>the most «relevant» Documents from some source.<br align="left"/></td></tr>
+</table>> ]
+
+  langchain_core_vectorstores_VectorStoreRetriever [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.vectorstores</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>VectorStoreRetriever</b></font></td></tr>
+<tr><td align="left" height="12">Base Retriever class for VectorStore.<br align="Left"/></td></tr>
+<tr><td align="left"><font color="#c08020">Create a new model by parsing and validating<br align="Left"/>input data from keyword arguments.<br align="left"/></font></td></tr>
+</table>> ]
+
+
+  langchain_core_prompts_base_BasePromptTemplate [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.prompts.base</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>BasePromptTemplate</b></font></td></tr>
+<tr><td align="left" height="12">…<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>    > ]
+
+  langchain_core_prompts_chat_BaseChatPromptTemplate [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.prompts.chat</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>BaseChatPromptTemplate</b></font></td></tr>
+<tr><td align="left" height="12">Base class for chat prompt templates.<br align="Left"/></td></tr>
+<tr><td align="left"><font color="#c08020">Create a new model by parsing and validating<br align="Left"/>input data from keyword arguments.<br align="left"/></font></td></tr>
+</table>> ]
+
+  langchain_core_prompts_chat_ChatPromptTemplate [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.prompts.chat</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>ChatPromptTemplate</b></font></td></tr>
+<tr><td align="left" height="12">Prompt template for chat models.<br align="Left"/></td></tr>
+<tr><td align="left">Used to create flexible templated<br align="left"/>prompts for chat models.<br align="left"/></td></tr>
+</table>> ]
+
+
+  langchain_core_runnables_base_RunnableSerializable -> langchain_core_retrievers_BaseRetriever
+  langchain_core_retrievers_BaseRetriever -> langchain_core_vectorstores_VectorStoreRetriever
+
+  langchain_core_runnables_base_RunnableSerializable -> langchain_core_prompts_base_BasePromptTemplate
+  langchain_core_prompts_base_BasePromptTemplate -> langchain_core_prompts_chat_BaseChatPromptTemplate
+  langchain_core_prompts_chat_BaseChatPromptTemplate -> langchain_core_prompts_chat_ChatPromptTemplate
+
+}

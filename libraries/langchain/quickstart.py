@@ -221,12 +221,21 @@ from langchain.agents import create_openai_functions_agent
 from langchain.agents import AgentExecutor
 
 # Get the prompt to use - you can modify this!
-prompt = hub.pull("hwchase17/openai-functions-agent")
+prompt = hub.pull("hwchase17/openai-functions-agent") # https://smith.langchain.com/hub/hwchase17/openai-functions-agent?tab=0
+# type(prompt) # langchain_core.prompts.chat.ChatPromptTemplate
+# tq84_prompts = prompt.get_prompts()
+# len(tq84_prompts) # 1
+# type(tq84_prompts[0]) # langchain_core.prompts.chat.ChatPromptTemplate
+# tq84_prompts[0] is tq84_prompts[0].get_prompts()[0] # True
+
+
 # type(prompt) -> langchain_core.prompts.chat.ChatPromptTemplate
 
 # You need to set OPENAI_API_KEY environment variable or pass it as argument `openai_api_key`.
 llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+
 agent = create_openai_functions_agent(llm, tools, prompt)
 agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+type(agent_executor)
 
 # }}}
