@@ -70,6 +70,17 @@ documents = text_splitter.split_documents(docs)
 # print(type(documents)) #  list  
 # print(type(documents[0])) # langchain_core.documents.base.Document
 
+#
+#  FAISS (Facebook AI Similarity Search) is a library for efficient similarity
+#  search and clustering of dense vectors. It contains algorithms that search
+#  in sets of vectors of any size, up to ones that possibly do not fit in RAM.
+#  It also contains supporting code for evaluation and parameter tuning. 
+#
+#  FAISS .from_documents returns VectorStore initialized from documents and embeddings.
+#
+#  The name of the variable that is assigned the returned value from
+#  FAISS.from_documents is db in this page: https://python.langchain.com/docs/integrations/vectorstores/faiss/
+#
 vector = FAISS.from_documents(documents, embeddings)
 # print(type(vector))  #  langchain_community.vectorstores.faiss.FAISS
 
@@ -233,8 +244,9 @@ prompt = hub.pull("hwchase17/openai-functions-agent") # https://smith.langchain.
 
 # You need to set OPENAI_API_KEY environment variable or pass it as argument `openai_api_key`.
 llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+# type(llm) -> langchain_openai.chat_models.base.ChatOpenAI
 
-agent = create_openai_functions_agent(llm, tools, prompt)
+agent = create_openai_functions_agent(llm, tools, prompt) # HERE HERE
 agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
 type(agent_executor)
 

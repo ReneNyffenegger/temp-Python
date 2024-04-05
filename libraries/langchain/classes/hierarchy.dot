@@ -72,10 +72,141 @@ digraph {
 <tr><td align="left">Used to create flexible templated<br align="left"/>prompts for chat models.<br align="left"/></td></tr>
 </table>> ]
 
+ langchain_core_language_models_base_BaseLanguageModel  [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.language_models.base</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>BaseLanguageModel</b></font></td></tr>
+<tr><td align="left" height="12">Abstract base class for interfacing with language models.<br align="Left"/></td></tr>
+<tr><td align="left">All language model wrappers inherit<br align="left"/>from BaseLanguageModel.<br align="left"/></td></tr>
+</table>    > ]
+
+  langchain_core_language_models_chat_models_BaseChatModel [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.language_models.chat_models</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>BaseChatModel</b></font></td></tr>
+<tr><td align="left" height="12">Base class for Chat models.<br align="Left"/></td></tr>
+<tr><td align="left"><font color="#c08020">Create a new model by parsing and validating<br align="Left"/>input data from keyword arguments.<br align="left"/></font></td></tr>
+</table>    > ]
+
+  langchain_openai_chat_models_base_ChatOpenAI [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_openai.chat_models.base</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>ChatOpenAI</b></font></td></tr>
+<tr><td align="left" height="12">…<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>> ]
+
+  langchain_core_documents_base_Document [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.documents.base</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>Document</b></font></td></tr>
+<tr><td align="left" height="12">Class for storing a piece of text and<br align="Left"/>associated metadata.<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>    > ]
+
+  langchain_core_document_loaders_base_BaseLoader [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.document_loaders.base</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>BaseLoader</b></font></td></tr>
+<tr><td align="left" height="12">Interface for Document Loader.<br align="Left"/></td></tr>
+<tr><td align="left">Implementations should implement the lazy-loading methods (<font face="courier">lazy_load()</font>, <font face="courier">alazy_load()</font>)<br align="Left"/>using generators to avoid loading all Documents into memory at once.<br align="left"/></td></tr>
+</table>    > ]
+
+  langchain_community_document_loaders_web_base_WebBaseLoader [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_community.document_loaders.web_base</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>WebBaseLoader</b></font></td></tr>
+<tr><td align="left" height="12">Load HTML pages using <font face="courier">urllib</font> and<br align="left"/>parse them with <font face="courier">BeautifulSoup</font>.<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>> ]
+
+  langchain_core_embeddings_embeddings_Embeddings [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.embeddings.embeddings</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>Embeddings</b></font></td></tr>
+<tr><td align="left" height="12">Interface for embedding models.<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>> ]
+
+  langchain_community_embeddings_ollama_OllamaEmbeddings [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_community.embeddings.ollama</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>OllamaEmbeddings</b></font></td></tr>
+<tr><td align="left" height="12">…<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>    > ]
+
+
+  langchain_core_documents_transformers_BaseDocumentTransformer [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.documents.transformers</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>BaseDocumentTransformer</b></font></td></tr>
+<tr><td align="left" height="12">Abstract base class for <i>document transformation systems</i>.<br align="Left"/></td></tr>
+<tr><td align="left">A document transformation system takes a sequence of Documents and<br align="Left"/>returns a sequence of transformed Documents.<br align="left"/></td></tr>
+</table>    > ]
+
+  langchain_text_splitters_base_TextSplitter [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_text_splitters.base.TextSplitter</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>TextSplitter</b></font></td></tr>
+<tr><td align="left" height="12">Interface for splitting text into chunks.<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>    > ]
+
+  langchain_text_splitters_character_RecursiveCharacterTextSplitter [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_text_splitters.character</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>RecursiveCharacterTextSplitter</b></font></td></tr>
+<tr><td align="left" height="12">Splitting text by recursively look at characters.<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>Recursively tries to split by different characters to find one that works.<br align="left"/></td></tr>
+</table>> ]
+
+  langchain_core_vectorstores_VectorStore [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.vectorstores</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>VectorStore</b></font></td></tr>
+<tr><td align="left" height="12">Interface for vector store.<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>    > ]
+
+  langchain_community_vectorstores_faiss_FAISS [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_community.vectorstores</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>faiss.FAISS</b></font></td></tr>
+<tr><td align="left" height="12">Meta Faiss vector store.<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>    > ]
+
+  langchain_core_vectorstores_VectorStore -> langchain_community_vectorstores_faiss_FAISS
+
+  langchain_core_documents_transformers_BaseDocumentTransformer -> langchain_text_splitters_base_TextSplitter
+  langchain_text_splitters_base_TextSplitter -> langchain_text_splitters_character_RecursiveCharacterTextSplitter
+
+  langchain_core_embeddings_embeddings_Embeddings -> langchain_community_embeddings_ollama_OllamaEmbeddings
+
+  langchain_core_document_loaders_base_BaseLoader -> langchain_community_document_loaders_web_base_WebBaseLoader
+
+  langchain_core_runnables_base_RunnableSerializable -> langchain_core_documents_base_Document
 
   langchain_core_runnables_base_RunnableSerializable -> langchain_core_retrievers_BaseRetriever
   langchain_core_retrievers_BaseRetriever -> langchain_core_vectorstores_VectorStoreRetriever
 
+  langchain_core_runnables_base_RunnableSerializable -> langchain_core_language_models_base_BaseLanguageModel
+  langchain_core_language_models_base_BaseLanguageModel -> langchain_core_language_models_chat_models_BaseChatModel
+  langchain_core_language_models_chat_models_BaseChatModel -> langchain_openai_chat_models_base_ChatOpenAI
   langchain_core_runnables_base_RunnableSerializable -> langchain_core_prompts_base_BasePromptTemplate
   langchain_core_prompts_base_BasePromptTemplate -> langchain_core_prompts_chat_BaseChatPromptTemplate
   langchain_core_prompts_chat_BaseChatPromptTemplate -> langchain_core_prompts_chat_ChatPromptTemplate
