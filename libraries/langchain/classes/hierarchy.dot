@@ -180,10 +180,11 @@ digraph {
   langchain_core_document_loaders_base_BaseLoader [
      label=<
 <table border="0">
-<tr><td align="left" valign="top"><font face="courier">langchain_core.document_loaders.base</font></td></tr>
-<tr><td align="left" valign="top" height="20"><font face="courier"><b>BaseLoader</b></font></td></tr>
-<tr><td align="left" height="12">Interface for Document Loader.<br align="Left"/></td></tr>
-<tr><td align="left">Implementations should implement the<br align="Left"/>lazy-loading methods (<font face="courier">lazy_load()</font>,<br align="Left"/><font face="courier">alazy_load()</font>)<br align="Left"/>using generators to avoid loading all<br align="Left"/>Documents into memory at once.<br align="left"/></td></tr>
+<tr><td align="left" colspan="2" valign="top"><font face="courier">langchain_core.document_loaders.base</font></td></tr>
+<tr><td align="left" colspan="2" valign="top" height="20"><font face="courier"><b>BaseLoader</b></font></td></tr>
+<tr><td align="left" colspan="2" height="12">Interface for Document Loader.<br align="Left"/></td></tr>
+<tr><td align="left" colspan="2">Implementations should implement the<br align="Left"/>lazy-loading methods (<font face="courier">lazy_load()</font>,<br align="Left"/><font face="courier">alazy_load()</font>)<br align="Left"/>using generators to avoid loading all<br align="Left"/>Documents into memory at once.<br align="left"/></td></tr>
+<tr><td><font face="courier">load()</font></td><td>Load data into list of Document objects </td></tr>
 </table>    > ]
 
   langchain_community_document_loaders_web_base_WebBaseLoader [
@@ -194,6 +195,25 @@ digraph {
 <tr><td align="left" height="12">Load HTML pages using <font face="courier">urllib</font> and<br align="left"/>parse them with <font face="courier">BeautifulSoup</font>.<br align="Left"/></td></tr>
 <tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
 </table>> ]
+
+
+  langchain_community_document_loaders_unstructured_UnstructuredBaseLoader [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_community.document_loaders.unstructured</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>UnstructuredBaseLoader</b></font></td></tr>
+<tr><td align="left" height="12">…<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>    > ]
+
+  langchain_community_document_loaders_unstructured_UnstructuredFileLoader [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_community.document_loaders.unstructured</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>UnstructuredFileLoader</b></font></td></tr>
+<tr><td align="left" height="12">…<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>    > ]
 
   langchain_core_embeddings_embeddings_Embeddings [
      label=<
@@ -226,11 +246,12 @@ digraph {
   langchain_text_splitters_base_TextSplitter [
      label=<
 <table border="0">
-<tr><td align="left" valign="top"><font face="courier">langchain_text_splitters.base.TextSplitter</font></td></tr>
-<tr><td align="left" valign="top" height="20"><font face="courier"><b>TextSplitter</b></font></td></tr>
-<tr><td align="left" height="12">Interface for splitting text into chunks.<br align="Left"/></td></tr>
-<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
-</table>    > ]
+<tr><td colspan="2" align="left" valign="top"><font face="courier">langchain_text_splitters.base</font></td></tr>
+<tr><td colspan="2" align="left" valign="top" height="20"><font face="courier"><b>TextSplitter</b></font></td></tr>
+<tr><td colspan="2" align="left" height="12">Interface for splitting text into chunks.<br align="Left"/></td></tr>
+<tr><td colspan="2" align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+<tr><td><font face="courier">split_documents()</font><br align="Left"/></td><td>returns a list of Documents<br align="Left"/></td></tr>
+</table>> ]
 
   langchain_text_splitters_character_RecursiveCharacterTextSplitter [
      label=<
@@ -238,8 +259,17 @@ digraph {
 <tr><td align="left" valign="top"><font face="courier">langchain_text_splitters.character</font></td></tr>
 <tr><td align="left" valign="top" height="20"><font face="courier"><b>RecursiveCharacterTextSplitter</b></font></td></tr>
 <tr><td align="left" height="12">Splitting text by recursively look at characters.<br align="Left"/></td></tr>
-<tr><td align="left">…<br align="Left"/>Recursively tries to split by different characters to find one that works.<br align="left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>Recursively tries to split by different<br align="Left"/>characters to find one that works.<br align="left"/></td></tr>
 </table>> ]
+
+  langchain_text_splitters_character_CharacterTextSplitter [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_text_splitters.character</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>CharacterTextSplitter</b></font></td></tr>
+<tr><td align="left" height="12">Splitting text that looks at characters.<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>    > ]
 
   langchain_core_vectorstores_VectorStore [
      label=<
@@ -259,6 +289,16 @@ digraph {
 <tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
 </table>    > ]
 
+
+  langchain_community_docstore_in_memory_InMemoryDocstore [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_community.docstore.in_memory</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>InMemoryDocstore</b></font></td></tr>
+<tr><td align="left" height="12">Simple in memory docstore in the form of a dict.<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>    > ]
+
   langchain_core_output_parsers_base_BaseLLMOutputParser -> langchain_core_output_parsers_base_BaseOutputParser
   langchain_core_output_parsers_base_BaseOutputParser -> langchain_core_output_parsers_transform_BaseTransformOutputParser 
   langchain_core_output_parsers_transform_BaseTransformOutputParser -> langchain_core_output_parsers_string_StrOutputParser
@@ -270,10 +310,13 @@ digraph {
 
   langchain_core_documents_transformers_BaseDocumentTransformer -> langchain_text_splitters_base_TextSplitter
   langchain_text_splitters_base_TextSplitter -> langchain_text_splitters_character_RecursiveCharacterTextSplitter
+  langchain_text_splitters_base_TextSplitter -> langchain_text_splitters_character_CharacterTextSplitter
 
   langchain_core_embeddings_embeddings_Embeddings -> langchain_community_embeddings_ollama_OllamaEmbeddings
 
   langchain_core_document_loaders_base_BaseLoader -> langchain_community_document_loaders_web_base_WebBaseLoader
+  langchain_core_document_loaders_base_BaseLoader -> langchain_community_document_loaders_unstructured_UnstructuredBaseLoader
+  langchain_community_document_loaders_unstructured_UnstructuredBaseLoader -> langchain_community_document_loaders_unstructured_UnstructuredFileLoader
 
   langchain_core_runnables_base_RunnableSerializable -> langchain_core_runnables_base_RunnableSequence
   langchain_core_runnables_base_RunnableSerializable -> langchain_core_documents_base_Document

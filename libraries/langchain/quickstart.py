@@ -108,17 +108,18 @@ documents = text_splitter.split_documents(docs)
 vector = FAISS.from_documents(documents, embeddings)
 # print(type(vector))  #  langchain_community.vectorstores.faiss.FAISS
 
-# save_local
-# ----------
-# vector.save_local('/tmp/vec') # -> creates the two files /tmp/vec/index.faiss and /tmp/vec/index.pkl
-# import pickle
-# with open('/tmp/vec/index.pkl', 'rb') as pkl:
-#     pickled_data = pickle.load(pkl)
-#     print(type(pickled_data)) # -> tuble
-#     #
-#     for elem in pickled_data:
-#         print(type(elem))  # langchain_community.docstore.in_memory.InMemoryDocstore
-#                            # dict
+if True: # {{{ save_local
+  # ----------
+    vector.save_local('/tmp/vec') # -> creates the two files /tmp/vec/index.faiss and /tmp/vec/index.pkl
+    import pickle
+    with open('/tmp/vec/index.pkl', 'rb') as pkl:
+        pickled_data = pickle.load(pkl)
+        print(type(pickled_data)) # -> tuple
+        #
+        for elem in pickled_data:
+            print(type(elem))  # langchain_community.docstore.in_memory.InMemoryDocstore                                                # PUT THIS INCLUDING base class into .dot
+                               # dict
+# }}}
 
 # embeddings is vector.embeddings # --> True
 
