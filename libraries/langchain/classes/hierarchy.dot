@@ -8,6 +8,7 @@ digraph {
 
   node [shape=box]
 
+
   template [
      label=<
 <table border="0">
@@ -16,6 +17,72 @@ digraph {
 <tr><td align="left" height="12">…<br align="Left"/></td></tr>
 <tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
 </table>> ]
+
+  langchain_core_output_parsers_base_BaseLLMOutputParser [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.output_parsers.base</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>BaseLLMOutputParser</b></font></td></tr>
+<tr><td align="left" height="12">Abstract base class for parsing the<br align="Left"/>outputs of a model.<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>    > ]
+
+  langchain_core_output_parsers_base_BaseOutputParser [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.output_parsers.base</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>BaseOutputParser</b></font></td></tr>
+<tr><td align="left" height="12">Base class to parse the output of<br align="Left"/>an LLM call.<br align="Left"/></td></tr>
+<tr><td align="left">Output parsers help structure<br align="Left"/>language model responses.<br align="Left"/>…<br align="left"/></td></tr>
+</table>    > ]
+
+  langchain_core_output_parsers_transform_BaseTransformOutputParser [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.output_parsers.transform</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>BaseTransformOutputParser</b></font></td></tr>
+<tr><td align="left" height="12">Base class for an output parser that can<br align="Left"/>handle streaming input.<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>    > ]
+
+  langchain_core_output_parsers_string_StrOutputParser [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.output_parsers.string</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>StrOutputParser</b></font></td></tr>
+<tr><td align="left" height="12">OutputParser that parses LLMResult<br align="Left"/>into the top likely string.<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>    > ]
+
+  langchain_core_runnables_base_RunnableSequence [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_core.runnables.base</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>RunnableSequence</b></font></td></tr>
+<tr><td align="left" height="12">Sequence of Runnables, where<br align="Left"/>the output of each is the input<br align="Left"/>of the next.<br align="Left"/></td></tr>
+<tr><td align="left">RunnableSequence is the most<br align="Left"/>important composition operator<br align="Left"/>in LangChain as it is used in<br align="Left"/>virtually every chain.<br align="Left"/></td></tr>
+<tr><td align="left" height="12">A RunnableSequence can be<br align="Left"/>instantiated directly or more<br align="Left"/>commonly by using the <font face="courier">|</font> operator<br align="Left"/>where either the left or<br align="Left"/>right operands (or both) must be<br align="Left"/>a Runnable.<br align="Left"/></td></tr>
+<tr><td align="left" height="12">…<br align="Left"/></td></tr>
+</table>    > ]
+
+  langchain_core_language_models_llms_BaseLLM [
+     label=<
+<table border="0">
+<tr><td align="left" colspan="2" valign="top"><font face="courier">langchain_core.language_models.llms</font></td></tr>
+<tr><td align="left" colspan="2" valign="top" height="20"><font face="courier"><b>BaseLLM</b></font></td></tr>
+<tr><td align="left" colspan="2" height="12">Base LLM abstract interface.<br align="Left"/></td></tr>
+<tr><td align="left" colspan="2">It should take in a prompt and return a string.<br align="left"/></td></tr>
+<tr><td align="left"><font face="courier">invoke()</font>:<br align="left"/></td><td>Transform a single input into an output.</td></tr>
+</table>    > ]
+
+  langchain_community_llms_ollama_Ollama [
+     label=<
+<table border="0">
+<tr><td align="left" valign="top"><font face="courier">langchain_community.llms</font></td></tr>
+<tr><td align="left" valign="top" height="20"><font face="courier"><b>ollama.Ollama</b></font></td></tr>
+<tr><td align="left" height="12">…<br align="Left"/></td></tr>
+<tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
+</table>    > ]
 
   langchain_core_runnables_base_RunnableSerializable [
      label=<
@@ -31,8 +98,8 @@ digraph {
 <table border="0">
 <tr><td align="left" valign="top"><font face="courier">langchain_core.retrievers</font></td></tr>
 <tr><td align="left" valign="top" height="20"><font face="courier"><b>BaseRetriever</b></font></td></tr>
-<tr><td align="left" height="12">Abstract base class for a Document retrieval system.<br align="Left"/></td></tr>
-<tr><td align="left">A <i>retrieval system</i> is defined as something that can take.<br align="Left"/>the most «relevant» Documents from some source.<br align="left"/></td></tr>
+<tr><td align="left" height="12">Abstract base class for a<br align="Left"/>Document retrieval system.<br align="Left"/></td></tr>
+<tr><td align="left">A <i>retrieval system</i> is defined<br align="Left"/>as something that can take.<br align="Left"/>the most «relevant» Documents<br align="Left"/>from some source.<br align="left"/></td></tr>
 </table>> ]
 
   langchain_core_vectorstores_VectorStoreRetriever [
@@ -50,7 +117,7 @@ digraph {
 <table border="0">
 <tr><td align="left" valign="top"><font face="courier">langchain_core.prompts.base</font></td></tr>
 <tr><td align="left" valign="top" height="20"><font face="courier"><b>BasePromptTemplate</b></font></td></tr>
-<tr><td align="left" height="12">…<br align="Left"/></td></tr>
+<tr><td align="left" height="12">Base class for all prompt templates,<br align="Left"/>returning a prompt.<br align="Left"/></td></tr>
 <tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
 </table>    > ]
 
@@ -69,7 +136,9 @@ digraph {
 <tr><td align="left" valign="top"><font face="courier">langchain_core.prompts.chat</font></td></tr>
 <tr><td align="left" valign="top" height="20"><font face="courier"><b>ChatPromptTemplate</b></font></td></tr>
 <tr><td align="left" height="12">Prompt template for chat models.<br align="Left"/></td></tr>
-<tr><td align="left">Used to create flexible templated<br align="left"/>prompts for chat models.<br align="left"/></td></tr>
+<tr><td align="left" height="12">Prompt templates convert raw<br align="Left"/>user input to better input to the LLM.<br align="Left"/></td></tr>
+<tr><td align="left" height="12">Used to create flexible templated<br align="left"/>prompts for chat models.<br align="left"/></td></tr>
+<tr><td align="left"><font face="courier">chain = prompt | llm</font><br align="left"/></td></tr>
 </table>> ]
 
  langchain_core_language_models_base_BaseLanguageModel  [
@@ -77,7 +146,7 @@ digraph {
 <table border="0">
 <tr><td align="left" valign="top"><font face="courier">langchain_core.language_models.base</font></td></tr>
 <tr><td align="left" valign="top" height="20"><font face="courier"><b>BaseLanguageModel</b></font></td></tr>
-<tr><td align="left" height="12">Abstract base class for interfacing with language models.<br align="Left"/></td></tr>
+<tr><td align="left" height="12">Abstract base class for interfacing<br align="Left"/>with language models.<br align="Left"/></td></tr>
 <tr><td align="left">All language model wrappers inherit<br align="left"/>from BaseLanguageModel.<br align="left"/></td></tr>
 </table>    > ]
 
@@ -104,7 +173,7 @@ digraph {
 <table border="0">
 <tr><td align="left" valign="top"><font face="courier">langchain_core.documents.base</font></td></tr>
 <tr><td align="left" valign="top" height="20"><font face="courier"><b>Document</b></font></td></tr>
-<tr><td align="left" height="12">Class for storing a piece of text and<br align="Left"/>associated metadata.<br align="Left"/></td></tr>
+<tr><td align="left" height="12">Class for storing a piece of text<br align="Left"/>and associated metadata (origin,<br align="Left"/>author etc.)<br align="Left"/></td></tr>
 <tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
 </table>    > ]
 
@@ -114,7 +183,7 @@ digraph {
 <tr><td align="left" valign="top"><font face="courier">langchain_core.document_loaders.base</font></td></tr>
 <tr><td align="left" valign="top" height="20"><font face="courier"><b>BaseLoader</b></font></td></tr>
 <tr><td align="left" height="12">Interface for Document Loader.<br align="Left"/></td></tr>
-<tr><td align="left">Implementations should implement the lazy-loading methods (<font face="courier">lazy_load()</font>, <font face="courier">alazy_load()</font>)<br align="Left"/>using generators to avoid loading all Documents into memory at once.<br align="left"/></td></tr>
+<tr><td align="left">Implementations should implement the<br align="Left"/>lazy-loading methods (<font face="courier">lazy_load()</font>,<br align="Left"/><font face="courier">alazy_load()</font>)<br align="Left"/>using generators to avoid loading all<br align="Left"/>Documents into memory at once.<br align="left"/></td></tr>
 </table>    > ]
 
   langchain_community_document_loaders_web_base_WebBaseLoader [
@@ -150,8 +219,8 @@ digraph {
 <table border="0">
 <tr><td align="left" valign="top"><font face="courier">langchain_core.documents.transformers</font></td></tr>
 <tr><td align="left" valign="top" height="20"><font face="courier"><b>BaseDocumentTransformer</b></font></td></tr>
-<tr><td align="left" height="12">Abstract base class for <i>document transformation systems</i>.<br align="Left"/></td></tr>
-<tr><td align="left">A document transformation system takes a sequence of Documents and<br align="Left"/>returns a sequence of transformed Documents.<br align="left"/></td></tr>
+<tr><td align="left" height="12">Abstract base class for<br align="Left"/><i>document transformation systems</i>.<br align="Left"/></td></tr>
+<tr><td align="left">A document transformation system takes a<br align="Left"/>sequence of Documents and<br align="Left"/>returns a sequence of transformed Documents.<br align="left"/></td></tr>
 </table>    > ]
 
   langchain_text_splitters_base_TextSplitter [
@@ -190,6 +259,13 @@ digraph {
 <tr><td align="left">…<br align="Left"/>…<br align="left"/></td></tr>
 </table>    > ]
 
+  langchain_core_output_parsers_base_BaseLLMOutputParser -> langchain_core_output_parsers_base_BaseOutputParser
+  langchain_core_output_parsers_base_BaseOutputParser -> langchain_core_output_parsers_transform_BaseTransformOutputParser 
+  langchain_core_output_parsers_transform_BaseTransformOutputParser -> langchain_core_output_parsers_string_StrOutputParser
+
+  langchain_core_language_models_base_BaseLanguageModel -> langchain_core_language_models_llms_BaseLLM
+  langchain_core_language_models_llms_BaseLLM -> langchain_community_llms_ollama_Ollama
+
   langchain_core_vectorstores_VectorStore -> langchain_community_vectorstores_faiss_FAISS
 
   langchain_core_documents_transformers_BaseDocumentTransformer -> langchain_text_splitters_base_TextSplitter
@@ -199,6 +275,7 @@ digraph {
 
   langchain_core_document_loaders_base_BaseLoader -> langchain_community_document_loaders_web_base_WebBaseLoader
 
+  langchain_core_runnables_base_RunnableSerializable -> langchain_core_runnables_base_RunnableSequence
   langchain_core_runnables_base_RunnableSerializable -> langchain_core_documents_base_Document
 
   langchain_core_runnables_base_RunnableSerializable -> langchain_core_retrievers_BaseRetriever

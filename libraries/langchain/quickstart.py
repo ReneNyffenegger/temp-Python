@@ -3,6 +3,9 @@
 #
 # https://python.langchain.com/docs/get_started/quickstart
 #
+# https://github.com/hwchase17/chat-your-data/blob/master/blogpost.md
+# https://github.com/hwchase17/chat-your-data
+#
 
 
 from langchain_community.llms import Ollama
@@ -11,42 +14,63 @@ llm = Ollama(model = 'llama2')
 # print(type(llm)) # langchain_community.llms.ollama.Ollama
 
 
-# opt-01 #
-# opt-01 #  Make sure ollama is started, for example with
-# opt-01 #     ollama serve
-# opt-01 #
-# opt-01 answer = llm.invoke("how can langsmith help with testing?")
-# opt-01 print(type(answer)) # str
-# opt-01 print(answer)
+if False: # {{{ opt-1
+   #
+   #  Make sure ollama is started, for example with
+   #     ollama serve
+   #
+   #  Ask a question whose answer was not in the training data.
+   #  We expect the answer to be not very good:
+   #
+ # answer = llm.invoke("how can yootool help with testing?")
+   answer = llm.invoke("how can langsmith help with testing?")
+   print(type(answer)) # str
+   print(answer)
 
-# ---------------------------------------------------------------------
 
-from langchain_core.prompts import ChatPromptTemplate
-prompt = ChatPromptTemplate.from_messages([
-    ("system", "You are world class technical documentation writer."),
-    ("user", "{input}")
-])
+# }}}
 
-# print(type(prompt))  #  langchain_core.prompts.chat.ChatPromptTemplate
-# opt-02 
-# opt-02 chain = prompt | llm 
-# opt-02 # print(type(chain))     #  langchain_core.runnables.base.RunnableSequence
-# opt-02 
-# opt-02 answer = chain.invoke({"input": "how can langsmith help with testing?"}) 
-# opt-02 print(answer)
-# opt-02 
-# opt-02 print(type(answer)) # str
+if True: # {{{ opt-2
 
-# opt-03 from langchain_core.output_parsers import StrOutputParser
-# opt-03 output_parser = StrOutputParser()
-# opt-03 
-# opt-03 # print(type(output_parser)) langchain_core.output_parsers.string.StrOutputParser
-# opt-03 
-# opt-03 chain = prompt | llm | output_parser
-# opt-03 # print(type(chain)) #  langchain_core.runnables.base.RunnableSequence
-# opt-03 answer = chain.invoke({"input": "how can langsmith help with testing?"})
-# opt-03 print(answer)
-# opt-03 print(type(answer)) # str
+   from langchain_core.prompts import ChatPromptTemplate
+   prompt = ChatPromptTemplate.from_messages([
+       ("system", "You are world class technical documentation writer."),
+       ("user", "{input}")
+   ])
+
+ # print(type(prompt))  #  langchain_core.prompts.chat.ChatPromptTemplate
+   
+   chain = prompt | llm
+   # print(type(chain))     #  langchain_core.runnables.base.RunnableSequence
+   
+ #
+ # We can now invoke it and ask the same question. It still won't know the
+ # answer, but it should respond in a more proper tone for a technical writer!
+ #
+   answer = chain.invoke({"input": "how can langsmith help with testing?"})
+   print(answer)
+   
+   print(type(answer)) # str
+
+   if True: # opt-3 # {{{
+
+    # The output of a ChatModel (and therefore, of this chain) is a message.
+    #    ( This assertion does not seem to be true !)
+    # However, it's often much more convenient to work with strings. Let's add
+    # a simple output parser to convert the chat message to a string.
+
+      from langchain_core.output_parsers import StrOutputParser
+      output_parser = StrOutputParser()
+      
+    # print(type(output_parser)) langchain_core.output_parsers.string.StrOutputParser
+      
+      chain = prompt | llm | output_parser
+      # print(type(chain)) #  langchain_core.runnables.base.RunnableSequence
+      answer = chain.invoke({"input": "how can langsmith help with testing?"})
+      print(answer)
+      print(type(answer)) # str
+   # }}}
+# }}}
 
 from langchain_community.document_loaders import WebBaseLoader
 loader = WebBaseLoader('https://docs.smith.langchain.com/user_guide')
