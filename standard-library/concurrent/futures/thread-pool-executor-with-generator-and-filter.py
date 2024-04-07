@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 
-# Already on 
-#  notes - development/languages/Python/standard-library/concurrent/futures/index
-
 from concurrent.futures import ThreadPoolExecutor
 import time
 import random
 
-items = [1, 2, 3, 4, 5, 6, 7, 8]
+def slow_item_generator():
+
+    for i in range(16):
+        yield i
+        time.sleep(1)
+
 
 def f(item):
 
@@ -21,6 +23,12 @@ def f(item):
     print(' ' * item + 'F')  # Finished
     
 
+def filter_items():
+    for item in slow_item_generator():
+        if item % 2 == 0:
+           yield item
+        
+    
 
 with ThreadPoolExecutor(max_workers=3) as executor:
-     executor.map(f, items)
+     executor.map(f, filter_items())
