@@ -17,9 +17,6 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 # from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
 
 
-
-
-
 class tq84HttpServer(BaseHTTPRequestHandler):
 
     @staticmethod
@@ -73,8 +70,12 @@ class tq84HttpServer(BaseHTTPRequestHandler):
         if self.path == '/upload':
 #          self.response('text/plain', str(type(self.headers)))
 #          print(self.headers['content-length'])
-#          for x in dir(self.headers):
+           print(f'type(self.headers) = f{str(type(self.headers))}')
+
+#          print('self.headers.keys')
+#          for x in dir(self.headers.keys()):
 #              print(x)
+#          print('-----------------')
 
            content_length = int(self.headers['content-length'])
            # length = int(content_length[0]) if content_length else 0
