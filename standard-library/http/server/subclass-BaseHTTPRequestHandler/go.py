@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
 #
+#      TODO: Use (deprecated) cgi module to parse uploaded file.
+#
 #   https://stackoverflow.com/a/52234729/180275
+#   
 #
 # Reflects the requests with dummy responses from HTTP methods GET, POST, PUT, and DELETE
 # Written by Tushar Dwivedi (2017)
+
+#
+#
+#
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
@@ -30,7 +37,14 @@ class tq84HttpServer(BaseHTTPRequestHandler):
 
        <p>
 
-       <form action="/upload" method="post" enctype="multipart/form-data">
+       <form action="/upload" method="post" 
+             enctype="application/x-www-form-urlencoded"
+       >
+    <!--    
+             enctype="multipart/form-data"
+             enctype="text/plain"
+             enctype="application/x-www-form-urlencoded"
+             -->
            <label for="fileUpload">Choose a file to upload:</label>
            <input type="file" id="fileUpload" name="fileUpload">
            <input type="submit" value="Upload File">
