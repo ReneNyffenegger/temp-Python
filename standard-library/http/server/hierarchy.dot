@@ -26,6 +26,18 @@ digraph {
   </table> > ]
 
 
+  email_message_Message [ label=< <table border="0">
+    <tr><td><font face="courier">email.message</font></td></tr>
+    <tr><td><font face="courier">Message</font></td></tr>
+    <tr><td align="left"><font point-size="8">…</font></td></tr>
+  </table> > ]
+
+  HTTPMessage [ label=< <table border="0">
+    <tr><td><font face="courier">http.server</font></td></tr>
+    <tr><td><font face="courier">HTTPMessage</font></td></tr>
+    <tr><td align="left"><font point-size="8">Headers from a HTTP response</font></td></tr>
+  </table> > ]
+
   CGIHTTPRequestHandler [ label=< <font face="Courier">CGIHTTPRequestHandler</font> >]
 
   
@@ -39,5 +51,7 @@ digraph {
 
   BaseHTTPRequestHandler -> SimpleHTTPRequestHandler
   SimpleHTTPRequestHandler -> CGIHTTPRequestHandler
+
+  email_message_Message -> HTTPMessage
 
 }
