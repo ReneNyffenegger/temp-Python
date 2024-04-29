@@ -1,3 +1,5 @@
+// dot hierarchy.dot -T pdf -o hierarchy.pdf
+
 digraph {
 
   node [shape=none]
