@@ -4,14 +4,59 @@ digraph {
 
   node [shape=none]
 
-  socketserver_BaseServer[ label=< <font face="Courier">socketserver.BaseServer</font> >]
-  socketserver_TCPServer[ label=< <font face="Courier">socketserver.TCPServer</font> >]
-  socketserver_ThreadingMixIn[ label=< <font face="Courier">socketserver.ThreadingMixIn</font> >]
-  socketserver_BaseRequestHandler[ label=< <font face="Courier">socketserver.BaseRequestHandler</font> >]
-  socketserver_StreamRequestHandler[ label=< <font face="Courier">socketserver.StreamRequestHandler</font> >]
 
-  HTTPServer [ label=< <font face="Courier">HTTPServer</font> >]
-  ThreadingHTTPServer [ label=< <font face="Courier">ThreadingHTTPServer</font> >]
+  socketserver_BaseServer [ label=< <table border="0">
+    <tr><td><font face="courier">socketserver</font></td></tr>
+    <tr><td><font face="courier">BaseServer</font></td></tr>
+    <tr><td align="left"><font point-size="8">...</font></td></tr>
+    <tr><td align="left"><font point-size="8">...</font></td></tr>
+  </table> > ]
+
+  socketserver_TCPServer [ label=< <table border="0">
+    <tr><td><font face="courier">socketserver</font></td></tr>
+    <tr><td><font face="courier">TCPServer</font></td></tr>
+    <tr><td align="left"><font point-size="8">...</font></td></tr>
+    <tr><td align="left"><font point-size="8">...</font></td></tr>
+  </table> > ]
+
+
+  socketserver_ThreadingMixIn [ label=< <table border="0">
+    <tr><td><font face="courier">socketserver</font></td></tr>
+    <tr><td><font face="courier">ThreadingMixIn</font></td></tr>
+    <tr><td align="left"><font point-size="8">...</font></td></tr>
+    <tr><td align="left"><font point-size="8">...</font></td></tr>
+  </table> > ]
+
+
+  socketserver_BaseRequestHandler[ label=< <table border="0">
+    <tr><td><font face="courier">socketserver</font></td></tr>
+    <tr><td><font face="courier">BaseRequestHandler</font></td></tr>
+    <tr><td align="left"><font point-size="8">...</font></td></tr>
+    <tr><td align="left"><font point-size="8">...</font></td></tr>
+  </table> > ]
+
+  socketserver_StreamRequestHandler[ label=< <table border="0">
+    <tr><td><font face="courier">socketserver</font></td></tr>
+    <tr><td><font face="courier">StreamRequestHandler</font></td></tr>
+    <tr><td align="left"><font point-size="8">...</font></td></tr>
+    <tr><td align="left"><font point-size="8">...</font></td></tr>
+  </table> > ]
+
+  HTTPServer [ label=< <table border="0">
+    <tr><td><font face="courier">http.server</font></td></tr>
+    <tr><td><font face="courier">HTTPServer</font></td></tr>
+    <tr><td align="left"><font point-size="8">...</font></td></tr>
+    <tr><td align="left"><font point-size="8">...</font></td></tr>
+  </table> > ]
+
+//ThreadingHTTPServer [ label=< <font face="Courier">ThreadingHTTPServer</font> >]
+
+  ThreadingHTTPServer [ label=< <table border="0">
+    <tr><td><font face="courier">http.server</font></td></tr>
+    <tr><td><font face="courier">ThreadingHTTPServer</font></td></tr>
+    <tr><td align="left"><font point-size="8">...</font></td></tr>
+    <tr><td align="left"><font point-size="8">...</font></td></tr>
+  </table> > ]
 
   BaseHTTPRequestHandler [ label=< <table border="0">
     <tr><td><font face="courier">http.server</font></td></tr>
@@ -40,7 +85,12 @@ digraph {
     <tr><td align="left"><font point-size="8">Headers from a HTTP response</font></td></tr>
   </table> > ]
 
-  CGIHTTPRequestHandler [ label=< <font face="Courier">CGIHTTPRequestHandler</font> >]
+  CGIHTTPRequestHandler[ label=< <table border="0">
+    <tr><td><font face="courier">http.server</font></td></tr>
+    <tr><td><font face="courier">CGIHTTPRequestHandler</font></td></tr>
+    <tr><td align="left"><font point-size="8">...</font></td></tr>
+    <tr><td align="left"><font point-size="8">...</font></td></tr>
+  </table> > ]
 
   
   socketserver_BaseServer -> socketserver_TCPServer
