@@ -35,19 +35,57 @@ class tq84HttpServer(BaseHTTPRequestHandler):
        <p>
 
        <form action="/upload" method="post" 
-             enctype="application/x-www-form-urlencoded"
+             enctype="multipart/form-data"
        >
     <!--    
-             enctype="multipart/form-data"
-             enctype="text/plain"
              enctype="application/x-www-form-urlencoded"
+             enctype="text/plain"
              -->
            <label for="fileUpload">Choose a file to upload:</label>
            <input type="file" id="fileUpload" name="fileUpload">
            <input type="submit" value="Upload File">
        </form>
+
+       <p><a href='enter-text'>Enter text</a>
+
      </body>
      </html>''', 'utf-8')
+
+    def enter_text(self, content = ''):
+
+#       print('a')
+#       print(type(self.rfile))
+#       print('b')
+#       print(self.rfile.readable())
+#       print('b2')
+#       content = self.rfile.read(-1)
+#       print(f'c: {content}')
+#       content = self.rfile.readlines()
+
+#       for x in dir(self.rfile):
+#           print(x)
+        
+        title = 'Enter text'
+        return bytes(f'''
+     <!DOCTYPE html>
+     <html>
+     <head>
+        <meta charset="UTF-8">
+        <title>{title}</title>
+     </head>
+     <body>
+       <h1>{title}</h1>
+
+       <form action="/enter-text" method="post" enctype="application/x-www-form-urlencoded">
+        <label for="text">Enter your text:</label><br>
+        <textarea name="text" rows="20" cols="50">{content}</textarea><br><br>
+        <input type="submit" value="Go!">
+    </form>
+     </body>
+     </html>
+
+       ''', 'utf-8')
+
 
     def response(self, content_type, body_bytes): 
 #       body_encoded = bytes(body, 'utf8')
@@ -61,12 +99,20 @@ class tq84HttpServer(BaseHTTPRequestHandler):
 
     def do_GET(self):
 
-        if self.path == '/':
-           self.response('text/html', self.slash())
+        if   self.path == '/':
+             self.response('text/html', self.slash())
+
+        elif self.path == '/enter-text':
+             self.response('text/html', self.enter_text())
 
 
     def do_POST(self):
 
+        content_length = int(self.headers['content-length'])
+        # length = int(content_length[0]) if content_length else 0
+        content = self.rfile.read(content_length) # read() returns a bytes() object
+
+        print(f'do Post, path = {self.path}')
         if self.path == '/upload':
 #          self.response('text/plain', str(type(self.headers)))
 #          print(self.headers['content-length'])
@@ -77,11 +123,10 @@ class tq84HttpServer(BaseHTTPRequestHandler):
 #              print(x)
 #          print('-----------------')
 
-           content_length = int(self.headers['content-length'])
-           # length = int(content_length[0]) if content_length else 0
-           content = self.rfile.read(content_length) # read() returns a bytes() object
            self.response('text/plain', content)
 
+        elif self.path == '/enter-text':
+           self.response('text/html', self.enter_text(content))
 
         # print("length :", length)
 
