@@ -8,6 +8,14 @@ def print_exports(pe):
     for entry in pe.DIRECTORY_ENTRY_EXPORT.symbols:
         print('  ' + entry.name.decode('utf-8'))
 
+def print_imports(pe):
+    for entry in pe.DIRECTORY_ENTRY_IMPORT:
+     print(f"Imported DLL: {entry.dll.decode('utf-8')}")
+     for imp in entry.imports:
+        # Some imports may not have a name (imported by ordinal)
+        name = imp.name.decode('utf-8') if imp.name else f"Ordinal: {imp.ordinal}"
+        print(f"\t{name} at 0x{imp.address:08x}")
+
 if False:
  # directory = Path('shobj')
  directory = Path('IDM')
@@ -19,4 +27,5 @@ if False:
 
 
 pe = pefile.PE('IDM/sfl400as.dll')
-print_exports(pe)
+# print_exports(pe)
+print_imports(pe)
