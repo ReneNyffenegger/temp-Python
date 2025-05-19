@@ -26,6 +26,15 @@ if False:
     print_exports(pe)
 
 
-pe = pefile.PE('IDM/sfl400as.dll')
-# print_exports(pe)
+if False:
+ pe = pefile.PE('IDM/sfl400as.dll')
+ print_exports(pe)
+ print_imports(pe)
+
+pe = pefile.PE('IDM/wvcore.dll')
+print_exports(pe)
+print_imports(pe)
+
+pe = pefile.PE('IDM/devect.dll')
+print_exports(pe)
 print_imports(pe)
