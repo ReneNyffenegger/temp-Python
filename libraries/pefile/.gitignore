@@ -1,3 +1,4 @@
 py-virt-env
 *.dll
 *.exe
+*.ocx

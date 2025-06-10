@@ -31,9 +31,10 @@ if False:
     print_exports(pe)
 
 
-# pf = 'pixannot.dll'
+pf = 'pixannot.dll'
 # pf = 'pixlocn.dll'
-pf = 'fndapp.exe'
+# pf = 'fndapp.exe'
+# pf = 'fnstkynt.ocx'
 # pe = pefile.PE('IDM/sfl400as.dll')
 # pe = pefile.PE('IDM/wvcore.dll')
 # pe = pefile.PE('IDM/devect.dll')
