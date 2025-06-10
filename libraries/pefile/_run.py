@@ -5,6 +5,11 @@ import pefile
 from pathlib import Path
 
 def print_exports(pe):
+
+    if not hasattr(pe, 'DIRECTORY_ENTRY_EXPORT'):
+       print('PE does not have attribute DIRECTORY_ENTRY_EXPORT')
+       return
+
     for entry in pe.DIRECTORY_ENTRY_EXPORT.symbols:
         print('  ' + entry.name.decode('utf-8'))
 
@@ -26,14 +31,15 @@ if False:
     print_exports(pe)
 
 
-pf = 'PIXANNOT.DLL'
-# pf = 'PIXLOCN.DLL'
+# pf = 'pixannot.dll'
+# pf = 'pixlocn.dll'
+pf = 'fndapp.exe'
 # pe = pefile.PE('IDM/sfl400as.dll')
 # pe = pefile.PE('IDM/wvcore.dll')
 # pe = pefile.PE('IDM/devect.dll')
 
 pe = pefile.PE(pf)
-# print_imports(pe)
+print_imports(pe)
 print_exports(pe)
 
 
