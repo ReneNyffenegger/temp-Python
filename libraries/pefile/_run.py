@@ -12,7 +12,7 @@ def print_imports(pe):
     for entry in pe.DIRECTORY_ENTRY_IMPORT:
      print(f"Imported DLL: {entry.dll.decode('utf-8')}")
      for imp in entry.imports:
-        # Some imports may not have a name (imported by ordinal)
+      # Some imports may not have a name (imported by ordinal)
         name = imp.name.decode('utf-8') if imp.name else f"Ordinal: {imp.ordinal}"
         print(f"\t{name} at 0x{imp.address:08x}")
 
@@ -26,15 +26,26 @@ if False:
     print_exports(pe)
 
 
-if False:
- pe = pefile.PE('IDM/sfl400as.dll')
- print_exports(pe)
- print_imports(pe)
+pf = 'PIXANNOT.DLL'
+# pf = 'PIXLOCN.DLL'
+# pe = pefile.PE('IDM/sfl400as.dll')
+# pe = pefile.PE('IDM/wvcore.dll')
+# pe = pefile.PE('IDM/devect.dll')
 
-pe = pefile.PE('IDM/wvcore.dll')
+pe = pefile.PE(pf)
+# print_imports(pe)
 print_exports(pe)
-print_imports(pe)
 
-pe = pefile.PE('IDM/devect.dll')
-print_exports(pe)
-print_imports(pe)
+
+#if False:
+# pe = pefile.PE('IDM/sfl400as.dll')
+# print_exports(pe)
+# print_imports(pe)
+#
+#pe = pefile.PE('IDM/wvcore.dll')
+#print_exports(pe)
+#print_imports(pe)
+#
+#pe = pefile.PE('IDM/devect.dll')
+#print_exports(pe)
+#print_imports(pe)
