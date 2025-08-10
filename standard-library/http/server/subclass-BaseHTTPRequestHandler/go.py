@@ -16,6 +16,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 
 # from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
 
+import time
 
 class tq84HttpServer(BaseHTTPRequestHandler):
 
@@ -47,6 +48,8 @@ class tq84HttpServer(BaseHTTPRequestHandler):
        </form>
 
        <p><a href='enter-text'>Enter text</a>
+
+       <p><a href='slow-response'>Slow-response</a>
 
      </body>
      </html>''', 'utf-8')
@@ -105,6 +108,24 @@ class tq84HttpServer(BaseHTTPRequestHandler):
         elif self.path == '/enter-text':
              self.response('text/html', self.enter_text())
 
+        elif self.path == '/slow-response':
+             self.send_response(200);
+             self.send_header('Content-Type'          , 'text/plain')
+             self.send_header('Content-Length'        , '20')
+             self.send_header('X-Content-Type-Options', 'nosniff'   ) # so that the browser displays data as it arrives
+             self.end_headers()
+
+             self.wfile.write(b"0\n") ; time.sleep(1)
+             self.wfile.write(b"1\n") ; time.sleep(1)
+             self.wfile.write(b"2\n") ; time.sleep(1)
+             self.wfile.write(b"3\n") ; time.sleep(1)
+             self.wfile.write(b"4\n") ; time.sleep(1)
+             self.wfile.write(b"5\n") ; time.sleep(1)
+             self.wfile.write(b"6\n") ; time.sleep(1)
+             self.wfile.write(b"7\n") ; time.sleep(1)
+             self.wfile.write(b"8\n") ; time.sleep(1)
+             self.wfile.write(b"9\n")
+             
 
     def do_POST(self):
 
