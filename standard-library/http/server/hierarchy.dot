@@ -8,14 +8,14 @@ digraph {
   socketserver_BaseServer [ label=< <table border="0">
     <tr><td><font face="courier">socketserver</font></td></tr>
     <tr><td><font face="courier">BaseServer</font></td></tr>
-    <tr><td align="left"><font point-size="8">...</font></td></tr>
+    <tr><td align="left"><font point-size="8" face="courier">serve_forever()</font></td></tr>
     <tr><td align="left"><font point-size="8">...</font></td></tr>
   </table> > ]
 
   socketserver_TCPServer [ label=< <table border="0">
     <tr><td><font face="courier">socketserver</font></td></tr>
     <tr><td><font face="courier">TCPServer</font></td></tr>
-    <tr><td align="left"><font point-size="8">...</font></td></tr>
+    <tr><td align="left"><font point-size="8" face="courier">get_request()</font></td></tr>
     <tr><td align="left"><font point-size="8">...</font></td></tr>
   </table> > ]
 
