@@ -110,8 +110,6 @@ class tq84HttpServer(BaseHTTPRequestHandler):
 
     def do_GET(self): # {{{
 
-        x = 0 / 0
-
         if   self.path == '/':
              self.response('text/html', self.slash())
 
