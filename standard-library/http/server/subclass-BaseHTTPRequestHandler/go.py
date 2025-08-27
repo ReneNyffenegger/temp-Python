@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# vim: foldmethod=marker foldmarker={{{,}}}
 #
 #      TODO: Use (deprecated) cgi module to parse uploaded file.
 #
@@ -13,15 +14,16 @@
 #
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import urllib.parse
+import html
+import time
 
 # from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
-
-import time
 
 class tq84HttpServer(BaseHTTPRequestHandler):
 
     @staticmethod
-    def slash():
+    def slash(): # {{{
          return bytes('''
      <!DOCTYPE html>
      <html>
@@ -53,8 +55,10 @@ class tq84HttpServer(BaseHTTPRequestHandler):
 
      </body>
      </html>''', 'utf-8')
+    # }}}   
 
-    def enter_text(self, content = ''):
+    def enter_text(self, content = ''): # {{{
+#        <textarea name="text-old" rows="20" cols="50">{content}</textarea><br><br>
 
 #       print('a')
 #       print(type(self.rfile))
@@ -81,16 +85,18 @@ class tq84HttpServer(BaseHTTPRequestHandler):
 
        <form action="/enter-text" method="post" enctype="application/x-www-form-urlencoded">
         <label for="text">Enter your text:</label><br>
-        <textarea name="text" rows="20" cols="50">{content}</textarea><br><br>
+        <textarea name="text" rows="20" cols="50">{html.escape(content)}</textarea><br><br>
         <input type="submit" value="Go!">
     </form>
      </body>
+
+     <p><a href='/'>Menu</a>
      </html>
 
        ''', 'utf-8')
+    # }}}
 
-
-    def response(self, content_type, body_bytes): 
+    def response(self, content_type, body_bytes): # {{{
 #       body_encoded = bytes(body, 'utf8')
 
         self.send_response(200)
@@ -100,7 +106,9 @@ class tq84HttpServer(BaseHTTPRequestHandler):
 
         self.wfile.write(body_bytes)
 
-    def do_GET(self):
+    # }}}
+
+    def do_GET(self): # {{{
 
         if   self.path == '/':
              self.response('text/html', self.slash())
@@ -126,8 +134,9 @@ class tq84HttpServer(BaseHTTPRequestHandler):
              self.wfile.write(b"8\n") ; time.sleep(1)
              self.wfile.write(b"9\n")
              
+    # }}}
 
-    def do_POST(self):
+    def do_POST(self): # {{{
 
         content_length = int(self.headers['content-length'])
         # length = int(content_length[0]) if content_length else 0
@@ -147,7 +156,11 @@ class tq84HttpServer(BaseHTTPRequestHandler):
            self.response('text/plain', content)
 
         elif self.path == '/enter-text':
-           self.response('text/html', self.enter_text(content))
+##          self.response('text/html', self.enter_text(content))
+           content_str=content.decode('utf-8')
+           print(urllib.parse.parse_qs(content_str))
+
+           self.response('text/html', self.enter_text(urllib.parse.parse_qs(content_str)['text'][0]))
 
         # print("length :", length)
 
@@ -157,6 +170,8 @@ class tq84HttpServer(BaseHTTPRequestHandler):
 #       self.send_header("Set-Cookie", "foo=bar")
 #       self.end_headers()
 #       self.wfile.write(json.dumps({'hello': 'world', 'received': 'ok'}))
+
+    # }}}
 
     do_PUT    = do_POST
     do_DELETE = do_GET
