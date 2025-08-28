@@ -38,7 +38,7 @@ digraph {
   socketserver_StreamRequestHandler[ label=< <table border="0">
     <tr><td><font face="courier">socketserver</font></td></tr>
     <tr><td><font face="courier">StreamRequestHandler</font></td></tr>
-    <tr><td align="left"><font point-size="8">...</font></td></tr>
+    <tr><td align="left"><font point-size="8"><font face="courier">wfile</font> and <font face="courier">rfile</font></font></td></tr>
     <tr><td align="left"><font point-size="8">...</font></td></tr>
   </table> > ]
 
@@ -63,6 +63,11 @@ digraph {
     <tr><td><font face="courier">BaseHTTPRequestHandler</font></td></tr>
     <tr><td align="left"><font point-size="8">Must be subclassed.</font></td></tr>
     <tr><td align="left"><font point-size="8">Instance is given to HTTPServer</font></td></tr>
+    <tr><td align="left"><font point-size="8" face="Courier">requestline</font></td></tr>
+    <tr><td align="left"><font point-size="8" face="Courier">request_version</font></td></tr>
+    <tr><td align="left"><font point-size="8" face="Courier">command</font></td></tr>
+    <tr><td align="left"><font point-size="8" face="Courier">path</font></td></tr>
+    <tr><td align="left"><font point-size="8" face="Courier">headers</font></td></tr>
   </table> > ]
 
 
