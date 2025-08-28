@@ -1,0 +1,58 @@
+// dot hierarchy.dot -T pdf -o hierarchy.pdf
+
+digraph {
+
+  node [shape=none]
+
+  IOBase [ label=< <table border="0">
+    <tr><td><font face="courier">_io</font></td></tr>
+    <tr><td><font face="courier">_IOBase</font></td></tr>
+    <tr><td align="left"><font point-size="8">…</font></td></tr>
+  </table> > ]
+
+  TextIOBase [ label=< <table border="0">
+    <tr><td><font face="courier">_io</font></td></tr>
+    <tr><td><font face="courier">TextIOBase</font></td></tr>
+    <tr><td align="left"><font point-size="8">…</font></td></tr>
+  </table> > ]
+
+  TextIOWrapper [ label=< <table border="0">
+    <tr><td><font face="courier">_io</font></td></tr>
+    <tr><td><font face="courier">TextIOWrapper</font></td></tr>
+    <tr><td align="left"><font point-size="8">…</font></td></tr>
+  </table> > ]
+
+  BufferedIOBase [ label=< <table border="0">
+    <tr><td><font face="courier">_io</font></td></tr>
+    <tr><td><font face="courier">BufferedIOBase</font></td></tr>
+    <tr><td align="left"><font point-size="8">…</font></td></tr>
+  </table> > ]
+
+  BufferedWriter [ label=< <table border="0">
+    <tr><td><font face="courier">_io</font></td></tr>
+    <tr><td><font face="courier">BufferedWriter</font></td></tr>
+    <tr><td align="left"><font point-size="8">…</font></td></tr>
+  </table> > ]
+
+  BufferedReader [ label=< <table border="0">
+    <tr><td><font face="courier">_io</font></td></tr>
+    <tr><td><font face="courier">BufferedReader</font></td></tr>
+    <tr><td align="left"><font point-size="8">…</font></td></tr>
+  </table> > ]
+
+  StringIO [ label=< <table border="0">
+    <tr><td><font face="courier">_io</font></td></tr>
+    <tr><td><font face="courier">StringIO</font></td></tr>
+    <tr><td align="left"><font point-size="8">…</font></td></tr>
+  </table> > ]
+
+  IOBase -> TextIOBase
+  IOBase -> BufferedIOBase
+
+  TextIOBase -> TextIOWrapper
+  TextIOBase -> StringIO
+
+  BufferedIOBase -> BufferedReader
+  BufferedIOBase -> BufferedWriter
+
+}
