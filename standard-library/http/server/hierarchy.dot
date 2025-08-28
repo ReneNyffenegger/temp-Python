@@ -31,7 +31,9 @@ digraph {
   socketserver_BaseRequestHandler[ label=< <table border="0">
     <tr><td><font face="courier">socketserver</font></td></tr>
     <tr><td><font face="courier">BaseRequestHandler</font></td></tr>
-    <tr><td align="left"><font point-size="8">...</font></td></tr>
+    <tr><td align="left"><font point-size="8" face="Courier">request</font></td></tr>
+    <tr><td align="left"><font point-size="8" face="Courier">client_address</font></td></tr>
+    <tr><td align="left"><font point-size="8" face="Courier">server</font></td></tr>
     <tr><td align="left"><font point-size="8">...</font></td></tr>
   </table> > ]
 
@@ -93,8 +95,7 @@ digraph {
   CGIHTTPRequestHandler[ label=< <table border="0">
     <tr><td><font face="courier">http.server</font></td></tr>
     <tr><td><font face="courier">CGIHTTPRequestHandler</font></td></tr>
-    <tr><td align="left"><font point-size="8">...</font></td></tr>
-    <tr><td align="left"><font point-size="8">...</font></td></tr>
+    <tr><td align="left"><font point-size="8"><i>Removed in Python 3.15</i></font></td></tr>
   </table> > ]
 
   
