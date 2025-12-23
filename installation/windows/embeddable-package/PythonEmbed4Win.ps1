@@ -1,7 +1,7 @@
 #
 #  https://github.com/jtmoon79/PythonEmbed4Win/blob/main/PythonEmbed4Win.ps1
 #
-#      .\PythonEmbed4Win.ps1 -path C:\Entwicklung\python\embed\3.14.0 -zipFile  O:\Benutzer\Nyffenegger\tools\downloaded\python-embed-3.14.2.zip
+#      .\PythonEmbed4Win.ps1 -path C:\Entwicklung\python\embed\3.14.0 -zipFile  c:\Users\igsnyre\github\dev\download-installers-isos-etc\temp\downloaded\python-embed-3.14.2.zip
 
 
 [Cmdletbinding(DefaultParameterSetName = 'Install')]
@@ -987,28 +987,41 @@ function process-python-zip {
 write-host      "Process-Python-Zip('${path_zip}', '${path_install}', ${ver}, ${skip_exec})"
     Write-Debug "Process-Python-Zip('${path_zip}', '${path_install}', ${ver}, ${skip_exec})"
 
+  #
   # if $path_install does not exist this will raise
   #
-    $_ignore = Join-Path $path_install -ChildPath "" -Resolve
+    $null = Join-Path $path_install -ChildPath "" -Resolve
 
    if (test-path $path_install) {
-      write-host "   installation path $path_install already exists"
+    #
+    # Apparently, it is expected that directory path_install already exists.
+    #
+      write-host "  installation path $path_install already exists (expected)"
    }
    else {
-      write-host "   installation path $path_install does not exist"
+      write-host "  installation path $path_install does not exist (not expected)"
    }
 
+    write-host "  path_install = $path_install"
+
+    write-host "  --------------------- ls path_install ($path_install) --- should be empty now --------"
+    write-host "  $(ls $path_install)"
+    write-host '  ---------------------------------------------------------------'
 
     write-debug "Expand-Archive '$path_zip' -DestinationPath '$path_install'"
-write-host      "Expand-Archive '$path_zip' -DestinationPath '$path_install'"
-    expand-archive $path_zip -DestinationPath $path_install
+write-host    "  Expand-Archive '$path_zip' -DestinationPath '$path_install'"
+    expand-archive $path_zip -destinationPath $path_install
+
+    write-host "  --------------------- ls path_install ($path_install) ---------------"
+    write-host "  $(ls $path_install)"
+    write-host '  ---------------------------------------------------------------'
 
   #
   # do tedious operations within the $PWD of the recently unzipped Python environment
   #
 
     Write-Debug "Push-Location '$path_install'"
-Write-host      "Push-Location '$path_install'"
+Write-host    "  Push-Location '$path_install'"
     $null = Push-Location -Path $path_install
 
   # 1a. not all versions of embed.zip have this directory
@@ -1038,19 +1051,28 @@ write-host "   python_DLL_path = $python_DLL_path"
        Write-Host -ForegroundColor Yellow 'Directory:' $_ignore.FullName
     }
 
-  # 1c. the downloaded zip file contains a zip file, python39.zip. Unzip that
-  # to under `Lib/`.
-    $pythonzip = Get-ChildItem -File -Filter 'python*.zip' -Depth 1
-    $dest_zip = 'Lib/python_zip'
+    write-host '---------------------------------'
+    write-host (ls)
+    write-host '---------------------------------'
+
+  # 1c. the downloaded zip file may contain a zip file (for example python39.zip).
+  #     (Version 3.14.2 does not contain such a file)
+  # Unzip that to under `Lib/`.
+  #
+    $pythonzip = get-childItem -file -filter 'python*.zip' -depth 1
+
+    write-host "   pythonzip = $pythonzip"
+    $dest_zip  = 'Lib/python_zip'
     write-host "   dest_zip = $dest_zip"
     if (test-path $dest_zip) {
-       write-host "  $dest_zip exists"
+       write-host "  dest_zip ($dest_zip) exists"
        Write-Host -ForegroundColor Yellow 'Unzip ' $pythonzip 'to' $dest_zip
        Expand-Archive $pythonzip -DestinationPath $dest_zip
        Remove-Item -Path $pythonzip
     }
 
   # 2. set python._pth file
+  #
     $pythonpth = Get-ChildItem -File -Filter 'python*._pth' -Depth 1
     write-host "  pythonpth = $pythonpth"
     if ($null -eq $pythonpth) {
@@ -1184,13 +1206,17 @@ Also, this installation cannot create new virtual environments.
   # XXX: oddly, the `ensurepip` module is not available in the Windows embed version of Python
   
     $path_getpip = ".\get-pip.py"
+
     Write-Host -ForegroundColor Yellow "`n`nInstall pip:"
     Write-Host -ForegroundColor Green "${python_exe} -O ${path_getpip} --no-warn-script-location`n"
+
     $uri_getpip1 = $URI_GETPIP
     if ($ver -lt [System.Version]"3.7") {
         $uri_getpip1 = $URI_GETPIP36
     }
+
     Download $uri_getpip1 $path_getpip
+
     & $python_exe -O $path_getpip --no-warn-script-location
     if ($LastExitCode -ne 0) {
         Write-Error "Python get-pip.py failed"
@@ -1239,7 +1265,7 @@ function Install-Python {
     $path_install_item = Create-Path-Install-Directory $path_install
 
     Write-Information "Installing Python to ${path_install_item}"
-    Process-Python-Zip $path_zip_tmp $path_install_item $ver $skip_exec
+    process-python-zip $path_zip_tmp $path_install_item $ver $skip_exec
 }
 
 function Process-Version {

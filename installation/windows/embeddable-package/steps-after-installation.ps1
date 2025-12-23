@@ -1,7 +1,7 @@
 #
 # Embedded Python was installed with:
 #
-#      .\PythonEmbed4Win.ps1 -path C:\Entwicklung\python\embed\3.14.0 -zipFile  O:\Benutzer\Nyffenegger\tools\downloaded\python-embed-3.14.2.zip
+#      .\PythonEmbed4Win.ps1 -path C:\Entwicklung\python\embed\3.14.0 -zipFile  c:\Users\igsnyre\github\dev\download-installers-isos-etc\temp\downloaded\python-embed-3.14.2.zip
 #
 # Files that were added to the installation directory include:
 #    - .\python._pth
