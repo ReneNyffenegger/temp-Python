@@ -1,7 +1,7 @@
 #
 #  https://github.com/jtmoon79/PythonEmbed4Win/blob/main/PythonEmbed4Win.ps1
 #
-#      .\PythonEmbed4Win.ps1 -path C:\Users\igsnyre\bin\python\embed\3.14.0 -zipFile  O:\Benutzer\Nyffenegger\tools\downloaded\python-embed-3.14.2.zip
+#      .\PythonEmbed4Win.ps1 -path C:\Entwicklung\python\embed\3.14.0 -zipFile  O:\Benutzer\Nyffenegger\tools\downloaded\python-embed-3.14.2.zip
 
 
 [Cmdletbinding(DefaultParameterSetName = 'Install')]
@@ -26,7 +26,7 @@ Param (
     [String] $Arch,
     [Parameter(ParameterSetName = 'Install')]
     [Parameter(ParameterSetName = 'ZipFile')]
-    [switch] $SkipExec,
+    [switch] $SkipExec, 
     [Parameter(ParameterSetName = 'Install')]
     [Parameter(ParameterSetName = 'UriCheck')]
     [Parameter(ParameterSetName = 'ZipFile')]
