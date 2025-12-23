@@ -8,6 +8,9 @@
 #     When downloading the zip file with wget,
 #     the content of the zip file is different
 #     than that of the downloaded zip.
+#
+#  See also
+#     https://github.com/ReneNyffenegger/dev-virtualization-Windows-Sandbox/blob/aa1f2193566bcb39e8b5eb4a7215f844c7ae93b4/scripts/install/python-embed.ps1
 
 
 [Cmdletbinding(DefaultParameterSetName = 'Install')]
