@@ -2,6 +2,12 @@
 #  https://github.com/jtmoon79/PythonEmbed4Win/blob/main/PythonEmbed4Win.ps1
 #
 #      .\PythonEmbed4Win.ps1 -path C:\Entwicklung\python\embed\3.14.0 -zipFile  c:\Users\igsnyre\github\dev\download-installers-isos-etc\temp\downloaded\python-embed-3.14.2.zip
+#
+#
+#  Different versions of downloaded zip file?
+#     When downloading the zip file with wget,
+#     the content of the zip file is different
+#     than that of the downloaded zip.
 
 
 [Cmdletbinding(DefaultParameterSetName = 'Install')]
