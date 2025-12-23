@@ -1,18 +1,19 @@
 #
 #  https://github.com/jtmoon79/PythonEmbed4Win/blob/main/PythonEmbed4Win.ps1
 #
+#      .\PythonEmbed4Win.ps1 -path C:\Users\igsnyre\bin\python\embed\3.14.0 -zipFile  O:\Benutzer\Nyffenegger\tools\downloaded\python-embed-3.14.2.zip
 
 
 [Cmdletbinding(DefaultParameterSetName = 'Install')]
 Param (
     [Parameter(ParameterSetName = 'ZipFile', Mandatory=$true)]
-    [String] $ZipFile,
+    [String] $zipFile,                                            # Do not download zip file, but specify it's location? see also: https://github.com/ReneNyffenegger/temp-download-installers-isos-etc/blob/6502023bbe768f1dd622e98206aa1e7f2a2edefe/go.ps1#L38
     [Parameter(ParameterSetName = 'UriCheck', Mandatory=$true)]
     [switch] $UriCheck,
     [Parameter(ParameterSetName = 'Install')]
     [Parameter(ParameterSetName = 'ZipFile')]
     [Parameter(ValueFromPipeline=$true, Position=0)]
-    [String] $Path,
+    [String] $path,                                               # Installation path? From this value (if specified) will $path_install be derived.
     [Parameter(ParameterSetName = 'Install')]
     [Parameter(ParameterSetName = 'UriCheck')]
     [String] $Version,
@@ -539,10 +540,12 @@ write-host "mkdir $tempDir"
 }
 
 function Print-File-Nicely {
+
     <#
     .SYNOPSIS
     Print a file for easy grok.
     #>
+
     Param([System.IO.FileInfo]$path)
 
     Write-Host -ForegroundColor Yellow `
@@ -774,7 +777,7 @@ function Scrape-Python-Versions {
     #       https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-webrequest?view=powershell-7.2#example-3--get-links-from-a-web-page
     #
 
-    # scrape the versions
+  # scrape the versions
     $versions_scraped = New-Object Collections.Generic.List[System.Version]
 
     foreach(
@@ -912,8 +915,8 @@ function Create-Path-Install-Name
     .SYNOPSIS
     Synthesize the $path_install directory name.
     #>
-    Param
-    (
+
+    Param (
         [OutputType([String])]
         [Parameter()][AllowNull()][String]$path_install=$null,
         [Parameter(Mandatory=$true)][System.Version]$ver
@@ -932,17 +935,19 @@ function Create-Path-Install-Name
     return $PathFileInfo
 }
 
-function Create-Path-Install-Directory {
+function create-path-install-directory {
+
     <#
     .SYNOPSIS
     Create the $path_install directory. Warn if it exists.
     #>
 
-    Param (
+    param (
         [OutputType([System.IO.DirectoryInfo])]
         [Parameter(Mandatory=$true)][String]$path_install
     )
 
+write-host "create-path-install-directory, path_install = $path_install"
     Write-Debug "Create-Path-Install-Directory('$path_install')"
 
     if (-not (Test-Path $path_install)) {
@@ -951,6 +956,8 @@ function Create-Path-Install-Directory {
         Write-Host -ForegroundColor Yellow 'Directory:' $item.FullName
     }
     else {
+        write-host "  Installation directory $path_install already exists"
+ exit
         Remove-Item -Recurse $path_install -Confirm
         Write-Verbose "New-Item -Path '$path_install'"
         $item = New-Item -Path $path_install -ItemType Directory
@@ -960,7 +967,8 @@ function Create-Path-Install-Directory {
     return $item
 }
 
-function Process-Python-Zip {
+function process-python-zip {
+
     <#
     .SYNOPSIS
     Given the downloaded python zip file $python_zip, install it to
@@ -970,52 +978,86 @@ function Process-Python-Zip {
     #>
 
     Param (
-        [Parameter(Mandatory=$true)][System.IO.FileInfo]$path_zip,
+        [Parameter(Mandatory=$true)][System.IO.FileInfo     ]$path_zip,
         [Parameter(Mandatory=$true)][System.IO.DirectoryInfo]$path_install,
-        [Parameter(Mandatory=$true)][System.Version]$ver,
-        [Parameter(Mandatory=$true)][bool]$skip_exec
+        [Parameter(Mandatory=$true)][System.Version         ]$ver,
+        [Parameter(Mandatory=$true)][bool                   ]$skip_exec
     )
 
+write-host      "Process-Python-Zip('${path_zip}', '${path_install}', ${ver}, ${skip_exec})"
     Write-Debug "Process-Python-Zip('${path_zip}', '${path_install}', ${ver}, ${skip_exec})"
 
-    # if $path_install does not exist this will raise
+  # if $path_install does not exist this will raise
+  #
     $_ignore = Join-Path $path_install -ChildPath "" -Resolve
 
-    Write-Debug "Expand-Archive '$path_zip' -DestinationPath '$path_install'"
-    Expand-Archive $path_zip -DestinationPath $path_install
+   if (test-path $path_install) {
+      write-host "   installation path $path_install already exists"
+   }
+   else {
+      write-host "   installation path $path_install does not exist"
+   }
 
-    #
-    # do tedious operations within the $PWD of the recently unzipped Python environment
-    #
+
+    write-debug "Expand-Archive '$path_zip' -DestinationPath '$path_install'"
+write-host      "Expand-Archive '$path_zip' -DestinationPath '$path_install'"
+    expand-archive $path_zip -DestinationPath $path_install
+
+  #
+  # do tedious operations within the $PWD of the recently unzipped Python environment
+  #
 
     Write-Debug "Push-Location '$path_install'"
-    $_ignore = Push-Location -Path $path_install
+Write-host      "Push-Location '$path_install'"
+    $null = Push-Location -Path $path_install
 
-    # 1a. not all versions of embed.zip have this directory
-    # e.g. https://www.python.org/ftp/python/3.8.4/python-3.8.4-embed-amd64.zip
-    Write-Verbose "New-Item 'Lib/site-packages'"
-    $_ignore = New-Item -Path "Lib/site-packages" -ItemType Directory
-    Write-Host -ForegroundColor Yellow 'Directory:' $_ignore.FullName
+  # 1a. not all versions of embed.zip have this directory
+  # e.g. https://www.python.org/ftp/python/3.8.4/python-3.8.4-embed-amd64.zip
+  #
+    if (test-path Lib/site-packages) {
+       write-host "Lib/site-packages exists"
+    }
+    else {
+       write-host "Lib/site-packages does not exist"
+       Write-Verbose "New-Item 'Lib/site-packages'"
+       $_ignore = New-Item -Path "Lib/site-packages" -ItemType Directory
+       Write-Host -ForegroundColor Yellow 'Directory:' $_ignore.FullName
+    }
+  
 
-    # 1b. create empty directory DLLs
+  # 1b. create empty directory DLLs
     $python_DLL_path = Join-Path -Path '.' -ChildPath 'DLLs'
-    Write-Verbose "New-Item '${python_DLL_path}'"
-    $_ignore = New-Item -Path $python_DLL_path -ItemType directory
-    Write-Host -ForegroundColor Yellow 'Directory:' $_ignore.FullName
+write-host "   python_DLL_path = $python_DLL_path"
 
-    # 1c. the downloaded zip file contains a zip file, python39.zip. Unzip that
-    # to under `Lib/`.
+    if (test-path $python_DLL_path) {
+        write-host "   $python_DLL_path already exists"
+    }
+    else {
+       Write-Verbose "New-Item '${python_DLL_path}'"
+       $_ignore = New-Item -Path $python_DLL_path -ItemType directory
+       Write-Host -ForegroundColor Yellow 'Directory:' $_ignore.FullName
+    }
+
+  # 1c. the downloaded zip file contains a zip file, python39.zip. Unzip that
+  # to under `Lib/`.
     $pythonzip = Get-ChildItem -File -Filter 'python*.zip' -Depth 1
     $dest_zip = 'Lib/python_zip'
-    Write-Host -ForegroundColor Yellow 'Unzip ' $pythonzip 'to' $dest_zip
-    Expand-Archive $pythonzip -DestinationPath $dest_zip
-    Remove-Item -Path $pythonzip
-
-    # 2. set python._pth file
-    $pythonpth = Get-ChildItem -File -Filter 'python*._pth' -Depth 1
-    if($null -eq $pythonpth) {
-        $pythonpth = ".\python._pth"
+    write-host "   dest_zip = $dest_zip"
+    if (test-path $dest_zip) {
+       write-host "  $dest_zip exists"
+       Write-Host -ForegroundColor Yellow 'Unzip ' $pythonzip 'to' $dest_zip
+       Expand-Archive $pythonzip -DestinationPath $dest_zip
+       Remove-Item -Path $pythonzip
     }
+
+  # 2. set python._pth file
+    $pythonpth = Get-ChildItem -File -Filter 'python*._pth' -Depth 1
+    write-host "  pythonpth = $pythonpth"
+    if ($null -eq $pythonpth) {
+        $pythonpth = ".\python._pth"
+        write-host "  pythonpth after null check = $pythonpth"
+    }
+
     $content_pythonpth = "# python._pth
 #
 # this file was added by PythonEmbed4Win.ps1
@@ -1031,8 +1073,11 @@ function Process-Python-Zip {
     $content_pythonpth | Out-File -Force -FilePath $pythonpth -Encoding "ascii"
     Print-File-Nicely $pythonpth
 
-    # 3. set sitecustomize.py
+  # 3. set sitecustomize.py
+  #
     $python_site_path = Join-Path -Path '.' -ChildPath "sitecustomize.py"
+    write-host "  python_site_path = $python_site_path"
+
     $content_sitecustomize = "# sitecustomize.py
 #
 # this file was added by PythonEmbed4Win.ps1
@@ -1066,8 +1111,9 @@ del __user_site_resolve
     $content_sitecustomize | Out-File -FilePath $python_site_path -Encoding "ascii"
     Print-File-Nicely $python_site_path
 
-    # 5. set `pip.ini`
+  # 5. set `pip.ini`
     $python_pip_ini = Join-Path -Path '.' -ChildPath 'pip.ini'
+    write-host "   python_pip_ini = $python_pip_ini"
     $content_pip_ini = "# pip.ini
 #
 # this file was added by PythonEmbed4Win.ps1
@@ -1080,11 +1126,14 @@ no-warn-script-location = true
     $content_pip_ini | Out-File -FilePath $python_pip_ini -Encoding "ascii"
     Print-File-Nicely $python_pip_ini
 
-    # 6. basic tests that python can run
-    #
-    # path to newly installed python.exe
+  # 6. basic tests that python can run
+  #
+  # path to newly installed python.exe
+  #
     $python_exe = Join-Path -Path $path_install -ChildPath "python.exe" -Resolve
-    # message to print before function returns
+    write-host "  python_exe = $python_exe"
+
+  # message to print before function returns
     $message1 = "`n`nNew self-contained Python executable is at "
     $message2 = "Note that this installation can only run when python.exe is the first command argument.
 Do not try run pip.exe directly from the Scripts directory nor any other program there.
@@ -1131,8 +1180,9 @@ Also, this installation cannot create new virtual environments.
 
     Pop-Location
 
-    # 7. get pip
-    # XXX: oddly, the `ensurepip` module is not available in the Windows embed version of Python
+  # 7. get pip
+  # XXX: oddly, the `ensurepip` module is not available in the Windows embed version of Python
+  
     $path_getpip = ".\get-pip.py"
     Write-Host -ForegroundColor Yellow "`n`nInstall pip:"
     Write-Host -ForegroundColor Green "${python_exe} -O ${path_getpip} --no-warn-script-location`n"
@@ -1146,14 +1196,20 @@ Also, this installation cannot create new virtual environments.
         Write-Error "Python get-pip.py failed"
     }
 
-    Pop-Location
+    pop-location
 
     Write-Host -ForegroundColor Yellow "`nList installed packages:"
     Write-Host -ForegroundColor Green "${python_exe} -B -m pip list -vv --disable-pip-version-check --no-python-version-warning`n"
+
+  #
+  # Use -B so that no cached .pyc file is written:
+  #
     & $python_exe -B -m pip list -vv --disable-pip-version-check --no-python-version-warning
+
     if ($LastExitCode -ne 0) {
         Write-Error "python -m pip list failed"
     }
+
     Write-Host -ForegroundColor Yellow -NoNewline $message1
     Write-Host -ForegroundColor Yellow -BackgroundColor Blue $python_exe
     Write-Host ""
@@ -1161,6 +1217,7 @@ Also, this installation cannot create new virtual environments.
 }
 
 function Install-Python {
+
     <#
     .SYNOPSIS
     Install python from zipped install `$uri_zip` to `$path_install`.
@@ -1226,15 +1283,18 @@ try {
 
     if (-not ([String]::IsNullOrEmpty($ZipFile))) {
 
-write-host "not reached if script is invoked with no parameters"
-exit
+write-host "Parameter zipFile file is specified: $zipFile"
 
         if (-not (Test-Path $ZipFile)) {
             Write-Error "Cannot find -ZipFile '${ZipFile}'"
         }
 
-        $zipfile_item = Get-Item $ZipFile
+        $zipfile_item = get-item $ZipFile
+
         $bname = $zipfile_item.BaseName
+
+write-host "  basename = $bname"  
+
         $VER_REG = '(3\.[\d]{1,2}\.[\d]{1,2})'
         $ver_exists = $bname -match $VER_REG
         if (-not $ver_exists) {
@@ -1242,6 +1302,7 @@ exit
         }
 
         $ver_s = $Matches[0]
+write-host "  ver_s = $ver_s"
         Write-Verbose "`$ver_s is '${ver_s}'"
         $ver = [System.Version] $ver_s
 
@@ -1252,10 +1313,10 @@ exit
         else {
             $path_install = [System.IO.FileInfo] $Path
         }
+write-host "  path_install = $path_install"
+        $path_install_item = create-path-install-directory $path_install
 
-        $path_install_item = Create-Path-Install-Directory $path_install
-
-        Process-Python-Zip $ZipFile $path_install_item $ver $SkipExec
+        process-python-zip $ZipFile $path_install_item $ver $SkipExec
         return
     }
 
@@ -1334,11 +1395,11 @@ write-host "  path_tmp1 = $path_tmp1"
         $ver = [System.Version]($version_links.keys | Sort-Object | Select-Object -Last 1)
 
 write-host "  ver = $ver"
-exit
         Write-Verbose "Version set to latest ${ver}"
         Write-Information ("Determined the latest version of Python to be " + $ver.ToString())
         $url_zip = $version_links[$ver]
         $uri_zip = [URI]$url_zip
+write-host "  url_zip = $url_zip"
 
     }
     else {
@@ -1350,17 +1411,22 @@ exit
         if ($ver -le [System.Version]"3.5") {
             Write-Error "Python 3.5 and prior can not run from an embed.zip installation; given $ver"
         }
+
         $path_tmp1 = New-TemporaryDirectory -extra ("python-" + $Version + "-" + $archs_.ToString())
         Write-Verbose "Temporary Directory ${path_tmp1}"
+
         if ($ver.Minor -eq -1 -or $ver.Build -eq -1) {
             $version_links = Scrape-Python-Versions <# $URI_PYTHON_VERSIONS #> $path_tmp1 $archs_ $version_filter
+
             if ($version_links.Count -eq 0) {
                 Write-Warning "Failed to scrape any versions from '$URI_PYTHON_VERSIONS'"
                 return
             }
+
             $versions = @($version_links.keys)
             $ver = Process-Version ([System.Version] $ver) $versions
             Write-Verbose "Version set to ${ver}"
+
             if ((-not $ver) -or ($ver.Major -eq -1)) {
                 Write-Error "Unable to process given version ${Version}"
             }
@@ -1369,19 +1435,26 @@ exit
             $ver = [System.Version]$Version
             Write-Verbose "Version is ${ver}"
         }
+
         $uri_zip = Create-Python-Zip-URI $URI_PYTHON_VERSIONS $ver $archs_
         if(-not (Confirm-URI $uri_zip)) {
             Write-Error "Python version ${Version} for arch ${archs_} was not found at ${URI_PYTHON_VERSIONS}"
         }
     }
 
-    if (-not $Path) {
-        # user did not pass -Path so create a sensible one
+    if (-not $path) {
+write-host "  ! path"
+      # user did not pass -Path so create a sensible one
         $pyDist = "python-" + $ver.ToString() + "-embed-" + $archs_.ToString()
         $path_install = [System.IO.DirectoryInfo] (Join-Path -Path "." -ChildPath $pyDist)
-    } else {
+    }
+    else {
+write-host "  path = $path"
         $path_install = [System.IO.DirectoryInfo] $Path
     }
+write-host "  path_install = $path_install"
+exit
+
     Install-Python $path_tmp1 $path_install $uri_zip $ver $SkipExec
     Write-Host -ForegroundColor Yellow "`nInstalled from" $uri_zip
 
