@@ -18,7 +18,11 @@
 
  - Use camelCase for all variables and function names, except prompted otherwise. (TODO Rene: think about again because this seems to be very controversial)
 
+ - Generally, indentation should be done with three spaces (but I deviate from this rule myself)
+
  - The code deliberately violates PEP 8 because I think it does no good for demonstration purposes.
+
+ - Avoid `if __name__ == "__main__":` guards in simple example scripts
 
  - Reduce error handling and other not strictly necessary clutter in the code so that the viewer can
    focus on the one concept presented.
