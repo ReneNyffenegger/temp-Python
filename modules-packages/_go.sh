@@ -1,6 +1,3 @@
------------------------------
------------------------------
-
 python3 -m A
 
 #  A.__init__.py, __name__ = A, __file__ = /home/rene/github/dev/lang/python/temp/modules-packages/A/__init__.py, __package__ = A
