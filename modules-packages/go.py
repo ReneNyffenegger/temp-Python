@@ -3,3 +3,5 @@
 # import X.p
 # import Y
 import Z
+
+Z.p.a.f()
