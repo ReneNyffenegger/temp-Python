@@ -9,6 +9,7 @@ digraph {
     <tr><td><font face="courier">socketserver</font></td></tr>
     <tr><td><font face="courier">BaseServer</font></td></tr>
     <tr><td align="left"><font point-size="8" face="courier">serve_forever()</font></td></tr>
+    <tr><td align="left"><font point-size="8" face="courier">process_request()</font></td></tr>
     <tr><td align="left"><font point-size="8">...</font></td></tr>
   </table> > ]
 
@@ -23,7 +24,9 @@ digraph {
   socketserver_ThreadingMixIn [ label=< <table border="0">
     <tr><td><font face="courier">socketserver</font></td></tr>
     <tr><td><font face="courier">ThreadingMixIn</font></td></tr>
-    <tr><td align="left"><font point-size="8">...</font></td></tr>
+    <tr><td><font point-size="8">Mix-in class to handle each<br align="left" />request in a new thread<br align="left" /></font></td></tr>
+    <tr><td align="left"><font point-size="8" face="courier">process_request_thread()</font></td></tr>
+    <tr><td align="left"><font point-size="8" face="courier">process_request()</font></td></tr>
     <tr><td align="left"><font point-size="8">...</font></td></tr>
   </table> > ]
 
@@ -51,12 +54,10 @@ digraph {
     <tr><td align="left"><font point-size="8">...</font></td></tr>
   </table> > ]
 
-//ThreadingHTTPServer [ label=< <font face="Courier">ThreadingHTTPServer</font> >]
-
   ThreadingHTTPServer [ label=< <table border="0">
     <tr><td><font face="courier">http.server</font></td></tr>
     <tr><td><font face="courier">ThreadingHTTPServer</font></td></tr>
-    <tr><td align="left"><font point-size="8">...</font></td></tr>
+    <tr><td align="left"><font point-size="8">Sets <font face="courier">daemon_threads</font> to <font face="courier">True</font></font></td></tr>
     <tr><td align="left"><font point-size="8">...</font></td></tr>
   </table> > ]
 
