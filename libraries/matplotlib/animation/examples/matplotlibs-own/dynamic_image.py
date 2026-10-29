@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+#
 # An animated image
 #
 #    https://matplotlib.org/examples/animation/dynamic_image.html
