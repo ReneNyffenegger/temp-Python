@@ -1,6 +1,7 @@
 
 Matplotlib's [own examples](https://matplotlib.org/examples/animation/dynamic_image.html), see also [this directory](examples/matplotlibs-own)
 
+[This example](examples/johal.in/basic-animation.py) creates an *animated gif*.
 
 
 See also
