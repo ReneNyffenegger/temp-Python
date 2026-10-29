@@ -1,4 +1,8 @@
 // dot hierarchy.dot -T pdf -o hierarchy.pdf
+//
+// This shold not be used anymore. Use
+//    https://github.com/ReneNyffenegger/py-RenesGraphvizHelper-temp/blob/master/test/py-stdlib-io.py
+//
 
 digraph {
 
