@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 
+# Also install:
+#   python3 -m pip install gliner-spacy
+#   python3 -m pip install glirel
+
 import spacy
+import glirel
 
 
 device = 'cpu' # TODO: gpu
