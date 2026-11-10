@@ -8,6 +8,8 @@ from sentence_transformers import SentenceTransformer
 import numpy as np
 
 model = SentenceTransformer('all-MiniLM-L6-v2')
+print(model.device)
+quit()
 
 # Encode all example texts into one list for pairwise comparison.
 emb = [
