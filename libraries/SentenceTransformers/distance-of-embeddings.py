@@ -34,14 +34,43 @@ def dist(emb_a, emb_b):
     similarity = dot_product / (norm_a * norm_b)
     dist_cos = 1 - similarity  # Cosine dista
 
-    print(dist_cos)
+    return dist_cos
 
   # dist_euclid = np.linalg.norm(emb_a - emb_b)
   # print(dist_euclid)
-  # print('')
+   # print('')
 
 
-# Compare every unique pair of embeddings.
+# Compare every unique pair of embeddings and store the symmetric results.
+distanceMatrix = np.zeros((len(emb), len(emb)))
+
 for index, emb_a in enumerate(emb):
-   for emb_b in emb[index + 1:]:
-      dist(emb_a, emb_b)
+   for other_index in range(index + 1, len(emb)):
+      distance = dist(emb_a, emb[other_index])
+      distanceMatrix[index, other_index] = distance
+      distanceMatrix[other_index, index] = distance
+
+
+# Use ANSI 256 colors from green for close distances to red for larger ones.
+def colorDistance(distance):
+   distance = min(max(distance, 0), 1)
+
+   if distance <= 0.5:
+      red = round(distance * 10)
+      green = 5
+   else:
+      red = 5
+      green = round((1 - distance) * 10)
+
+   ansiColor = 16 + 36 * red + 6 * green
+   return f'\033[38;5;{ansiColor}m'
+
+
+# Print aligned values with three decimal places and leading zeroes.
+print('    ' + ' '.join(f'{index:>6}' for index in range(len(emb))))
+for row, distances in enumerate(distanceMatrix):
+   values = []
+   for column, distance in enumerate(distances):
+      value = f'{distance:6.3f}'
+      values.append(f'{colorDistance(distance)}{value}\033[0m')
+   print(f'{row:>3} ' + ' '.join(values))
