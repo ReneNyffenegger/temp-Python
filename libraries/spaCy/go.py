@@ -21,11 +21,15 @@ spacy_config = {
 
 # spacy.require_gpu()
 
+#
+#  Create a new, empty English-language spaCy pipeline.
+#  It provides English tokenization, but doesn’t load a pretrained model or any
+#  processing components         
+#
 nlp = spacy.blank('en')
 
-nlp.add_pipe('gliner_spacy', config = spacy_config)
-nlp.add_pipe('glirel'      , after  ='gliner_spacy')
+nlp.add_pipe('gliner_spacy', config = spacy_config ) # Find entities
+nlp.add_pipe('glirel'      , after  ='gliner_spacy') # Find relations among entites
 
 
-print(type(nlp))
-
+# print(type(nlp)) # spacy.lang.en.English
