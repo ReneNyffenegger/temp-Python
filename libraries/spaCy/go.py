@@ -14,7 +14,7 @@ device = 'cpu' # TODO: gpu
 spacy_config = {
   'gliner_model':'urchade/gliner_mediumv2.1',
   'chunk_size'  : 250,
-  'labels'      :['Person', 'Organization', 'Location', 'Product', 'Concept'],
+   'labels'      :['Person'],
   'style'       :'ent',
   'threshold'   : 0.75,
   'map_location': device,
@@ -33,36 +33,39 @@ nlp.add_pipe('gliner_spacy', config = spacy_config ) # Find entities
 nlp.add_pipe('glirel'      , after  ='gliner_spacy') # Find relations among entites
 
 texts = [
-   "Microsoft was founded by Bill Gates and Paul Allen in 1975. "
-   "The company is headquartered in Redmond, Washington. "
-   "Bill Gates led Microsoft for many years.",
+   "In ancient Athens, Socrates taught Plato. Their conversations about justice "
+   "and knowledge became an important part of the younger philosopher's work. "
+   "Years later, he founded his own school.",
 
-   "Larry Page and Sergey Brin founded Google. "
-   "Google acquired YouTube in 2006. "
-   "The company is headquartered in Mountain View, California.",
+   "Plato spent years studying under Socrates in Athens. Philosophy was not taught "
+   "through lectures alone: questions about virtue and justice were debated in "
+   "public. Later, the student wrote dialogues inspired by those conversations.",
 
-   "Steve Jobs, Steve Wozniak, and Ronald Wayne founded Apple in 1976. "
-   "Apple acquired Beats Electronics in 2014. "
-   "Apple is headquartered in Cupertino, California.",
+   "After joining Plato's school, Aristotle stayed for nearly twenty years. "
+   "He listened to lectures and explored questions of logic and nature. "
+   "The two philosophers did not agree on everything, and the student eventually "
+   "pursued his own ideas.",
+
+   "Socrates lived before Aristotle. Both men became influential philosophers, "
+   "but they never met or studied together.",
 ]
 
 relationLabels = {
-   'founder'         : {'allowed_head': ['Person'      ], 'allowed_tail': ['Organization']},
-   'headquartered in': {'allowed_head': ['Organization'], 'allowed_tail': ['Location'    ]},
-   'acquired'        : {'allowed_head': ['Organization'], 'allowed_tail': ['Organization']},
+   'teacher of': {'allowed_head': ['Person'], 'allowed_tail': ['Person']},
 }
 inputs = [(text, {'glirel_labels': relationLabels}) for text in texts]
 
+# These are model guesses; compare directions and scores with the text above.
 for chunkNumber, (doc, context) in enumerate(nlp.pipe(inputs, as_tuples=True), start=1): # {{{
-#  print(f'Chunk {chunkNumber}: {doc.text}')
-#  print('Entities:', [(entity.text, entity.label_) for entity in doc.ents])
-#  print('Relations:')
+   print(f'Chunk {chunkNumber}: {doc.text}')
+   print('Entities:', [(entity.text, entity.label_) for entity in doc.ents])
+   print('Relations:')
    shownRelations = set()
    for relation in doc._.relations:
       relationKey = (' '.join(relation['head_text']), relation['label'],
                      ' '.join(relation['tail_text']))
 
-      if relation['score'] >= 0.7 and relationKey not in shownRelations:
+      if relation['score'] >= 0.3 and relationKey not in shownRelations:
          print('  ', relationKey[0], '--', relationKey[1], '-->', relationKey[2],
                f"({relation['score']:.2f})")
          shownRelations.add(relationKey)
