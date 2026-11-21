@@ -1,4 +1,0 @@
-. venv
-
-pip3 install youtube-transcript-api
-
