@@ -11,7 +11,7 @@ llm = Llama.from_pretrained(
    n_ctx     = 4096
 )
 
-response = llm.create_chat_completion(
+res = llm.create_chat_completion(
     messages=[
         {"role": "system", "content": "The answers should make use of emojis"},
         {"role": "user"  , "content": "What are the first 20 prime numbers"},
@@ -19,10 +19,21 @@ response = llm.create_chat_completion(
     temperature=0.2
 )
 
-print(response['object'])
-print(response['model'])
-for choice in response['choices']:
-    msg = choice['message']
-    print(msg['role'] + ': ' + msg['content'])
+print(f"Object:    {res['object' ]}")
+print(f"MOdel:     {res['model'  ]}")
+print(f"Created:   {res['created']}")
+usg = res['usage']
+print( "Token usage ")
+print(f"   prompt    : {usg['prompt_tokens'    ]}")
+print(f"   completion: {usg['completion_tokens']}")
+print(f"   total:      {usg['total_tokens'     ]}")
 
+print( "Choices")
+for choice in res['choices']:
+    msg = choice['message']
+    print(f"  logprobs     : {choice['logprobs'     ]}")
+    print(f"  finish reason: {choice['finish_reason']}")
+    print(f"  Message role : {msg['role']}")
+    print(f"  Content      : {msg['content']}")
+    print('')
 # print(dir(llm))
