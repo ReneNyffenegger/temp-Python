@@ -7,6 +7,8 @@ llm = Llama(
       n_gpu_layers =-1,          # Uncomment to use GPU acceleration
       seed         = 1337,       # Uncomment to set a specific seed
       n_ctx        = 2048,       # Uncomment to increase the context window
+      verbose      = False       # Print or do not print model-loading diagnostics and tokenizer.chat_template inside the model metadata.
+                                 # The {% … %} is Jinja2
 )
 
 #
