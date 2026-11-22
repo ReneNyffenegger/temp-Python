@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# vim: foldmethod=marker foldmarker={{{,}}}
 
 # this works at least with .gguf files. NOt sure if it works with others, too.
 
